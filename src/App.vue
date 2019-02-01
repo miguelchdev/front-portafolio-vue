@@ -1,24 +1,24 @@
 <template>
 <div id="app">
   <header class="dark-zone">
-    <b-container fluid>
-      <b-row class="align-items-center">
-        <b-col lg="7" md="12">
-          <b-row>
-            <b-col col md="5">
+    <b-container fluid class="h-100">
+      <b-row class="align-items-center h-100">
+        <b-col lg="7" md="5">
+          <b-row align-v="end">
+            <b-col col cols="6" lg="5">
               <b-button size="lg" variant="primary" block>
                 Home
               </b-button>
             </b-col>
-            <b-col md="5">
+            <b-col col cols="6" lg="5">
               <b-button size="lg" variant="outline-light" block>
                 About
               </b-button>
             </b-col>
           </b-row>
         </b-col>
-        <b-col lg="5" md="12">
-          <p>prueba</p>
+        <b-col lg="5" md="5" class="d-none d-md-block d-lg-block h-100 px-0">
+          <HeaderImage imgUrl="https://images.pexels.com/photos/1092671/pexels-photo-1092671.jpeg?dl&fit=crop&crop=entropy&w=1920&h=1280"></HeaderImage>
         </b-col>
       </b-row>
     </b-container>
@@ -54,13 +54,13 @@ header {
     color: $white;
 }
 // Extra small devices (portrait phones, less than 576px)
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(xs) {
     header {
         height: 40%;
     }
 }
 // Medium devices (tablets, 768px and up) IPAD Kindle etc
-@media (min-width: 768px) and (max-width: 991.98px) {
+@include media-breakpoint-down(md) {
     header {
         height: 40%;
     }

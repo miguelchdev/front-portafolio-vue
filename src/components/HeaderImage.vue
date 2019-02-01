@@ -1,5 +1,5 @@
 <template>
-<div class="hello">
+<div :style="style" class="img-header">
 
 </div>
 </template>
@@ -8,7 +8,12 @@
 export default {
   name: 'HeaderImage',
   props: {
-    msg: String
+    imgUrl: String
+  },
+  computed: {
+    style() {
+      return 'background: url(' + this.imgUrl + ') no-repeat center center; background-size: cover; height: 100%;  width: 100%;';
+    }
   }
 }
 </script>
