@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+
     <HeaderPort></HeaderPort>
+
   </div>
 </template>
 
@@ -24,10 +26,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
+
 body,
 html {
     height: 100%;
     width: 100%;
     background-color: $primary;
 }
+
 </style>
