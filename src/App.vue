@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-
     <HeaderPort></HeaderPort>
+    <main role="main">
+      <AboutMe></AboutMe>
+    </main>
 
   </div>
 </template>
 
 <script>
 import HeaderPort from "./components/Header.vue";
+import AboutMe from "./components/About.vue"
 
 export default {
   name: "app",
   components: {
-    HeaderPort,
+    HeaderPort,AboutMe
   }
 };
 </script>

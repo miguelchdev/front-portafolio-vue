@@ -62,7 +62,7 @@ header {
         height: 40%;
     }
     .padding-title {
-        padding: 10px;
+        padding: 25px;
     }
 }
 // Medium devices (tablets, 768px and up) IPAD Kindle etc
