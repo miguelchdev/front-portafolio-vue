@@ -42,7 +42,7 @@ $state-warning-text: darken($warning, 30);
 $state-danger-text: darken($danger, 10);
 
 // Override badges padding (doubled because otherwise too crammed)
-$badge-padding-x: 0.8em;
+$badge-padding-x: 0.8em; //default 0.8
 $badge-padding-y: 0.4em;
 
 // Don't make badges normal instead of bold
@@ -58,10 +58,3 @@ $font-family-base: $font-family-sans-serif;
 // Set global options
 $enable-shadows: false;
 $enable-gradients: true;
-
-body,
-html {
-    height: 100%;
-    width: 100%;
-    background-color: $primary;
-}
