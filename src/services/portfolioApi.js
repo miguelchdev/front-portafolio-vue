@@ -2,37 +2,37 @@ import axios from 'axios'
 
 
 export default {
-    getBios(params={}) {
-        return axios.get('api/bio/',{
+    getBios(params = {}) {
+        return axios.get('api/bio/', {
             params: params
-          })
+        })
             .then(response => {
                 return response.data
             })
     },
-    getBio(pk,params={}) {
+    getBio(pk, params = {}) {
         const url = `api/bio/${pk}`;
-        return axios.get( url,{
+        return axios.get(url, {
             params: params
-          })
+        })
             .then(response => {
                 return response.data
             })
     },
-    getProyects(params={}) {
-        const url = `api/project/`;
-        return axios.get( url,{
+    getProjects(params = {}) {
+        const url = `api/projects/`;
+        return axios.get(url, {
             params: params
-          })
+        })
             .then(response => {
                 return response.data
             })
     },
-    getProyect(pk,params={}) {
-        const url = `api/project/${pk}`;
-        return axios.get( url,{
+    getProject(pk, params = {}) {
+        const url = `api/projects/${pk}`;
+        return axios.get(url, {
             params: params
-          })
+        })
             .then(response => {
                 return response.data
             })
