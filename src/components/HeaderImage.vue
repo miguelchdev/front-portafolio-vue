@@ -1,24 +1,30 @@
 <template>
-    <v-container fluid class="px-0 py-0 h-100">
-        <v-row no-gutters   justify="end" class="h-100 layer-0">
-<v-col
+    <v-container
+        fluid
+        class="px-0 py-0 h-100"
+    >
+        <v-row
+            no-gutters
+            justify="end"
+            class="h-100 layer-0"
+        >
+            <v-col
                 xl="6"
                 lg="6"
                 md="6"
                 :style="style"
-                
                 class="img-header  dos hidden-sm-and-down"
             >
 
             </v-col>
-      
+
         </v-row>
         <div class="layer-1 h-100 d-flex align-center">
 
-          <slot></slot>
+            <slot></slot>
         </div>
     </v-container>
-  
+
 </template>
 
 <script>
@@ -42,17 +48,14 @@ export default {
 }
 .h-100 {
     height: 100vh;
-   
 }
-.layer-0{
-   z-index: 0;
-
+.layer-0 {
+    z-index: 0;
 }
-.layer-1{
-  z-index: 1;
+.layer-1 {
+    z-index: 1;
     position: absolute;
-    top:0;
+    top: 0;
     width: 100%;
 }
-
 </style>
