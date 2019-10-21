@@ -1,42 +1,61 @@
 <template>
-  
+
     <v-app>
 
-        <!-- <v-container>
-           
-            <p>{{ bio.welcome_message }}</p>
+        <header-image>
+            <v-container class="bg-white ">
+
+                <p>Sobre mi: {{ bio.about }}</p>
+                <h1>{{full_name}}</h1>
+                <p>{{bio.welcome_message}}</p>
+                <p>Role: {{ bio.role }}</p>
+
+                <ul>
+                    <li
+                        v-for="(item, index) in bio.social_networks"
+                        :key="index"
+                    >
+                        <a :href="item">{{index}}</a>
+                    </li>
+                </ul>
+                <v-row>
+                    <v-col>adsad</v-col>
+                    <v-col>asdasd</v-col>
+                </v-row>
+            </v-container>
+        </header-image>
+
+        <v-container class="bg-two ">
+
             <p>Sobre mi: {{ bio.about }}</p>
-            <v-img v-for="(value, key) in bio.pic" :key="key" :lazy-src="value" :src="value" alt></v-img>
+            <h1>{{full_name}}</h1>
+            <p>{{bio.welcome_message}}</p>
             <p>Role: {{ bio.role }}</p>
-            <p>Mis conocimientos</p>
+
             <ul>
-                <li v-for="skill in bio.skills" :key="skill.id">{{ skill.name }}</li>
-            </ul>
-            <p>Mi educación</p>
-            <ul>
-                <li v-for="course in bio.education" :key="course.id">
-                    <span>{{ course.name }}</span>
-                    <span>{{ course.location }}</span>
-                    <span>{{ course.degree }}</span>
-                    <span>{{ course.start_date }}</span>
-                    <span>{{ course.end_date }}</span>
+                <li
+                    v-for="(item, index) in bio.social_networks"
+                    :key="index"
+                >
+                    <a :href="item">{{index}}</a>
                 </li>
             </ul>
-           
-        </v-container> -->
-       <project-list></project-list>
+
+        </v-container>
+
     </v-app>
 </template>
 
 <script>
 import portfolioApi from "@/services/portfolioApi";
-import ProjectList from '@/components/ProjectList';
+import ProjectList from "@/components/ProjectList";
+import HeaderImage from "./components/HeaderImage.vue";
 export default {
     name: "App",
-    components: { ProjectList,},
+    components: { ProjectList, HeaderImage },
     data: () => ({
         bio: null,
-        loading: true,
+        loading: true
     }),
     methods: {
         getBio() {
@@ -53,11 +72,36 @@ export default {
     },
     computed: {
         full_name() {
-            return this.bio.name + " " + this.last_name;
+            return this.bio.name + " " + this.bio.last_name;
         }
     },
-    mounted() {
+    created() {
         this.getBio();
     }
 };
 </script>
+
+<style lang="scss">
+@import "assets/custom-bootstrap.scss";
+
+@for $i from 1 through 4 {
+    h#{$i} {
+        font-family: "Proxima Nova";
+        text-transform: uppercase;
+        font-weight: 900;
+        color: #555555;
+    }
+}
+.bg-two {
+    background-color: green;
+    height: 100vh;
+}
+
+.bg-white {
+    background-color: blue;
+}
+
+.bg-rose{
+    background-color: pink;
+}
+</style>

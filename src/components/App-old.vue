@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <div id="parte1" class="dark-zone">
-      <header-image
-      />
-       <header-image
-      />
+     
       <div class="prueba">
         <b-container>
           <h1>sdfklsjdfljsdflsjdflsdjflsdjfslfjsdlkfjsdlf</h1>

@@ -1,6 +1,24 @@
 // Import custom font from Google
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('./assets/fonts/ProximaNova-Regular.otf');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('./assets/fonts/Proxima Nova Bold.otf');
+  font-weight: bold;
+}
+
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('./assets/fonts/Proxima Nova Extrabold.otf');
+  font-weight: 900;
+}
 // Override / set color variables
 $white:  #fafafa;
 $black: #1a1a1a;
@@ -58,3 +76,7 @@ $font-family-base: $font-family-sans-serif;
 // Set global options
 $enable-shadows: false;
 $enable-gradients: true;
+
+html{
+  font-size: 100%;
+}
