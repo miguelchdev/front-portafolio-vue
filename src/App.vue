@@ -6,7 +6,7 @@
 
             <v-container
                 v-if="bio !== null"
-                class="px-12 fill-height d-"
+                class="px-12 fill-height"
             >
                 <v-row class="fill-height">
                     <v-col
