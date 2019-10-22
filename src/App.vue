@@ -6,7 +6,7 @@
 
             <v-container
                 v-if="bio !== null"
-                class="px-12 fill-height"
+                class="px-12 fill-height d-"
             >
                 <v-row class="fill-height">
                     <v-col
@@ -15,66 +15,37 @@
                         md="7"
                         sm="12"
                         xs="12"
-                        class="fill-height"
+                        class="fill-height d-flex flex-column"
                     >
-                        <v-row class="fill-height  bg-two">
-                            <v-col
-                                align-self="start"
-                                xl="12"
-                                lg="12"
-                                md="12"
-                                sm="12"
-                                xs="12"
+
+                        <p>{{bio.welcome_message}}</p>
+
+                        <div class="mt-auto">
+
+                            <h1 class="name mb-5">{{full_name}}</h1>
+                            <p class="mb-5">{{ bio.about }}</p>
+
+                            <v-btn
+                                tile
+                                large
+                                elevation="24"
+                                width="300"
+                            >{{seeMyWork}}</v-btn>
+
+                        </div>
+
+                        <div class="mt-auto">
+
+                            <a
+                                v-for="(item, index) in bio.social_networks"
+                                :key="index"
+                                :href="item"
                             >
-
-                                <p>{{bio.welcome_message}}</p>
-                            </v-col>
-                            <v-col
-                                align-self="center"
-                                xl="12"
-                                lg="12"
-                                md="12"
-                                sm="12"
-                                xs="12"
-                            >
-
-                                <h1 class="name mb-5">{{full_name}}</h1>
-                                <p class="mb-5">{{ bio.about }}</p>
-
-                                <v-btn
-                                    tile
-                                    large
-                                    elevation="24"
-                                    width="300"
-                                >{{seeMyWork}}</v-btn>
-
-                            </v-col>
-
-                            <v-col
-                                align-self="end"
-                                xl="12"
-                                lg="12"
-                                md="12"
-                                sm="12"
-                                xs="12"
-                                class=" mt-auto"
-                            >
-                                <div>
-
-                                    <a
-                                        v-for="(item, index) in bio.social_networks"
-                                        :key="index"
-                                        :href="item"
-                                    >
-                                        {{index}}</a>
-
-                                </div>
-                            </v-col>
-                        </v-row>
+                                {{index}}</a>
+                        </div>
 
                     </v-col>
                 </v-row>
-
             </v-container>
         </header-image>
         <v-container
@@ -161,5 +132,7 @@ button {
 
 .name {
     font-size: 4.2rem;
+}
+.expand-width {
 }
 </style>
