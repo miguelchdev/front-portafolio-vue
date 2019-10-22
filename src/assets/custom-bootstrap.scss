@@ -5,12 +5,14 @@
   font-family: 'Proxima Nova';
   src: url('./assets/fonts/ProximaNova-Regular.otf');
   font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: 'Proxima Nova';
   src: url('./assets/fonts/Proxima Nova Bold.otf');
   font-weight: bold;
+  font-style: normal;
 }
 
 
@@ -18,9 +20,10 @@
   font-family: 'Proxima Nova';
   src: url('./assets/fonts/Proxima Nova Extrabold.otf');
   font-weight: 900;
+  font-style: normal;
 }
 // Override / set color variables
-$white:  #fafafa;
+$white:  #be2121;
 $black: #1a1a1a;
 $green: #00e389;
 $blue: #448aff;
@@ -30,53 +33,7 @@ $red: #e5001e;
 $gray: #262626;
 
 
-// Create grayscale
-$gray-dark: #292b2c;
-$gray: #3f3f3f;
-$gray-light: #7e7e7e;
-$gray-lighter: #ededed;
-$gray-lightest: #fafafa;
-
-// Set brand colors
-$primary: $blue;
-$success: $green;
-$info: $yellow;
-$warning: $orange;
-$danger: $red;
-
-// Override button colors
-$btn-info-color: darken($info, 45);
-
-// Override alert background colors
-$state-success-bg: lighten($success, 30);
-$state-info-bg: lighten($info, 30);
-$state-warning-bg: lighten($warning, 30);
-$state-danger-bg: lighten($danger, 45);
-
-// Override alert text colors
-$state-success-text: darken($success, 30);
-$state-info-text: darken($info, 30);
-$state-warning-text: darken($warning, 30);
-$state-danger-text: darken($danger, 10);
-
-// Override badges padding (doubled because otherwise too crammed)
-$badge-padding-x: 0.8em; //default 0.8
-$badge-padding-y: 0.4em;
-
-// Don't make badges normal instead of bold
-$badge-font-weight: normal;
-
-// Override fonts
-$font-family-sans-serif: 'Raleway', sans-serif;
-$font-family-serif: Georgia, 'Times New Roman', Times, serif;
-$font-family-monospace: Menlo, Monaco, Consolas, 'Liberation Mono',
-  'Courier New', monospace;
-$font-family-base: $font-family-sans-serif;
-
-// Set global options
-$enable-shadows: false;
-$enable-gradients: true;
 
 html{
-  font-size: 100%;
+  font-size: 16px;
 }

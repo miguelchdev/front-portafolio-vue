@@ -2,35 +2,88 @@
 
     <v-app>
 
-        <header-image>
-            <v-container class="bg-white ">
+        <header-image image_url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
 
-                <p>Sobre mi: {{ bio.about }}</p>
-                <h1>{{full_name}}</h1>
-                <p>{{bio.welcome_message}}</p>
-                <p>Role: {{ bio.role }}</p>
-
-                <ul>
-                    <li
-                        v-for="(item, index) in bio.social_networks"
-                        :key="index"
+            <v-container
+                v-if="bio !== null"
+                class="px-12 fill-height"
+            >
+                <v-row class="fill-height">
+                    <v-col
+                        xl="8"
+                        lg="8"
+                        md="7"
+                        sm="12"
+                        xs="12"
+                        class="fill-height"
                     >
-                        <a :href="item">{{index}}</a>
-                    </li>
-                </ul>
-                <v-row>
-                    <v-col>adsad</v-col>
-                    <v-col>asdasd</v-col>
+                        <v-row class="fill-height  bg-two">
+                            <v-col
+                                align-self="start"
+                                xl="12"
+                                lg="12"
+                                md="12"
+                                sm="12"
+                                xs="12"
+                            >
+
+                                <p>{{bio.welcome_message}}</p>
+                            </v-col>
+                            <v-col
+                                align-self="center"
+                                xl="12"
+                                lg="12"
+                                md="12"
+                                sm="12"
+                                xs="12"
+                            >
+
+                                <h1 class="name mb-5">{{full_name}}</h1>
+                                <p class="mb-5">{{ bio.about }}</p>
+
+                                <v-btn
+                                    tile
+                                    large
+                                    elevation="24"
+                                    width="300"
+                                >{{seeMyWork}}</v-btn>
+
+                            </v-col>
+
+                            <v-col
+                                align-self="end"
+                                xl="12"
+                                lg="12"
+                                md="12"
+                                sm="12"
+                                xs="12"
+                                class=" mt-auto"
+                            >
+                                <div>
+
+                                    <a
+                                        v-for="(item, index) in bio.social_networks"
+                                        :key="index"
+                                        :href="item"
+                                    >
+                                        {{index}}</a>
+
+                                </div>
+                            </v-col>
+                        </v-row>
+
+                    </v-col>
                 </v-row>
+
             </v-container>
         </header-image>
+        <v-container
+            v-if="bio !== null"
+            class="px-12 bg-two"
+        >
 
-        <v-container class="bg-two ">
-
-            <p>Sobre mi: {{ bio.about }}</p>
-            <h1>{{full_name}}</h1>
-            <p>{{bio.welcome_message}}</p>
-            <p>Role: {{ bio.role }}</p>
+            <h1 class="name mb-5">{{full_name}}</h1>
+            <p class="mb-5">{{ bio.about }}</p>
 
             <ul>
                 <li
@@ -40,9 +93,14 @@
                     <a :href="item">{{index}}</a>
                 </li>
             </ul>
+            <v-btn
+                tile
+                large
+                elevation="24"
+                width="200"
+            >{{seeMyWork}}</v-btn>
 
         </v-container>
-
     </v-app>
 </template>
 
@@ -50,12 +108,14 @@
 import portfolioApi from "@/services/portfolioApi";
 import ProjectList from "@/components/ProjectList";
 import HeaderImage from "./components/HeaderImage.vue";
+
 export default {
     name: "App",
     components: { ProjectList, HeaderImage },
     data: () => ({
         bio: null,
-        loading: true
+        loading: true,
+        seeMyWork: "See my work"
     }),
     methods: {
         getBio() {
@@ -83,8 +143,9 @@ export default {
 
 <style lang="scss">
 @import "assets/custom-bootstrap.scss";
+@import "~vuetify/src/styles/main.sass";
 
-@for $i from 1 through 4 {
+@for $i from 1 through 6 {
     h#{$i} {
         font-family: "Proxima Nova";
         text-transform: uppercase;
@@ -92,16 +153,13 @@ export default {
         color: #555555;
     }
 }
-.bg-two {
-    background-color: green;
-    height: 100vh;
+button {
+    font-family: "Proxima Nova";
+    text-transform: uppercase;
+    font-weight: 900;
 }
 
-.bg-white {
-    background-color: blue;
-}
-
-.bg-rose{
-    background-color: pink;
+.name {
+    font-size: 4.2rem;
 }
 </style>
