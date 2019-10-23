@@ -1,9 +1,6 @@
 <template>
-
     <v-app>
-
-        <header-image image_url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
-
+        <header-image image-url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
             <v-container
                 v-if="bio !== null"
                 class="px-12 fill-height"
@@ -13,37 +10,38 @@
                         xl="8"
                         lg="8"
                         md="7"
-                        sm="12"
+                        sm="8"
                         xs="12"
                         class="fill-height d-flex flex-column"
                     >
-
-                        <p>{{bio.welcome_message}}</p>
+                        <p>{{ bio.welcome_message }}</p>
 
                         <div class="mt-auto">
-
-                            <h1 class="name mb-5">{{full_name}}</h1>
-                            <p class="mb-5">{{ bio.about }}</p>
+                            <h1 class="name mb-5">
+                                {{ full_name }}
+                            </h1>
+                            <p class="mb-5">
+                                {{ bio.about }}
+                            </p>
 
                             <v-btn
                                 tile
                                 large
                                 elevation="24"
                                 width="300"
-                            >{{seeMyWork}}</v-btn>
-
+                            >
+                                {{ seeMyWork }}
+                            </v-btn>
                         </div>
 
                         <div class="mt-auto">
-
                             <a
                                 v-for="(item, index) in bio.social_networks"
                                 :key="index"
                                 :href="item"
                             >
-                                {{index}}</a>
+                                {{ index }}</a>
                         </div>
-
                     </v-col>
                 </v-row>
             </v-container>
@@ -52,16 +50,19 @@
             v-if="bio !== null"
             class="px-12 bg-two"
         >
-
-            <h1 class="name mb-5">{{full_name}}</h1>
-            <p class="mb-5">{{ bio.about }}</p>
+            <h1 class="name mb-5">
+                {{ full_name }}
+            </h1>
+            <p class="mb-5">
+                {{ bio.about }}
+            </p>
 
             <ul>
                 <li
                     v-for="(item, index) in bio.social_networks"
                     :key="index"
                 >
-                    <a :href="item">{{index}}</a>
+                    <a :href="item">{{ index }}</a>
                 </li>
             </ul>
             <v-btn
@@ -69,8 +70,9 @@
                 large
                 elevation="24"
                 width="200"
-            >{{seeMyWork}}</v-btn>
-
+            >
+                {{ seeMyWork }}
+            </v-btn>
         </v-container>
     </v-app>
 </template>
@@ -88,6 +90,14 @@ export default {
         loading: true,
         seeMyWork: "See my work"
     }),
+    computed: {
+        full_name() {
+            return this.bio.name + " " + this.bio.last_name;
+        }
+    },
+    created() {
+        this.getBio();
+    },
     methods: {
         getBio() {
             portfolioApi
@@ -100,21 +110,13 @@ export default {
                     console.log(error);
                 });
         }
-    },
-    computed: {
-        full_name() {
-            return this.bio.name + " " + this.bio.last_name;
-        }
-    },
-    created() {
-        this.getBio();
     }
 };
 </script>
 
 <style lang="scss">
-@import "assets/custom-bootstrap.scss";
-@import "~vuetify/src/styles/main.sass";
+@import "@/assets/custom-bootstrap.scss";
+// @import "~vuetify/src/styles/main.sass";
 
 @for $i from 1 through 6 {
     h#{$i} {
@@ -132,7 +134,5 @@ button {
 
 .name {
     font-size: 4.2rem;
-}
-.expand-width {
 }
 </style>

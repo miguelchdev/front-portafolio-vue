@@ -1,19 +1,55 @@
 <template>
   <header class="dark-zone">
-    <b-container fluid class="h-100">
-      <b-row align-v="center" class="h-100">
-        <b-col lg="7" md="7" class="padding-title">
+    <b-container
+      fluid
+      class="h-100"
+    >
+      <b-row
+        align-v="center"
+        class="h-100"
+      >
+        <b-col
+          lg="7"
+          md="7"
+          class="padding-title"
+        >
           <b-row align-v="end">
-            <b-col col cols="6" md="5" lg="5">
+            <b-col
+              col
+              cols="6"
+              md="5"
+              lg="5"
+            >
               <h1>Prueba</h1>
-              <b-button size="lg" variant="primary" block>Home</b-button>
+              <b-button
+                size="lg"
+                variant="primary"
+                block
+              >
+                Home
+              </b-button>
             </b-col>
-            <b-col col cols="6" md="5" lg="5">
-              <b-button size="lg" variant="outline-light" block>About</b-button>
+            <b-col
+              col
+              cols="6"
+              md="5"
+              lg="5"
+            >
+              <b-button
+                size="lg"
+                variant="outline-light"
+                block
+              >
+                About
+              </b-button>
             </b-col>
           </b-row>
         </b-col>
-        <b-col lg="5" md="5" class="d-none d-md-block d-lg-block h-100 px-0">
+        <b-col
+          lg="5"
+          md="5"
+          class="d-none d-md-block d-lg-block h-100 px-0"
+        >
           <HeaderImage
             img-url="https://images.pexels.com/photos/1092671/pexels-photo-1092671.jpeg?dl&fit=crop&crop=entropy&w=1920&h=1280"
           />

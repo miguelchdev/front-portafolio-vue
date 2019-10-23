@@ -1,17 +1,29 @@
 <template lang="html">
-  <b-container fluid class="light-zone">
-    <b-row >
-      <b-col lg="7" order-xs="2"  class="padding-title">
+  <b-container
+    fluid
+    class="light-zone"
+  >
+    <b-row>
+      <b-col
+        lg="7"
+        order-xs="2"
+        class="padding-title"
+      >
         <h1>About Me</h1>
         <p>Description Description  Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description</p>
       </b-col>
-      <b-col lg="4" order-xs="1"  class="padding-title">
-        <b-img fluid-grow  src="https://raw.githubusercontent.com/miguelangelchgz/portafolio/master/images/coding.jpg"/>
+      <b-col
+        lg="4"
+        order-xs="1"
+        class="padding-title"
+      >
+        <b-img
+          fluid-grow
+          src="https://raw.githubusercontent.com/miguelangelchgz/portafolio/master/images/coding.jpg"
+        />
       </b-col>
-
     </b-row>
   </b-container>
-
 </template>
 
 <script>

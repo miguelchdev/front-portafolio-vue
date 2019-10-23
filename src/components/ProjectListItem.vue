@@ -11,19 +11,23 @@
             >
                 <v-card-title class="align-end fill-height">
                     {{
-                    title
-                    }}
+            title
+          }}
                 </v-card-title>
             </v-img>
             <v-card-actions>
-                <v-btn text>Share</v-btn>
+                <v-btn text>
+                    Share
+                </v-btn>
 
                 <v-btn
                     text
                     color="purple"
-                >Explore</v-btn>
+                >
+                    Explore
+                </v-btn>
 
-                <div class="flex-grow-1"></div>
+                <div class="flex-grow-1" />
 
                 <v-btn
                     icon
@@ -31,8 +35,8 @@
                 >
                     <v-icon>
                         {{
-                        show ? "mdi-chevron-up" : "mdi-chevron-down"
-                        }}
+              show ? "mdi-chevron-up" : "mdi-chevron-down"
+            }}
                     </v-icon>
                 </v-btn>
             </v-card-actions>
@@ -49,9 +53,9 @@
 export default {
     name: "ProjectItem",
     props: {
-        title: String,
-        image_url: String,
-        description: String
+        title: { type: String, default: "" },
+        imageUrl: { type: String, default: "" },
+        description: { type: String, default: "" }
     },
     data: () => ({
         loading: true,

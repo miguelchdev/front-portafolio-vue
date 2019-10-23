@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <div id="parte1" class="dark-zone">
-     
+    <div
+      id="parte1"
+      class="dark-zone"
+    >
       <div class="prueba">
         <b-container>
           <h1>sdfklsjdfljsdflsjdflsdjflsdjfslfjsdlkfjsdlf</h1>
@@ -15,7 +17,7 @@
 import HeaderImage from "./components/HeaderImage.vue";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     HeaderImage
   }

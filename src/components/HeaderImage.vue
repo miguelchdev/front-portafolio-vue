@@ -6,32 +6,28 @@
         <v-row
             no-gutters
             justify="end"
-            class="h-100vh layer-0"
+            class="full-height layer-0"
         >
             <v-col
                 xl="4"
                 lg="4"
-                md="5"
-                class="hidden-sm-and-down"
+                md="4"
+                sm="4"
+                class="hidden-xs-only"
                 :style="styleObject"
-            >
-
-            </v-col>
-
+            />
         </v-row>
-        <div class="layer-1 h-100vh">
-
-            <slot></slot>
+        <div class="layer-1 full-height">
+            <slot />
         </div>
     </v-container>
-
 </template>
 
 <script>
 export default {
-    name: "header-image",
+    name: "HeaderImage",
     props: {
-        image_url: {
+        imageUrl: {
             type: String,
             required: true,
             default: ""
@@ -43,8 +39,8 @@ export default {
                 height: "100%",
                 width: "100%",
                 backgroundRepeat: "no-repeat",
-                background: "url(" + this.image_url + ")",
-                backgroundSize: "cover",
+                background: "url(" + this.imageUrl + ")  15% 0%",
+                backgroundSize: "cover"
             };
         }
     }
@@ -53,16 +49,26 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.layer-0 {
-    z-index: 0;
+@import "@/assets/responsive-breakpoints.scss";
+//Tables pequeñas y hacia arriba
+@include respond-above(sm) {
+    .layer-0 {
+        z-index: 0;
+    }
+    .layer-1 {
+        z-index: 1;
+        position: absolute;
+        width: 100%;
+    }
+    .full-height {
+        height: 100%;
+    }
 }
-.layer-1 {
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-.h-100vh {
-  height: 100vh;
+
+// Tablet grandes,laptops y pa arriba
+@include respond-above(md) {
+    .full-height {
+        height: 100vh;
+    }
 }
 </style>
