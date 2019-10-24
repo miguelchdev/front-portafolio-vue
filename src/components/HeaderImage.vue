@@ -47,9 +47,16 @@ export default {
 };
 </script>
 
+
+<style lang="scss">
+/* global styles */
+@import "@/assets/styles/variables.scss";
+</style>
+
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import "@/assets/responsive-breakpoints.scss";
+@import "@/assets/styles/responsive-breakpoints.scss";
 //Tables pequeñas y hacia arriba
 @include respond-above(sm) {
     .layer-0 {
@@ -63,9 +70,6 @@ export default {
     .full-height {
         height: 100%;
     }
-}
-.bg-white{
-    background-color: #fafafa;
 }
 
 // Tablet grandes,laptops y pa arriba
