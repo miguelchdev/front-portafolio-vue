@@ -1,44 +1,51 @@
 <template>
     <v-app>
-        <header-image image-url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+        <header-image
+            light="true"
+            image-url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        >
             <v-container
                 v-if="bio !== null"
-                class="px-12 fill-height"
+                class="px-md-12 px-6 fill-height"
             >
-                <v-row class="fill-height">
+                <v-row class="fill-height ">
                     <v-col
                         xl="8"
                         lg="8"
                         md="7"
                         sm="8"
                         xs="12"
-                        class="fill-height d-flex flex-column"
+                        class="fill-height d-flex flex-column bg-light"
                     >
-                        <p>{{ bio.welcome_message }}</p>
+                        <p class="mx-md-0 mx-auto">{{ bio.welcome_message }}</p>
 
                         <div class="mt-auto">
-                            <h1 class="name mb-5">
+                            <h1 class="text-md-left text-center name mb-5">
                                 {{ full_name }}
                             </h1>
                             <p class="mb-5">
                                 {{ bio.about }}
                             </p>
+                            <div class="text-md-left text-center ">
+                                <v-btn
+                                    tile
+                                    large
+                                    elevation="24"
+                                    width="300"
+                                >
+                                    {{ seeMyWork }}
+                                </v-btn>
+                            </div>
 
-                            <v-btn
-                                tile
-                                large
-                                elevation="24"
-                                width="300"
-                            >
-                                {{ seeMyWork }}
-                            </v-btn>
                         </div>
 
-                        <div class="mt-auto">
+                        <div class="mt-auto mx-md-0 mx-auto pt-5">
                             <a
                                 v-for="(item, index) in bio.social_networks"
                                 :key="index"
                                 :href="item"
+                                class="social pr-5"
+                                target="_blank"
                             >
                                 {{ index }}</a>
                         </div>
@@ -46,45 +53,27 @@
                 </v-row>
             </v-container>
         </header-image>
-        <v-container
-            v-if="bio !== null"
-            class="px-12 bg-two"
-        >
-            <h1 class="name mb-5">
-                {{ full_name }}
-            </h1>
-            <p class="mb-5">
-                {{ bio.about }}
-            </p>
-
-            <ul>
-                <li
-                    v-for="(item, index) in bio.social_networks"
-                    :key="index"
-                >
-                    <a :href="item">{{ index }}</a>
-                </li>
-            </ul>
-            <v-btn
-                tile
-                large
-                elevation="24"
-                width="200"
+        <div class="bg-dark py-md-12">
+            <v-container
+                v-if="bio !== null"
+                class="px-md-12 py-md-12 px-5 bg-two"
             >
-                {{ seeMyWork }}
-            </v-btn>
-        </v-container>
+                <h1>MY SERVICES</h1>
+                <h2>sadasd</h2>
+                <p>sdfsdfds</p>
+            </v-container>
+        </div>
+
     </v-app>
 </template>
 
 <script>
 import portfolioApi from "@/services/portfolioApi";
-import ProjectList from "@/components/ProjectList";
-import HeaderImage from "./components/HeaderImage.vue";
+import HeaderImage from "@/components/HeaderImage.vue";
 
 export default {
     name: "App",
-    components: { ProjectList, HeaderImage },
+    components: { HeaderImage },
     data: () => ({
         bio: null,
         loading: true,
@@ -115,24 +104,19 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/custom-bootstrap.scss";
-// @import "~vuetify/src/styles/main.sass";
+/* global styles */
+@import "@/assets/styles/variables.scss";
 
-@for $i from 1 through 6 {
-    h#{$i} {
-        font-family: "Proxima Nova";
-        text-transform: uppercase;
-        font-weight: 900;
-        color: #555555;
-    }
-}
-button {
-    font-family: "Proxima Nova";
-    text-transform: uppercase;
-    font-weight: 900;
-}
+</style>
 
+<style scoped lang="scss">
 .name {
     font-size: 4.2rem;
+}
+
+.social {
+    text-transform: capitalize;
+    font-weight: 900;
+    text-decoration: none;
 }
 </style>

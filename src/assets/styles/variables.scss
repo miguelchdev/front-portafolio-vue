@@ -75,7 +75,7 @@ $variations: light, dark;
         }
 
         p, a {
-            color: var(--v-#{$variation}Text-base);
+            color: var(--v-#{$variation}Text-base) !important;
             font-weight: 500;
             text-decoration: none;
         }
