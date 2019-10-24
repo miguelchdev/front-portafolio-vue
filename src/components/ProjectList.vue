@@ -1,25 +1,23 @@
 <template>
-  <v-container class="gray lighten-5">
-    <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-
-    <v-row>
-      <v-col
-        v-for="project in projects"
-        :key="project.id"
-        xl="4"
-        lg="4"
-        md="4"
-        sm="6"
-        xs="12"
-      >
-        <project-item
-          :title="project.title"
-          :image_url="project.images[0].file['gallery_large']"
-          :description="project.description"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+    <v-container>
+        <v-row>
+            <v-col
+                v-for="project in projects"
+                :key="project.id"
+                xl="4"
+                lg="4"
+                md="4"
+                sm="6"
+                cols="12"
+            >
+                <project-item
+                    :title="project.title"
+                    :image-url="cover(project)"
+                    :description="project.description"
+                />
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -49,7 +47,11 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
+      cover( project){
+        let cover = project.images.length - 1;
+        return project.images[cover].file['gallery_large']
+      }
     }
 };
 </script>
