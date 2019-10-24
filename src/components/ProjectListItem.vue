@@ -3,11 +3,12 @@
         <v-card
             :elevation="hover ? 12 : 2"
             class="mx-auto"
+            color="accent"
         >
             <v-img
                 class="white--text"
                 height="250px"
-                :src="image_url"
+                :src="imageUrl"
             >
                 <v-card-title class="align-end fill-height">
                     {{
