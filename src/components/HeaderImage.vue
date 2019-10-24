@@ -64,6 +64,9 @@ export default {
         height: 100%;
     }
 }
+.bg-white{
+    background-color: #fafafa;
+}
 
 // Tablet grandes,laptops y pa arriba
 @include respond-above(md) {
