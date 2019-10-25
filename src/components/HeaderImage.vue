@@ -1,24 +1,24 @@
 <template>
     <v-container
         fluid
-        class="px-0 py-0 fill-height"
+        class="px-0 py-0 full-view"
     >
         <v-row
             no-gutters
             justify="end"
-            class="full-height layer-0"
+            class="parent-height layer-0"
         >
             <v-col
                 xl="4"
                 lg="4"
                 md="4"
                 sm="4"
-                class="hidden-xs-only"
+                class="hide-only-xs"
                 :style="styleObject"
             />
         </v-row>
-        <div class="layer-1 full-height">
-            <slot />
+        <div class="layer-1 parent-height">
+            <slot></slot>
         </div>
     </v-container>
 </template>
@@ -36,7 +36,7 @@ export default {
     computed: {
         styleObject() {
             return {
-                height: "100%",
+                height: "auto",
                 width: "100%",
                 backgroundRepeat: "no-repeat",
                 background: "url(" + this.imageUrl + ")  15% 0%",
@@ -57,25 +57,52 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import "@/assets/styles/responsive-breakpoints.scss";
+
+.parent-height {
+    height: inherit;
+    min-height: inherit;
+}
+
+// Telefonos moviles en landscape
+@include respond-between(xs, md) {
+    @media (orientation: landscape) {
+        .layer-1 {
+            top: 0;
+            z-index: 1;
+            position: absolute;
+            width: 100%;
+            left: 0;
+        }
+        .full-view {
+            min-height: 150vh;
+        }
+    }
+}
 //Tables pequeñas y hacia arriba
 @include respond-above(sm) {
     .layer-0 {
         z-index: 0;
+        position: relative;
     }
     .layer-1 {
+        top: 0;
         z-index: 1;
         position: absolute;
         width: 100%;
+        left: 0;
     }
-    .full-height {
-        height: 100%;
+    @media (orientation: portrait) {
+        .full-view {
+            height: 70vh;
+        }
     }
 }
 
 // Tablet grandes,laptops y pa arriba
 @include respond-above(md) {
-    .full-height {
+    .full-view {
         height: 100vh;
+        min-height: 100vh;
     }
 }
 </style>
