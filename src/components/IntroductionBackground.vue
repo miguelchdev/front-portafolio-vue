@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: "HeaderImage",
+    name: "IntroductionBackground",
     props: {
         imageUrl: {
             type: String,
@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss">
 /* global styles */
-@import "@/assets/styles/variables.scss";
+@import "@/assets/styles/base.scss";
 </style>
 
 
@@ -58,10 +58,6 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/responsive-breakpoints.scss";
 
-.parent-height {
-    height: inherit;
-    min-height: inherit;
-}
 
 // Telefonos moviles en landscape
 @include respond-between(xs, md) {

@@ -18,7 +18,8 @@ export default new Vuetify({
         lightHeading: '#323232',
         dark:'#1a1a1a',
         darkHeading:'#ffffff',
-        darkText:'#d7d7d7'
+        darkText:'#d7d7d7',
+        gray:'#262626'
       },
     },
   }

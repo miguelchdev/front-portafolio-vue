@@ -1,4 +1,36 @@
 // src/sass/variables.scss
+@font-face {
+  font-family:'Proxima Nova';
+  src:url('@/assets/fonts/ProximaNova-Regular.otf');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family:'Proxima Nova';
+  src:url('@/assets/fonts/Proxima Nova Extrabold.otf');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family:'Proxima Nova';
+  src:url('@/assets/fonts/Proxima Nova Thin.otf');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 100;
+}
+
+@font-face {
+  font-family:'Proxima Nova';
+  src:url('@/assets/fonts/Proxima Nova Bold.otf');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 800;
+}
+
 
 // Globals
 $border-radius-root: 6px;
@@ -86,4 +118,12 @@ button {
     font-family: "Proxima Nova";
     text-transform: uppercase;
     font-weight: 900;
+}
+.parent-height {
+  height: inherit;
+  // min-height: inherit;
+}
+.padding-y{
+  padding-top: 7rem;
+  padding-bottom: 7rem;
 }

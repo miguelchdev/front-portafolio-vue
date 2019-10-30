@@ -36,5 +36,13 @@ export default {
             .then(response => {
                 return response.data
             })
+    }, getServices(params = {}) {
+        const url = `api/service/`;
+        return axios.get(url, {
+            params: params
+        })
+            .then(response => {
+                return response.data
+            })
     }
 }

@@ -23,6 +23,7 @@
 <script>
 import portfolioApi from "@/services/portfolioApi";
 import ProjectItem from "./ProjectListItem.vue";
+
 export default {
     name: "ProjectList",
     components: { ProjectItem },
