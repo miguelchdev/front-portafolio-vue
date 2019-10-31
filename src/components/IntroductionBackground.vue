@@ -69,9 +69,7 @@ export default {
             width: 100%;
             left: 0;
         }
-        .full-view {
-            min-height: 150vh;
-        }
+       
     }
 }
 //Tables pequeñas y hacia arriba
@@ -87,18 +85,8 @@ export default {
         width: 100%;
         left: 0;
     }
-    @media (orientation: portrait) {
-        .full-view {
-            height: 70vh;
-        }
-    }
+    
 }
 
-// Tablet grandes,laptops y pa arriba
-@include respond-above(md) {
-    .full-view {
-        height: 100vh;
-        min-height: 100vh;
-    }
-}
+
 </style>
