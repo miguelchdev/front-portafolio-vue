@@ -1,20 +1,22 @@
 <template>
     <v-hover v-slot:default="{ hover }">
         <v-card
-            :elevation="hover ? 24 : 0"
-            class="py-8 px-6"
+            :elevation="getElevation(hover)"
+            class="py-xl-8 px-xl-6 px-sm-2"
             tile
-            :color="hover ? 'gray' : 'dark'"
-            :height="cardSize.height"
+            :color="getColor(hover)"
+            max-width="400"
         >
             <v-card-title>
                 <h2 class="title-card">{{
             title
-          }}</h2>
+          }}
 
+                </h2>
+                <div class="line py-2"></div>
             </v-card-title>
             <v-card-text class="aling-self-end">
-                <p class="description-text">
+                <p class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5">
                     {{description}}
                 </p>
 
@@ -35,10 +37,20 @@ export default {
         loading: true,
         show: false
     }),
-    computed: {
-        cardSize() {
-            if (this.$vuetify.breakpoint.xlOnly) {
-                return { height: 500, width: 450 };
+
+    methods: {
+        getColor(hover) {
+            if (hover || this.$vuetify.breakpoint.smAndDown) {
+                return "gray";
+            } else {
+                return "dark";
+            }
+        },
+        getElevation(hover) {
+            if (hover || this.$vuetify.breakpoint.smAndDown) {
+                return 24;
+            } else {
+                return 0;
             }
         }
     }
@@ -49,12 +61,33 @@ export default {
 </style>
 
 <style scoped lang="scss">
+@import "@/assets/styles/responsive-breakpoints.scss";
 .title-card {
     text-transform: capitalize;
     font-weight: 100;
+    width: 100%;
+}
+.line {
+    width: 12%;
+    height: auto;
+    border-bottom: 0.22rem solid white;
+    position: relative;
 }
 .description-text {
     font-size: 1.15rem;
     line-height: 2rem;
+}
+@include respond-below(md) {
+    .description-text {
+        font-size: 0.95rem;
+        line-height: 1.2rem;
+        text-justify: auto;
+    }
+    .line {
+        width: 20%;
+        height: auto;
+        border-bottom: 0.22rem solid white;
+        position: relative;
+    }
 }
 </style>

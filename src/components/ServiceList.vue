@@ -1,6 +1,6 @@
 <template>
   <v-container class="px-0">
-        <v-row>
+        <v-row >
             <v-col
                 v-for="service in services"
                 :key="service.id"
@@ -47,6 +47,10 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        }
+    },computed:{
+        hasGutters(){
+            return false;
         }
     }
 

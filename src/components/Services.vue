@@ -1,7 +1,7 @@
 <template>
     <div class="bg-dark full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <h1>{{myServices}}</h1>
+            <h1 class="text-sm-justify text-center">{{myServices}}</h1>
             <p class="description-services ">{{servicesDescription}}</p>
             <service-list></service-list>
         </v-container>
@@ -12,7 +12,7 @@
 import ServiceList from "@/components/ServiceList.vue";
 export default {
     name: "Services",
-    components: {  ServiceList },
+    components: { ServiceList },
     data: () => ({
         myServices: "MY SERVICES",
         servicesDescription:
@@ -29,6 +29,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/assets/styles/responsive-breakpoints.scss";
+
 .description-services {
     font-weight: 400;
     font-size: 1.35rem;
@@ -40,6 +41,7 @@ export default {
     @media (orientation: landscape) {
         .full-view {
             min-height: 150vh;
+            
         }
     }
 }
@@ -47,7 +49,7 @@ export default {
 @include respond-above(sm) {
     @media (orientation: portrait) {
         .full-view {
-            height: 70vh;
+            min-height: 70vh;
         }
     }
 }
@@ -55,9 +57,7 @@ export default {
 // Tablet grandes,laptops y pa arriba
 @include respond-above(md) {
     .full-view {
-        height: 100vh;
         min-height: 100vh;
     }
 }
-
 </style>
