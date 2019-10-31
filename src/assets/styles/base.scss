@@ -123,7 +123,6 @@ button {
 }
 .parent-height {
   height: inherit;
-  min-height: inherit;
 }
 .padding-y{
   padding-top: 7rem;
@@ -133,8 +132,8 @@ button {
 @include respond-between(xs, md) {
   @media (orientation: landscape) {
       .full-view {
-          min-height: 150vh;
-          
+          height: 150vh;
+          height: 150vh;
       }
   }
 }
@@ -142,7 +141,10 @@ button {
 @include respond-above(sm) {
   @media (orientation: portrait) {
       .full-view {
-          min-height: 70vh;
+          height: 70vh;
+      }
+      .parent-height {
+        height: inherit;
       }
   }
 }
@@ -150,6 +152,11 @@ button {
 // Tablet grandes,laptops y pa arriba
 @include respond-above(md) {
   .full-view {
-      min-height: 100vh;
+     
+      height: 100vh;
   }
+  .parent-height {
+      height: inherit;
+  }
+  
 }

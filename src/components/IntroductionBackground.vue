@@ -58,7 +58,6 @@ export default {
 <style scoped lang="scss">
 @import "@/assets/styles/responsive-breakpoints.scss";
 
-
 // Telefonos moviles en landscape
 @include respond-between(xs, md) {
     @media (orientation: landscape) {

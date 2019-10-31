@@ -96,7 +96,9 @@ export default {
 </style>
 
 <style scoped lang="scss">
-
+.fill-height{
+    min-height: 100%;
+}
 .name {
     font-size: 4.2rem;
 }

@@ -36,5 +36,24 @@ export default {
     color: var(--v-darkText-base);
     padding: 5% 0 3% 0%;
 }
+@include respond-above(sm) {
+  @media (orientation: portrait) {
+      .full-view {
+          min-height: 70vh;
+          height: auto;
+      }
+      .parent-height {
+        min-height: inherit;
+      }
+  }
+  @media (orientation: landscape) {
+      .full-view {
+          min-height: 100vh;
+          height: auto;
+      }
+     
+  }
+}
+
 
 </style>
