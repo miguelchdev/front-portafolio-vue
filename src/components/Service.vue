@@ -11,7 +11,7 @@
 <script>
 import ServiceList from "@/components/ServiceList.vue";
 export default {
-    name: "Services",
+    name: "Service",
     components: { ServiceList },
     data: () => ({
         myServices: "MY SERVICES",

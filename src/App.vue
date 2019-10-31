@@ -1,17 +1,17 @@
 <template>
     <v-app>
         <introduction />
-        <services />
+        <service />
 
     </v-app>
 </template>
 
 <script>
 import Introduction from "@/components/Introduction.vue";
-import Services from "@/components/Services.vue";
+import Service from "@/components/Service.vue";
 export default {
     name: "App",
-    components: { Introduction, Services },
+    components: { Introduction, Service },
     
 };
 </script>
