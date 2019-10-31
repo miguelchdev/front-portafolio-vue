@@ -6,6 +6,8 @@
             tile
             :color="getColor(hover)"
             max-width="400"
+           
+    
         >
             <v-card-title>
                 <h2 class="title-card">{{

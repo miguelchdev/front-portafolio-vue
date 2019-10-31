@@ -96,7 +96,7 @@ export default {
 </style>
 
 <style scoped lang="scss">
-@import "@/assets/styles/responsive-breakpoints.scss";
+
 .name {
     font-size: 4.2rem;
 }

@@ -1,4 +1,6 @@
 // src/sass/variables.scss
+@import '@/assets/styles/responsive-breakpoints.scss';
+
 @font-face {
   font-family:'Proxima Nova';
   src:url('/assets/fonts/ProximaNova-Regular.otf');
@@ -126,4 +128,28 @@ button {
 .padding-y{
   padding-top: 7rem;
   padding-bottom: 7rem;
+}
+// Telefonos moviles en landscape
+@include respond-between(xs, md) {
+  @media (orientation: landscape) {
+      .full-view {
+          min-height: 150vh;
+          
+      }
+  }
+}
+//Tables pequeñas y hacia arriba
+@include respond-above(sm) {
+  @media (orientation: portrait) {
+      .full-view {
+          min-height: 70vh;
+      }
+  }
+}
+
+// Tablet grandes,laptops y pa arriba
+@include respond-above(md) {
+  .full-view {
+      min-height: 100vh;
+  }
 }

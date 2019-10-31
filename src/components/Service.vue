@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss">
 /* global styles */
-@import "@/assets/styles/base.scss";
+//@import "@/assets/styles/base.scss";
 </style>
 
 <style lang="scss" scoped>
@@ -36,28 +36,5 @@ export default {
     color: var(--v-darkText-base);
     padding: 5% 0 3% 0%;
 }
-// Telefonos moviles en landscape
-@include respond-between(xs, md) {
-    @media (orientation: landscape) {
-        .full-view {
-            min-height: 150vh;
-            
-        }
-    }
-}
-//Tables pequeñas y hacia arriba
-@include respond-above(sm) {
-    @media (orientation: portrait) {
-        .full-view {
-            min-height: 70vh;
-        }
-    }
-}
 
-// Tablet grandes,laptops y pa arriba
-@include respond-above(md) {
-    .full-view {
-        min-height: 100vh;
-    }
-}
 </style>
