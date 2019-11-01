@@ -126,7 +126,7 @@ button {
 }
 .padding-y{
   padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-bottom: 2rem;
 }
 // Telefonos moviles en landscape
 @include respond-between(xs, md) {

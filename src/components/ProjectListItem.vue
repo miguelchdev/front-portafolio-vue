@@ -3,6 +3,7 @@
         <v-card
             :elevation="hover ? 12 : 2"
             class="mx-auto"
+            transition="slide-x-transition"
         >
             <v-img
                 class="white--text"
