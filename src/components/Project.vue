@@ -1,12 +1,26 @@
 <template>
     <div class="bg-light full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <h1 class="text-sm-justify text-center description-services">{{myWork}}</h1>
+            <div class="d-flex justify-space-between">
+                <h1 class=" text-sm-justify text-center description-services">{{myWork}}</h1>
+                <ul class="d-inline">
+                    <li
+                        v-for="(category,index) in categories"
+                        :key="index"
+                    >{{category}}</li>
+                </ul>
+            </div>
 
-            <project-list v-if="projects" :projects="filterProyects" class="mt-auto fill-height" />
+            <project-list
+                v-if="projects"
+                :projects="filterProjects"
+                :page="page"
+                class="fill-height mt-auto"
+            />
+
             <v-pagination
                 v-model="page"
-                :length="count"
+                :length="pages"
                 class="mt-auto"
             ></v-pagination>
         </v-container>
@@ -26,14 +40,13 @@ export default {
         page: 1,
         projects: null,
         count: null,
-        loading: true,
-        show: false
-        
+        pageCount: 3,
+        categories: ["All", "Mobile", "Web"]
     }),
     methods: {
         getProjects() {
             portfolioApi
-                .getProjects({ fields: "title,images,description" })
+                .getProjects({ fields: "id,title,images,description" })
                 .then(data => {
                     this.projects = data.results;
                     this.count = data.count;
@@ -44,11 +57,18 @@ export default {
                 });
         }
     },
-    mounted(){
+    mounted() {
         this.getProjects();
-    },computed:{
-        filterProyects(){
-            return [this.projects[this.page - 1],];
+    },
+    computed: {
+        filterProjects() {
+            let start = (this.page - 1) * this.pageCount;
+            let end = start + this.pageCount;
+
+            return this.projects.slice(start, end);
+        },
+        pages() {
+            return Math.ceil(this.count / this.pageCount);
         }
     }
 };
