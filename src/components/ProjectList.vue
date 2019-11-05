@@ -1,6 +1,7 @@
 <template>
-    <v-container class="px-0">
-        <v-row>
+    <v-container class="px-0 max-s">
+        <v-scroll-x-transition group class="row"  tag="div" leave-absolute mode="out-in">
+
             <v-col
                 v-for="project in projects"
                 :key="project.id"
@@ -9,17 +10,18 @@
                 md="4"
                 sm="6"
                 cols="12"
+                class="flex-grow-0"
             >
-                <v-slide-y-transition mode="out-in" appear>
-                    <project-item
-                        :title="project.title"
-                        :image-url="cover(project)"
-                        :description="project.description"
-                    />
-                </v-slide-y-transition>
+
+                <project-item
+                    :title="project.title"
+                    :image-url="cover(project)"
+                    :description="project.description"
+                />
 
             </v-col>
-        </v-row>
+
+        </v-scroll-x-transition>
     </v-container>
 </template>
 
@@ -33,17 +35,20 @@ export default {
         projects: {
             type: Array,
             required: true
+        },
+        page: {
+            type: Number
         }
     },
     methods: {
         cover(project) {
             let cover = project.images.length - 1;
             return project.images[cover].file["gallery_large"];
-        }
+        },
+        
     }
 };
 </script>
 
-<style lang="sass" scoped>
-
+<style lang="scss" scoped>
 </style>
