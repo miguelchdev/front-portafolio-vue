@@ -1,28 +1,32 @@
 <template>
-    <v-container class="px-0 max-s">
-        <v-scroll-x-transition group class="row"  tag="div" leave-absolute mode="out-in">
 
-            <v-col
-                v-for="project in projects"
-                :key="project.id"
-                xl="4"
-                lg="4"
-                md="4"
-                sm="6"
-                cols="12"
-                class="flex-grow-0"
-            >
+    <v-slide-group
+        mandatory
+        show-arrows
+        center-active
+        v-model="model"
+        @change="onSelect"
+    >
 
-                <project-item
-                    :title="project.title"
-                    :image-url="cover(project)"
-                    :description="project.description"
-                />
+        <v-slide-item
+            v-for="project in projects"
+            :key="project.id"
+            v-slot:default="{ active, toggle }"
+            active-class="sad"
+        >
 
-            </v-col>
+            <project-item
+                :id="project.id"
+                :title="project.title"
+                :image-url="cover(project)"
+                :description="project.description"
+                :active="active"
+                @click="toggle"
+            />
 
-        </v-scroll-x-transition>
-    </v-container>
+        </v-slide-item>
+
+    </v-slide-group>
 </template>
 
 <script>
@@ -31,13 +35,13 @@ import ProjectItem from "@/components/ProjectListItem.vue";
 export default {
     name: "ProjectList",
     components: { ProjectItem },
+    data: () => ({
+        model: null
+    }),
     props: {
         projects: {
             type: Array,
             required: true
-        },
-        page: {
-            type: Number
         }
     },
     methods: {
@@ -45,10 +49,16 @@ export default {
             let cover = project.images.length - 1;
             return project.images[cover].file["gallery_large"];
         },
-        
+        onSelect() {
+           this.$emit('selected',this.model);
+        }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.sad {
+    background-color: blue;
+}
 </style>

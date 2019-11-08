@@ -13,18 +13,19 @@
 
             <project-list
                 v-if="projects"
-                :projects="filterProjects"
-                :page="page"
-                class="fill-height mt-auto"
+                :projects="projects"
+                class=""
+                 @selected="setCurrentProject"
             />
-
-            <v-pagination
+            <h1>{{currentProject.title}}</h1>
+           
+            <!-- <v-pagination
                 v-model="page"
                 :length="pages"
                 class="mt-auto"
-            ></v-pagination>
-        </v-container>
+            ></v-pagination> -->
 
+        </v-container>
     </div>
 </template>
 
@@ -40,8 +41,9 @@ export default {
         page: 1,
         projects: null,
         count: null,
-        pageCount: 3,
-        categories: ["All", "Mobile", "Web"]
+        pageCount: 2,
+        categories: ["All", "Mobile", "Web"],
+        current: 0
     }),
     methods: {
         getProjects() {
@@ -55,20 +57,28 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        setCurrentProject(position) {
+            this.current = postion;
         }
     },
     mounted() {
         this.getProjects();
     },
     computed: {
-        filterProjects() {
-            let start = (this.page - 1) * this.pageCount;
-            let end = start + this.pageCount;
-
-            return this.projects.slice(start, end);
-        },
-        pages() {
-            return Math.ceil(this.count / this.pageCount);
+        // filterProjects() {
+        //     // let start = (this.page - 1) * this.pageCount;
+        //     // let end = start + this.pageCount;
+        //     let start = this.page - 1;
+        //     let end = start + this.pageCount + 1;
+        //     return this.projects.slice(start, end);
+        // },
+        // pages() {
+        //     return Math.ceil(this.count / this.pageCount);
+        // },
+        currentProject() {
+            return this.projects[this.current];
+            
         }
     }
 };

@@ -1,27 +1,26 @@
 <template>
-    <v-hover v-slot:default="{ hover }">
-            <v-card
-                :elevation="hover ? 12 : 2"
-                class="mx-auto"
-    
-            >
-                <v-img
-                    class="white--text"
-                   height="250px"
-                    :src="imageUrl"
-                >
-                    
-                </v-img>
-                <v-card-title class="align-end fill-height">
-                        {{
+
+    <v-card
+        :elevation="active ? 12 : 2"
+        class="mx-12 my-12"
+        tile
+        @click="clickMe"
+    >
+        <v-img
+            class="white--text"
+            :src="imageUrl"
+        >
+
+        </v-img>
+        <v-card-title>
+            {{
             title
           }}
-                    </v-card-title>
-                <v-card-text>{{ description }}</v-card-text>
+        </v-card-title>
+        <v-card-text>{{ description }}</v-card-text>
 
-            </v-card>
-       
-    </v-hover>
+    </v-card>
+
 </template>
 
 <script>
@@ -30,12 +29,22 @@ export default {
     props: {
         title: { type: String, default: "" },
         imageUrl: { type: String, default: "" },
-        description: { type: String, default: "" }
+        description: { type: String, default: "" },
+        id: { type: Number, required: true },
+        active: {
+            type: Boolean,
+            default: false
+        }
     },
     data: () => ({
         loading: true,
         show: false
-    })
+    }),
+    methods: {
+        clickMe() {
+            this.$emit("click", this.id);
+        }
+    }
 };
 </script>
 
