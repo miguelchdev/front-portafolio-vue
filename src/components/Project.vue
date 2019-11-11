@@ -58,8 +58,8 @@ export default {
                     console.log(error);
                 });
         },
-        setCurrentProject(position) {
-            this.current = postion;
+        setCurrentProject(id) {
+          this.current = id;
         }
     },
     mounted() {

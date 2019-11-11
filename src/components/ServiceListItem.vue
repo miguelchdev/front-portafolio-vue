@@ -5,25 +5,23 @@
             class="py-xl-8 px-xl-6 px-sm-2"
             tile
             :color="getColor(hover)"
-            max-width="400"
-           
-    
         >
-            <v-card-title>
-                <h2 class="title-card">{{
+            <v-responsive :aspect-ratio="6/5">
+                <v-card-title>
+                    <h2 class="title-card">{{
             title
           }}
 
-                </h2>
-                <div class="line py-2"></div>
-            </v-card-title>
-            <v-card-text class="aling-self-end">
-                <p class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5">
-                    {{description}}
-                </p>
+                    </h2>
+                    <div class="line py-2"></div>
+                </v-card-title>
+                <v-card-text class="aling-self-end">
+                    <p class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5">
+                        {{description}}
+                    </p>
 
-            </v-card-text>
-
+                </v-card-text>
+            </v-responsive>
         </v-card>
     </v-hover>
 </template>

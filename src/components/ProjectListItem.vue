@@ -1,26 +1,26 @@
 <template>
-
-    <v-card
-        :elevation="active ? 12 : 2"
-        class="mx-12 my-12"
-        tile
-        @click="clickMe"
-    >
-        <v-img
-            class="white--text"
-            :src="imageUrl"
+    <v-hover v-slot:default="{ hover }">
+        <v-card
+            :elevation="hover ? 12 : 4"
+            tile
+            @click="clickMe"
         >
+            <v-img
+                class="white--text"
+                :srcset="imageUrl"
+                :aspect-ratio="16/9"
+            >
 
-        </v-img>
-        <v-card-title>
-            {{
+            </v-img>
+            <v-card-title>
+                {{
             title
           }}
-        </v-card-title>
-        <v-card-text>{{ description }}</v-card-text>
+            </v-card-title>
+            <v-card-text>{{ description }}</v-card-text>
 
-    </v-card>
-
+        </v-card>
+    </v-hover>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
     }),
     methods: {
         clickMe() {
-            this.$emit("click", this.id);
+            this.$emit("click", 5);
         }
     }
 };
