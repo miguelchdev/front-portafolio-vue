@@ -1,26 +1,21 @@
 <template>
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
     <v-app>
-        <introduction />
-        <service />
-        <project/>
+        <v-slide-y-transition
+            hide-on-leave
+            mode="in-out"
+        >
+            <router-view></router-view>
+        </v-slide-y-transition>
     </v-app>
 </template>
 
 <script>
-import Introduction from "@/components/Introduction.vue";
-import Service from "@/components/Service.vue";
-import Project from "@/components/Project.vue";
 export default {
-    name: "App",
-    components: { Introduction, Service,Project },
-    
-};
+    name: 'App',
+    components: {}
+}
 </script>
 
-
-<style scoped lang="scss">
-
-
-
-
-</style>
+<style scoped lang="scss"></style>

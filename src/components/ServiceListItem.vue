@@ -1,25 +1,22 @@
 <template>
     <v-hover v-slot:default="{ hover }">
         <v-card
-            :elevation="getElevation(hover)"
+            :elevation="elevation(hover)"
             class="py-xl-8 px-xl-6 px-sm-2"
             tile
-            :color="getColor(hover)"
+            :color="color(hover)"
         >
-            <v-responsive :aspect-ratio="6/5">
+            <v-responsive :aspect-ratio="6 / 5">
                 <v-card-title>
-                    <h2 class="title-card">{{
-            title
-          }}
-
-                    </h2>
+                    <h2 class="title-card">{{ title }}</h2>
                     <div class="line py-2"></div>
                 </v-card-title>
                 <v-card-text class="aling-self-end">
-                    <p class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5">
-                        {{description}}
+                    <p
+                        class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5"
+                    >
+                        {{ description }}
                     </p>
-
                 </v-card-text>
             </v-responsive>
         </v-card>
@@ -28,10 +25,10 @@
 
 <script>
 export default {
-    name: "ServiceListItem",
+    name: 'ServiceListItem',
     props: {
-        title: { type: String, default: "" },
-        description: { type: String, default: "" }
+        title: { type: String, default: '' },
+        description: { type: String, default: '' }
     },
     data: () => ({
         loading: true,
@@ -39,23 +36,20 @@ export default {
     }),
 
     methods: {
-        getColor(hover) {
-            return hover || this.$vuetify.breakpoint.smAndDown
-                ? "gray"
-                : "dark";
+        color(hover) {
+            return hover || this.$vuetify.breakpoint.smAndDown ? 'gray' : 'dark'
         },
-        getElevation(hover) {
-            return hover || this.$vuetify.breakpoint.smAndDown ? 24 : 0;
+        elevation(hover) {
+            return hover || this.$vuetify.breakpoint.smAndDown ? 24 : 0
         }
     }
-};
+}
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 
 <style scoped lang="scss">
-@import "@/assets/styles/responsive-breakpoints.scss";
+@import '@/assets/styles/responsive-breakpoints.scss';
 .title-card {
     text-transform: capitalize;
     font-weight: 100;

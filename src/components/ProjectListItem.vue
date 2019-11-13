@@ -8,28 +8,24 @@
             <v-img
                 class="white--text"
                 :src="imageUrl"
-                :aspect-ratio="16/9"
+                :aspect-ratio="16 / 9"
             >
-
             </v-img>
             <v-card-title>
-                {{
-            title
-          }}
+                {{ title }}
             </v-card-title>
             <v-card-text>{{ description }}</v-card-text>
-
         </v-card>
     </v-hover>
 </template>
 
 <script>
 export default {
-    name: "ProjectItem",
+    name: 'ProjectItem',
     props: {
-        title: { type: String, default: "" },
-        imageUrl: { type: String, default: "" },
-        description: { type: String, default: "" },
+        title: { type: String, default: '' },
+        imageUrl: { type: String, default: '' },
+        description: { type: String, default: '' },
         id: { type: Number, required: true },
         active: {
             type: Boolean,
@@ -42,11 +38,10 @@ export default {
     }),
     methods: {
         clickMe() {
-            this.$emit("click", 5);
+            this.$emit('click', 5)
         }
     }
-};
+}
 </script>
 
-<style>
-</style>
+<style></style>
