@@ -7,7 +7,7 @@
         >
             <v-img
                 class="white--text"
-                :srcset="imageUrl"
+                :src="imageUrl"
                 :aspect-ratio="16/9"
             >
 

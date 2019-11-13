@@ -1,29 +1,53 @@
 <template>
     <div class="bg-light full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
+            <v-row no-gutters>
+                <v-col
+                    xl="10"
+                    cols="12"
+                    class="mb-md-0 mb-5"
+                >
+                    <h1 class=" text-sm-justify text-center description-services">{{myWork}}</h1>
+                </v-col>
+                <v-col
+                    xl="2"
+                    cols="12"
+                >
+                    <v-tabs
+                        grow
+                        class="mx-auto"
+                        background-color="light"
+                    >
+                        <v-tab
+                            v-for="(category,index) in categories"
+                            :key="index"
+                        >{{category}}</v-tab>
+
+                    </v-tabs>
+                </v-col>
+               
+            </v-row>
             <div class="d-flex justify-space-between">
-                <h1 class=" text-sm-justify text-center description-services">{{myWork}}</h1>
-                <ul class="d-inline">
+
+                <!-- <ul class="d-inline">
                     <li
                         v-for="(category,index) in categories"
                         :key="index"
-                    >{{category}}</li>
-                </ul>
+                    ></li>
+                </ul> -->
+
             </div>
 
             <project-list
                 v-if="projects"
-                :projects="projects"
-                class=""
-                 @selected="setCurrentProject"
+                :projects="filterProjects"
             />
-            <h1>{{currentProject.title}}</h1>
-           
-            <!-- <v-pagination
+
+            <v-pagination
                 v-model="page"
                 :length="pages"
                 class="mt-auto"
-            ></v-pagination> -->
+            ></v-pagination>
 
         </v-container>
     </div>
@@ -41,7 +65,6 @@ export default {
         page: 1,
         projects: null,
         count: null,
-        pageCount: 2,
         categories: ["All", "Mobile", "Web"],
         current: 0
     }),
@@ -59,26 +82,28 @@ export default {
                 });
         },
         setCurrentProject(id) {
-          this.current = id;
+            this.current = id;
         }
     },
     mounted() {
         this.getProjects();
     },
     computed: {
-        // filterProjects() {
-        //     // let start = (this.page - 1) * this.pageCount;
-        //     // let end = start + this.pageCount;
-        //     let start = this.page - 1;
-        //     let end = start + this.pageCount + 1;
-        //     return this.projects.slice(start, end);
-        // },
-        // pages() {
-        //     return Math.ceil(this.count / this.pageCount);
-        // },
+        filterProjects() {
+            let start = (this.page - 1) * this.pageCount;
+            let end = start + this.pageCount;
+            // let start = this.page - 1;
+            // let end = start + this.pageCount + 1;
+            return this.projects.slice(start, end);
+        },
+        pageCount() {
+            return this.$vuetify.breakpoint.smAndDown ? 3 : 6;
+        },
+        pages() {
+            return Math.ceil(this.count / this.pageCount);
+        },
         currentProject() {
             return this.projects[this.current];
-            
         }
     }
 };

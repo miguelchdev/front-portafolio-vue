@@ -40,18 +40,12 @@ export default {
 
     methods: {
         getColor(hover) {
-            if (hover || this.$vuetify.breakpoint.smAndDown) {
-                return "gray";
-            } else {
-                return "dark";
-            }
+            return hover || this.$vuetify.breakpoint.smAndDown
+                ? "gray"
+                : "dark";
         },
         getElevation(hover) {
-            if (hover || this.$vuetify.breakpoint.smAndDown) {
-                return 24;
-            } else {
-                return 0;
-            }
+            return hover || this.$vuetify.breakpoint.smAndDown ? 24 : 0;
         }
     }
 };
