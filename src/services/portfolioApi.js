@@ -44,5 +44,13 @@ export default {
             .then(response => {
                 return response.data
             })
+    }, getTechnologys(params = {}) {
+        const url = 'api/technology/'
+        return axios.get(url, {
+            params: params
+        })
+            .then(response => {
+                return response.data
+            })
     }
 }

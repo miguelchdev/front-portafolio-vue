@@ -2,7 +2,7 @@
     <v-hover v-slot:default="{ hover }">
         <v-card
             :elevation="elevation(hover)"
-            class="py-xl-8 px-xl-6 px-sm-2"
+            class="py-xl-8 px-xl-6 px-md-1 px-sm-2"
             tile
             :color="color(hover)"
         >
@@ -12,9 +12,7 @@
                     <div class="line py-2"></div>
                 </v-card-title>
                 <v-card-text class="aling-self-end">
-                    <p
-                        class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5"
-                    >
+                    <p class="description-text pt-xl-8 pt-lg-8 pt-md-5 pt-sm-5 pt-5">
                         {{ description }}
                     </p>
                 </v-card-text>
@@ -25,10 +23,10 @@
 
 <script>
 export default {
-    name: 'ServiceListItem',
+    name: "ServiceListItem",
     props: {
-        title: { type: String, default: '' },
-        description: { type: String, default: '' }
+        title: { type: String, default: "" },
+        description: { type: String, default: "" }
     },
     data: () => ({
         loading: true,
@@ -37,19 +35,21 @@ export default {
 
     methods: {
         color(hover) {
-            return hover || this.$vuetify.breakpoint.smAndDown ? 'gray' : 'dark'
+            return hover || this.$vuetify.breakpoint.smAndDown
+                ? "gray"
+                : "dark";
         },
         elevation(hover) {
-            return hover || this.$vuetify.breakpoint.smAndDown ? 24 : 0
+            return hover || this.$vuetify.breakpoint.smAndDown ? 24 : 0;
         }
     }
-}
+};
 </script>
 
 <style lang="scss"></style>
 
 <style scoped lang="scss">
-@import '@/assets/styles/responsive-breakpoints.scss';
+@import "@/assets/styles/responsive-breakpoints.scss";
 .title-card {
     text-transform: capitalize;
     font-weight: 100;
