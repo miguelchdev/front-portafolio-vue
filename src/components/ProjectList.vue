@@ -2,9 +2,9 @@
     <!--  -->
     <v-container
         fluid
-        class="fill-height"
+        class="fill-height py-md-0"
     >
-        <v-scroll-x-transition
+        <v-slide-x-transition
             group
             tag="div"
             class="row"
@@ -26,16 +26,16 @@
                     class="fade-item"
                 />
             </v-col>
-        </v-scroll-x-transition>
+        </v-slide-x-transition>
     </v-container>
     <!--  -->
 </template>
 
 <script>
-import ProjectItem from '@/components/ProjectListItem.vue'
+import ProjectItem from "@/components/ProjectListItem.vue";
 
 export default {
-    name: 'ProjectList',
+    name: "ProjectList",
     components: { ProjectItem },
     data: () => ({
         model: null
@@ -48,21 +48,15 @@ export default {
     },
     methods: {
         cover(project) {
-            let cover = project.images.length - 1
-            let srcSet = ''
-            for (let [key, value] of Object.entries(
-                project.images[cover].file
-            )) {
-                srcSet += value + ' ' + key + 'w, '
-            }
-            console.log(srcSet.slice(0, srcSet.length - 1))
-            return project.images[cover].file[640]
+            let cover = project.images.length - 1;
+
+            return project.images[cover].file[640];
         },
         onSelect() {
-            this.$emit('selected', 0)
+            this.$emit("selected", 0);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
