@@ -4,6 +4,7 @@
         fluid
         class="fill-height py-md-0"
     >
+
         <v-slide-x-transition
             group
             tag="div"

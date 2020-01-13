@@ -48,10 +48,6 @@ export default {
 </script>
 
 
-<style lang="scss">
-/* global styles */
-@import "@/assets/styles/base.scss";
-</style>
 
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -68,7 +64,6 @@ export default {
             width: 100%;
             left: 0;
         }
-       
     }
 }
 //Tables pequeñas y hacia arriba
@@ -84,8 +79,5 @@ export default {
         width: 100%;
         left: 0;
     }
-    
 }
-
-
 </style>

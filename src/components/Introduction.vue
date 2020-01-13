@@ -89,14 +89,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
-/* global styles */
-@import "@/assets/styles/base.scss";
-
-</style>
 
 <style scoped lang="scss">
-.fill-height{
+.fill-height {
     min-height: 100%;
 }
 .name {
@@ -108,5 +103,4 @@ export default {
     font-weight: 900;
     text-decoration: none;
 }
-
 </style>

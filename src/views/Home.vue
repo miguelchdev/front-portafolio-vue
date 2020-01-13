@@ -2,16 +2,22 @@
     <div id="about">
         <introduction />
         <service />
+
         <project />
+        <contact />
     </div>
 </template>
 
 <script>
-import Introduction from '@/components/Introduction.vue'
-import Service from '@/components/Service.vue'
-import Project from '@/components/Project.vue'
+import Introduction from "@/components/Introduction.vue";
+import Service from "@/components/Service.vue";
+import Project from "@/components/Project.vue";
+import Contact from "@/components/Contact.vue";
 
 export default {
-    components: { Introduction, Service, Project }
-}
+    components: { Introduction, Service, Project, Contact }
+};
 </script>
+<style lang="scss">
+@import "@/assets/styles/base.scss";
+</style>

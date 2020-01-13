@@ -4,18 +4,18 @@
             <v-row no-gutters>
                 <v-col
                     xl="8"
-                    lg="10"
+                    lg="6"
                     md="10"
                     cols="12"
                     class="mb-md-0 mb-5"
                 >
-                    <h1 class=" text-sm-justify text-center description-services">
+                    <h1 class=" text-sm-justify text-center description-services mins">
                         {{ myWork }}
                     </h1>
                 </v-col>
                 <v-col
                     xl="4"
-                    lg="2"
+                    lg="6"
                     md="2"
                     cols="12"
                 >
@@ -24,6 +24,7 @@
                         v-model="tab"
                         fixed-tabs
                         background-color="light"
+                        show-arrows
                     >
                         <v-tab
                             v-for="(category,index) in categories"

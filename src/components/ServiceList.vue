@@ -1,6 +1,6 @@
 <template>
-  <v-container class="px-0">
-        <v-row >
+    <v-container class="px-0">
+        <v-row>
             <v-col
                 v-for="service in services"
                 :key="service.id"
@@ -48,19 +48,18 @@ export default {
                     console.log(error);
                 });
         }
-    },computed:{
-        hasGutters(){
+    },
+    computed: {
+        hasGutters() {
             return false;
         }
     }
-
-}
+};
 </script>
 <style lang="scss">
 /* global styles */
-@import "@/assets/styles/base.scss";
+// @import "@/assets/styles/base.scss";
 </style>
 
 <style scoped lang="scss">
-
 </style>

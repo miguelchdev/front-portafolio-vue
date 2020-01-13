@@ -21,11 +21,11 @@
 
 <script>
 export default {
-    name: 'ProjectItem',
+    name: "ProjectItem",
     props: {
-        title: { type: String, default: '' },
-        imageUrl: { type: String, default: '' },
-        description: { type: String, default: '' },
+        title: { type: String, default: "" },
+        imageUrl: { type: String, default: "" },
+        description: { type: String, default: "" },
         id: { type: Number, required: true },
         active: {
             type: Boolean,
@@ -38,10 +38,11 @@ export default {
     }),
     methods: {
         clickMe() {
-            this.$emit('click', 5)
+            this.$emit("click", 5);
         }
     }
-}
+};
 </script>
 
-<style></style>
+<style scoped lang="scss">
+</style>
