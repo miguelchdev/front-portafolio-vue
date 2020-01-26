@@ -1,17 +1,19 @@
 // src/sass/variables.scss
-@import '@/assets/styles/responsive-breakpoints.scss';
-
 @font-face {
     font-family: 'Proxima Nova';
-    src: url('@~/assets/fonts/ProximaNova-Regular.otf');
+    src: url('~@/assets/fonts/ProximaNova.ttf');
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: normal;
 }
 
+@import '@/assets/styles/responsive-breakpoints.scss';
+
+
+
 @font-face {
     font-family: 'Proxima Nova';
-    src: url('@~/assets/fonts/Proxima Nova Extrabold.otf');
+    src: url('~@/assets/fonts/Proxima Nova Extrabold.otf') format('opentype');
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: bold;
@@ -19,7 +21,7 @@
 
 @font-face {
     font-family: 'Proxima Nova';
-    src: url('@~/assets/fonts/Proxima Nova Thin.otf');
+    src: url('~@/assets/fonts/Proxima Nova Thin.otf');
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 100;
@@ -27,7 +29,7 @@
 
 @font-face {
     font-family: 'Proxima Nova';
-    src: url('@~/assets/fonts/Proxima Nova Bold.otf');
+    src: url('~@/assets/fonts/Proxima Nova Bold.otf');
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 800;
