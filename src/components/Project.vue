@@ -36,7 +36,7 @@
 
             <project-list
                 v-if="projects"
-                :projects="paginateProjects"
+                :projects="projects"
             />
 
             <v-pagination
@@ -51,7 +51,7 @@
 
 <script>
 import ProjectList from "@/components/ProjectList.vue";
-import portfolioApi from "@/services/portfolioApi";
+
 
 export default {
     name: "Projects",
@@ -59,44 +59,16 @@ export default {
     data: () => ({
         myWork: "my work",
         page: 1,
-        projects: [],
-        count: null,
-        categories: [],
         current: 0,
         tab: 0,
-        all: "All",
         loading: true
     }),
     methods: {
         getProjects() {
-            portfolioApi
-                .getProjects({
-                    fields: "id,title,images,description,technologys"
-                })
-                .then(data => {
-                    this.projects = data.results;
-                    this.count = data.count;
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.loading = true;
-                });
+          this.$store.dispatch("fetchProjects")
         },
         getTechnologys() {
-            portfolioApi
-                .getTechnologys()
-                .then(data => {
-                    this.categories = data.results;
-                    this.categories.unshift(this.all);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        },
-        filterItems(list, query, defValue) {
-            return list.filter(el =>
-                query == defValue ? true : el["technologys"].includes(query)
-            );
+           this.$store.dispatch("fetchProjectsTechnologys")
         }
     },
     created() {
@@ -104,24 +76,29 @@ export default {
         this.getTechnologys();
     },
     computed: {
-        filterProjects() {
-            return this.filterItems(
-                this.projects,
-                this.categories[this.tab],
-                this.all
-            );
+        selectedCategory(){
+            return this.categories[this.tab]
+        },
+        projects(){
+            return this.$store.getters.portfolioProjects(this.selectedCategory)
+        },
+        count(){
+            return this.$store.getters.portfolioProjectsTotal
+        },
+        categories(){
+            return ['All'].concat(this.$store.state.projectsTechnologys)
+        },
+        pageCount() {
+            return this.$vuetify.breakpoint.smAndDown ? 3 : 4;
         },
         paginateProjects() {
             let start = (this.page - 1) * this.pageCount;
             let end = start + this.pageCount;
 
-            return this.filterProjects.slice(start, end);
-        },
-        pageCount() {
-            return this.$vuetify.breakpoint.smAndDown ? 3 : 4;
+            return this.projects.slice(start, end);
         },
         size() {
-            return this.filterProjects.length;
+            return this.projects.length;
         },
         pages() {
             return Math.ceil(this.size / this.pageCount);
