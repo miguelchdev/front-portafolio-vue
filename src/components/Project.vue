@@ -5,7 +5,7 @@
                 <v-col
                     xl="8"
                     lg="6"
-                    md="10"
+                    md="6"
                     cols="12"
                     class="mb-md-0 mb-5"
                 >
@@ -16,7 +16,7 @@
                 <v-col
                     xl="4"
                     lg="6"
-                    md="2"
+                    md="6"
                     cols="12"
                 >
                     <v-tabs
