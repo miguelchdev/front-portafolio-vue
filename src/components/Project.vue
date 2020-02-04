@@ -51,7 +51,7 @@
 
 <script>
 import ProjectList from "@/components/ProjectList.vue";
-
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
     name: "Projects",
@@ -64,29 +64,31 @@ export default {
         loading: true
     }),
     methods: {
-        getProjects() {
-          this.$store.dispatch("fetchProjects")
-        },
-        getTechnologys() {
-           this.$store.dispatch("fetchProjectsTechnologys")
-        }
+        ...mapActions("projects", {
+            getProjects: "fetchProjects",
+            getTechnologys: "fetchProjectsTechnologys"
+        })
     },
     created() {
         this.getProjects();
         this.getTechnologys();
     },
     computed: {
-        selectedCategory(){
-            return this.categories[this.tab]
+        selectedCategory() {
+            return this.categories[this.tab];
         },
-        projects(){
-            return this.$store.getters.portfolioProjects(this.selectedCategory)
+        ...mapGetters("projects", [
+            "portfolioProjects",
+            "portfolioProjectsTotal"
+        ]),
+        ...mapState("projects", {
+            categories: state => ["All"].concat(state.projectsTechnologys)
+        }),
+        projects() {
+            return this.portfolioProjects(this.selectedCategory);
         },
-        count(){
-            return this.$store.getters.portfolioProjectsTotal
-        },
-        categories(){
-            return ['All'].concat(this.$store.state.projectsTechnologys)
+        count() {
+            return this.portfolioProjectsTotal;
         },
         pageCount() {
             return this.$vuetify.breakpoint.smAndDown ? 3 : 4;

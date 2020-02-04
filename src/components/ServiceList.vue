@@ -20,36 +20,29 @@
 </template>
 
 <script>
-import portfolioApi from "@/services/portfolioApi";
+import { mapState, mapGetters, mapActions } from "vuex";
 import ServiceListItem from "@/components/ServiceListItem.vue";
 
 export default {
     name: "ServiceList",
     components: { ServiceListItem },
     data: () => ({
-        services: null,
-        count: null,
         loading: true,
         show: false
     }),
+    methods: {
+        ...mapActions("services", {
+            getServices: "fetchServices"
+        })
+    },
     mounted() {
         this.getServices();
     },
-    methods: {
-        getServices() {
-            portfolioApi
-                .getServices()
-                .then(data => {
-                    this.services = data.results;
-                    this.count = data.count;
-                    this.loading = false;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-    },
     computed: {
+        ...mapState("services", {
+            services: "services",
+            count: "servicesTotal"
+        }),
         hasGutters() {
             return false;
         }
