@@ -66,7 +66,7 @@ export default {
     methods: {
         ...mapActions("projects", {
             getProjects: "fetchProjects",
-            getTechnologys: "fetchProjectsTechnologys"
+            getTechnologys: "fetchTechnologys"
         })
     },
     created() {
@@ -82,7 +82,7 @@ export default {
             "portfolioProjectsTotal"
         ]),
         ...mapState("projects", {
-            categories: state => ["All"].concat(state.projectsTechnologys)
+            categories: state => ["All"].concat(state.technologys)
         }),
         projects() {
             return this.portfolioProjects(this.selectedCategory);
