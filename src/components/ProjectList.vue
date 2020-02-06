@@ -5,11 +5,11 @@
         class="fill-height py-md-0"
     >
 
-        <v-slide-x-transition
+        <fade-transition
             group
             tag="div"
-            class="row"
-            leave-absolute
+            class="row full"
+          
         >
             <v-col
                 v-for="project in projects"
@@ -18,6 +18,7 @@
                 lg="4"
                 md="4"
                 cols="12"
+                class="green"
             >
                 <project-item
                     :id="project.id"
@@ -27,7 +28,7 @@
                     class="fade-item"
                 />
             </v-col>
-        </v-slide-x-transition>
+        </fade-transition>
     </v-container>
     <!--  -->
 </template>
@@ -61,6 +62,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.full{
+    background-color: blue;
+   
+   
+}
+.green{
+    background-color: green;
+}
 .scroll-fade-enter-active {
     transition: all 0.3s ease;
 }

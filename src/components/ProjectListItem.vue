@@ -1,9 +1,12 @@
 <template>
     <v-hover v-slot:default="{ hover }">
+        <!-- Se necesita establecer un ancho fijo para evitar los issues al redimensionar -->
         <v-card
             :elevation="hover ? 12 : 4"
             tile
             @click="clickMe"
+            :width="300" 
+            :height="300"
         >
             <v-img
                 class="white--text"
