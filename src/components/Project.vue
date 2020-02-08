@@ -58,6 +58,7 @@ export default {
     components: { ProjectList },
     data: () => ({
         myWork: "my work",
+        all: "All",
         page: 1,
         current: 0,
         tab: 0,
@@ -74,21 +75,21 @@ export default {
         this.getTechnologys();
     },
     computed: {
+         ...mapGetters("projects", ["filterItems"]),
+        ...mapState("projects", ["technologys", "projectsTotal"]),
         selectedCategory() {
             return this.categories[this.tab];
         },
-        ...mapGetters("projects", [
-            "portfolioProjects",
-            "portfolioProjectsTotal"
-        ]),
-        ...mapState("projects", {
-            categories: state => ["All"].concat(state.technologys)
-        }),
+        categories() {
+            return [this.all].concat(this.technologys);
+        },
         projects() {
-            return this.portfolioProjects(this.selectedCategory);
+            let category = this.selectedCategory;
+            if (category == this.all) category = "";
+            return this.filterItems(category);
         },
         count() {
-            return this.portfolioProjectsTotal;
+            return this.projectsTotal;
         },
         pageCount() {
             return this.$vuetify.breakpoint.smAndDown ? 3 : 4;

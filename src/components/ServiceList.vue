@@ -40,8 +40,8 @@ export default {
     },
     computed: {
         ...mapState("services", {
-            services: "services",
-            count: "servicesTotal"
+            services: "items",
+            count: "itemsTotal"
         }),
         hasGutters() {
             return false;
