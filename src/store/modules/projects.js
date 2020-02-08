@@ -28,7 +28,7 @@ export default {
     },
     getters: {
         filterItems: ({ items }) => query => {
-            return filterFun(items, "techonologys", query);
+            return filterFun(items, "technologys", query);
         }
     },
     mutations: {

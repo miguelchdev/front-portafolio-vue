@@ -31,8 +31,8 @@ export default {
         }
     },
     getters: {
-        full_name(state) {
-            return state.name + " " + state.last_name;
+        full_name({name, last_name}) {
+            return name + " " + last_name;
         }
     },
     mutations: {
