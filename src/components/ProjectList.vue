@@ -2,14 +2,13 @@
     <!--  -->
     <v-container
         fluid
-        class="fill-height py-md-0"
+        ref="cola"
     >
 
         <fade-transition
             group
             tag="div"
-            class="row full"
-          
+            class="row"
         >
             <v-col
                 v-for="project in projects"
@@ -18,7 +17,6 @@
                 lg="4"
                 md="4"
                 cols="12"
-                class="green"
             >
                 <project-item
                     :id="project.id"
@@ -26,6 +24,7 @@
                     :image-url="cover(project)"
                     :description="project.description"
                     class="fade-item"
+                    :parent-width="parentWidth"
                 />
             </v-col>
         </fade-transition>
@@ -55,21 +54,23 @@ export default {
             return project.images[cover].file[640];
         },
         onSelect() {
-            this.$emit("selected", 0);
+            console.log(this.$refs.cola.offsetWidth);
+        }
+    },
+    computed: {
+        parentWidth() {
+            return this.$refs.cola.offsetWidth - 25;
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.full{
+.full {
     background-color: blue;
-   
-   
+    height: 100%;
 }
-.green{
-    background-color: green;
-}
+
 .scroll-fade-enter-active {
     transition: all 0.3s ease;
 }

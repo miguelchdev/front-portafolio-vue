@@ -1,25 +1,25 @@
 <template>
-    <v-hover v-slot:default="{ hover }">
-        <!-- Se necesita establecer un ancho fijo para evitar los issues al redimensionar -->
-        <v-card
-            :elevation="hover ? 12 : 4"
-            tile
-            @click="clickMe"
-            :width="300" 
-            :height="300"
+    <!-- <v-hover v-slot:default="{ hover }"> -->
+    <!-- Se necesita establecer un ancho fijo para evitar los issues al redimensionar -->
+    <v-card
+        tile
+        @click="clickMe"
+        :height="cardSize['height']"
+        :width="cardSize['width']"
+        ref="card"
+    >
+        <v-img
+            class="white--text"
+            :src="imageUrl"
+            :aspect-ratio="16/9"
         >
-            <v-img
-                class="white--text"
-                :src="imageUrl"
-                :aspect-ratio="16 / 9"
-            >
-            </v-img>
-            <v-card-title>
-                {{ title }}
-            </v-card-title>
-            <v-card-text>{{ description }}</v-card-text>
-        </v-card>
-    </v-hover>
+        </v-img>
+        <v-card-title>
+            {{ title }}
+        </v-card-title>
+        <v-card-text>{{ description }}</v-card-text>
+    </v-card>
+    <!-- </v-hover> -->
 </template>
 
 <script>
@@ -33,6 +33,9 @@ export default {
         active: {
             type: Boolean,
             default: false
+        },
+        parentWidth: {
+            type: Number
         }
     },
     data: () => ({
@@ -41,7 +44,25 @@ export default {
     }),
     methods: {
         clickMe() {
+            console.log(this.$refs.card.$parent);
             this.$emit("click", 5);
+        }
+    },
+    computed: {
+        cardSize() {
+            switch (this.$vuetify.breakpoint.name) {
+                case "xs":
+                    return { height: "auto", width: this.parentWidth };
+                case "sm":
+                    return { height: "376", width: "auto" };
+                case "md":
+                    return { height: "378", width: "527" };
+                case "lg":
+                    return { height: "265", width: "331" };
+                case "xl":
+                    return { height: "375", width: "525" };
+            }
+            return { height: "auto", width: "525" };
         }
     }
 };
