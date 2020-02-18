@@ -33,11 +33,12 @@
                     </v-tabs>
                 </v-col>
             </v-row>
-
-            <project-list
-                v-if="projects"
-                :projects="projects"
-            />
+            <v-row no-gutters>
+                <project-list
+                    v-if="projects"
+                    :projects="projects"
+                />
+            </v-row>
 
             <v-pagination
                 v-if="projects"
@@ -75,7 +76,7 @@ export default {
         this.getTechnologys();
     },
     computed: {
-         ...mapGetters("projects", ["filterItems"]),
+        ...mapGetters("projects", ["filterItems"]),
         ...mapState("projects", ["technologys", "projectsTotal"]),
         selectedCategory() {
             return this.categories[this.tab];
