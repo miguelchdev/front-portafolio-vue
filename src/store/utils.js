@@ -1,6 +1,6 @@
 export const filterFun = (toFilter, property, query) => {
-    if( query == '') return toFilter
-    
+    if (query == '') return toFilter
+
     return toFilter.filter(element => {
         if (element.hasOwnProperty(property)) {
             if (Array.isArray(element[property])) {
