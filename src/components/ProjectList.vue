@@ -1,9 +1,6 @@
 <template>
     <!--  -->
-    <v-container
-        fluid
-        ref="cola"
-    >
+    <v-container fluid>
 
         <fade-transition
             group
@@ -16,15 +13,16 @@
                 xl="4"
                 lg="4"
                 md="4"
+                sm="6"
                 cols="12"
             >
                 <project-item
+                    ref="cols"
                     :id="project.id"
                     :title="project.title"
                     :image-url="cover(project)"
                     :description="project.description"
-                    class="fade-item"
-                    :parent-width="parentWidth"
+                    :element-width="elementWidth"
                 />
             </v-col>
         </fade-transition>
@@ -39,8 +37,17 @@ export default {
     name: "ProjectList",
     components: { ProjectItem },
     data: () => ({
-        model: null
+        model: null,
+        width: "auto"
     }),
+    beforeUpdate() {
+        window.addEventListener("resize", this.setWidthAuto);
+    },
+    updated() {
+        this.$nextTick(() => {
+            this.calculateWidth();
+        });
+    },
     props: {
         projects: {
             type: Array,
@@ -53,13 +60,24 @@ export default {
 
             return project.images[cover].file[640];
         },
-        onSelect() {
-            console.log(this.$refs.cola.offsetWidth);
+        calculateWidth() {
+            if (this.width == "auto") {
+                let size = this.$refs.cols[0].$el.offsetWidth;
+                this.width = size;
+                console.log("ejecutandose");
+            }
+        },
+        setWidthAuto() {
+            this.width = "auto";
         }
     },
     computed: {
-        parentWidth() {
-            return this.$refs.cola.offsetWidth - 25;
+        elementWidth() {
+            if (this.width == "auto") {
+                return this.width;
+            } else {
+                return this.width + "px";
+            }
         }
     }
 };

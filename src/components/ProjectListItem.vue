@@ -4,9 +4,7 @@
     <v-card
         tile
         @click="clickMe"
-        :height="cardSize['height']"
-        :width="cardSize['width']"
-        ref="card"
+        :width="elementWidth"
     >
         <v-img
             class="white--text"
@@ -19,6 +17,7 @@
         </v-card-title>
         <v-card-text>{{ description }}</v-card-text>
     </v-card>
+
     <!-- </v-hover> -->
 </template>
 
@@ -34,8 +33,9 @@ export default {
             type: Boolean,
             default: false
         },
-        parentWidth: {
-            type: Number
+        elementWidth: {
+            type: String,
+            default: "auto"
         }
     },
     data: () => ({
@@ -48,23 +48,7 @@ export default {
             this.$emit("click", 5);
         }
     },
-    computed: {
-        cardSize() {
-            switch (this.$vuetify.breakpoint.name) {
-                case "xs":
-                    return { height: "auto", width: this.parentWidth };
-                case "sm":
-                    return { height: "376", width: "auto" };
-                case "md":
-                    return { height: "378", width: "527" };
-                case "lg":
-                    return { height: "265", width: "331" };
-                case "xl":
-                    return { height: "375", width: "525" };
-            }
-            return { height: "auto", width: "525" };
-        }
-    }
+    computed: {}
 };
 </script>
 
