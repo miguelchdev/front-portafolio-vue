@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState,  mapActions } from "vuex";
 import ServiceListItem from "@/components/ServiceListItem.vue";
 
 export default {
@@ -40,8 +40,8 @@ export default {
     },
     computed: {
         ...mapState("services", {
-            services: "services",
-            count: "servicesTotal"
+            services: "items",
+            count: "itemsTotal"
         }),
         hasGutters() {
             return false;

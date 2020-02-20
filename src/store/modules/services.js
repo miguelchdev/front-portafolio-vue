@@ -3,12 +3,12 @@ import portfolioApi from "@/services/portfolioApi";
 export default {
     namespaced: true,
     state: {
-        services: [],
-        servicesTotal: 0
+        items: [],
+        itemsTotal: 0
     },
     actions: {
         fetchServices({ commit }) {
-            portfolioApi
+            return portfolioApi
                 .getServices()
                 .then(data => {
                     commit('setServices', data.results);
@@ -20,10 +20,10 @@ export default {
 
     }, mutations: {
         setServices(state, services) {
-            state.services = services
+            state.items = services
         },
         setServicesTotal(state, total) {
-            state.servicesTotal = total
+            state.itemsTotal = total
         }
     }
 }

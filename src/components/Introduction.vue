@@ -4,11 +4,8 @@
         class="bg-light"
         image-url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
     >
-       
-        <v-container
-         
-            class="px-sm-12 px-6 fill-height"
-        >
+
+        <v-container class="px-sm-12 px-6 fill-height">
             <v-row class="fill-height">
                 <v-col
                     xl="8"
@@ -60,11 +57,15 @@ export default {
         seeMyWork: "See my work"
     }),
     computed: {
-        ...mapGetters("bio", ["full_name", "welcome_message", "about","social_networks"]),
-        ...mapState("bio", ["bio"])
+        ...mapState("bio", [
+            "welcome_message",
+            "about",
+            "social_networks"
+        ]),
+        ...mapGetters('bio',["full_name"])
     },
     created() {
-        this.getBio()
+        this.getBio();
     },
     methods: {
         ...mapActions("bio", { getBio: "fetchBio" })

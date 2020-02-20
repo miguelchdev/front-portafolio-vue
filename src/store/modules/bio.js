@@ -3,39 +3,53 @@ import portfolioApi from "@/services/portfolioApi";
 export default {
     namespaced: true,
     state: {
-        bio: {}
+        name: "",
+        last_name: "",
+        welcome_message: "",
+        about: "",
+        social_networks: []
     },
     actions: {
         fetchBio({ commit }) {
-            portfolioApi.getBio(1).then(data => {
-                commit("setBio", data);
-            });
+            return portfolioApi
+                .getBio(1)
+                .then(
+                    ({
+                        name,
+                        last_name,
+                        welcome_message,
+                        about,
+                        social_networks
+                    }) => {
+                        commit("setName",name);
+                        commit("setLastName", last_name);
+                        commit("setWelcomeMessage", welcome_message);
+                        commit("setAbout", about);
+                        commit("setSocialNetworks", social_networks);
+                    }
+                );
         }
     },
     getters: {
-        name(state) {
-            return state.bio.name;
-        },
-        last_name(state) {
-            return state.bio.last_name;
-        },
-        full_name(state) {
-            return state.bio.name + " " + state.bio.last_name;
-        },
-        welcome_message(state) {
-            return state.bio.welcome_message;
-        },
-        about(state) {
-            return state.bio.about;
-        },
-        social_networks(state){
-            return state.bio.social_networks
+        full_name({name, last_name}) {
+            return name + " " + last_name;
         }
-      
     },
     mutations: {
-        setBio(state, bio) {
-            state.bio = bio;
+        setName(state, name) {
+            state.name = name;
+        },
+        setLastName(state, last_name) {
+            state.last_name = last_name;
+        },
+        setWelcomeMessage(state, welcome_message) {
+            state.welcome_message = welcome_message;
+        },
+        setAbout(state, about) {
+            state.about = about;
+        },
+        setSocialNetworks(state, social_networks) {
+            state.social_networks = social_networks;
         }
     }
 };
