@@ -18,7 +18,7 @@
                 lg="4"
                 md="4"
                 cols="12"
-                class="green"
+                
             >
                 <project-item
                     :id="project.id"
@@ -62,14 +62,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.full{
-    background-color: blue;
+// .full{
+//     background-color: blue;
    
    
-}
-.green{
-    background-color: green;
-}
+// }
+// .green{
+//     background-color: green;
+// }
 .scroll-fade-enter-active {
     transition: all 0.3s ease;
 }

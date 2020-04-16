@@ -1,5 +1,5 @@
 <template>
-    <div id="about">
+    <div>
         <introduction />
         <service />
 
