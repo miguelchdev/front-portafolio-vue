@@ -1,6 +1,6 @@
 <template>
     <div class="bg-light full-view">
-        <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column ">
+        <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
             <v-row no-gutters>
                 <v-col
                     xl="8"
@@ -36,7 +36,7 @@
 
             <project-list
                 v-if="projects"
-                :projects="projects"
+                :projects="paginateProjects"
             />
 
             <v-pagination
@@ -44,6 +44,7 @@
                 v-model="page"
                 :length="pages"
                 class="mt-auto"
+                @input="prueba"
             ></v-pagination>
         </v-container>
     </div>
@@ -68,15 +69,30 @@ export default {
         ...mapActions("projects", {
             getProjects: "fetchProjects",
             getTechnologys: "fetchTechnologys"
-        })
+        }),
+        prueba(payload) {
+            console.log(payload);
+        }
     },
     created() {
         this.getProjects();
         this.getTechnologys();
     },
+    watch: {
+        tab(newValue, oldValue) {
+            this.page = 1;
+            console.log("New:" + newValue + " old:" + oldValue);
+        },
+        page() {
+            if (this.page == this.pages) {
+                console.log("fetching elements");
+                this.getProjects();
+            }
+        }
+    },
     computed: {
-         ...mapGetters("projects", ["filterItems"]),
-        ...mapState("projects", ["technologys", "projectsTotal"]),
+        ...mapGetters("projects", ["filterItems"]),
+        ...mapState("projects", ["technologys", "count"]),
         selectedCategory() {
             return this.categories[this.tab];
         },
@@ -88,15 +104,13 @@ export default {
             if (category == this.all) category = "";
             return this.filterItems(category);
         },
-        count() {
-            return this.projectsTotal;
-        },
         pageCount() {
             return this.$vuetify.breakpoint.smAndDown ? 3 : 4;
         },
         paginateProjects() {
-            let start = (this.page - 1) * this.pageCount;
-            let end = start + this.pageCount;
+            let start = (this.page - 1) * 3;
+
+            let end = start + 3;
 
             return this.projects.slice(start, end);
         },
@@ -104,7 +118,7 @@ export default {
             return this.projects.length;
         },
         pages() {
-            return Math.ceil(this.size / this.pageCount);
+            return Math.ceil(this.size / 3);
         }
     }
 };
