@@ -84,10 +84,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.full {
-    background-color: blue;
-    height: 100%;
-}
+
+// .full{
+//     background-color: blue;
+   
+   
+// }
+// .green{
+//     background-color: green;
+// }
 
 .scroll-fade-enter-active {
     transition: all 0.3s ease;

@@ -6,26 +6,28 @@
     >
 
         <v-container class="px-sm-12 px-6 fill-height">
-            <v-row class="fill-height">
+            <v-row class="fill-height mx-auto">
                 <v-col
                     xl="8"
                     lg="8"
                     md="7"
                     sm="8"
                     xs="12"
+                    col="12"
                     class="d-flex flex-column  fill-height"
                 >
                     <p class="mx-sm-0 mx-auto">{{ welcome_message }}</p>
 
                     <div class="mt-auto">
                         <h1 class="text-sm-left text-center name mb-5">{{ full_name }}</h1>
-                        <p class="mb-5">{{ about }}</p>
+
+                        <p class="text-sm-left text-center mb-5">{{ about }}</p>
+
                         <div class="text-sm-left text-center">
                             <v-btn
                                 tile
                                 large
                                 elevation="24"
-                                width="300"
                             >{{ seeMyWork }}</v-btn>
                         </div>
                     </div>
@@ -57,12 +59,8 @@ export default {
         seeMyWork: "See my work"
     }),
     computed: {
-        ...mapState("bio", [
-            "welcome_message",
-            "about",
-            "social_networks"
-        ]),
-        ...mapGetters('bio',["full_name"])
+        ...mapState("bio", ["welcome_message", "about", "social_networks"]),
+        ...mapGetters("bio", ["full_name"])
     },
     created() {
         this.getBio();
