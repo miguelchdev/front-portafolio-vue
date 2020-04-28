@@ -1,5 +1,7 @@
 export const filterFun = (toFilter, property, query) => {
+
     if (query == "") return toFilter;
+
 
     return toFilter.filter(element => {
         if (element.hasOwnProperty(property)) {

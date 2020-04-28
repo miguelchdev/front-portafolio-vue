@@ -39,6 +39,7 @@
                 :projects="paginateProjects"
             />
 
+
             <v-pagination
                 v-if="projects"
                 v-model="page"
@@ -93,6 +94,7 @@ export default {
     computed: {
         ...mapGetters("projects", ["filterItems"]),
         ...mapState("projects", ["technologys", "count"]),
+
         selectedCategory() {
             return this.categories[this.tab];
         },

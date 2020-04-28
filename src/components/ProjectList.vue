@@ -1,15 +1,11 @@
 <template>
     <!--  -->
-    <v-container
-        fluid
-        class="fill-height py-md-0"
-    >
+    <v-container fluid>
 
         <fade-transition
             group
             tag="div"
-            class="row full"
-          
+            class="row"
         >
             <v-col
                 v-for="project in projects"
@@ -17,15 +13,16 @@
                 xl="4"
                 lg="4"
                 md="4"
+                sm="6"
                 cols="12"
-                
             >
                 <project-item
+                    ref="cols"
                     :id="project.id"
                     :title="project.title"
                     :image-url="cover(project)"
                     :description="project.description"
-                    class="fade-item"
+                    :element-width="elementWidth"
                 />
             </v-col>
         </fade-transition>
@@ -40,8 +37,17 @@ export default {
     name: "ProjectList",
     components: { ProjectItem },
     data: () => ({
-        model: null
+        model: null,
+        width: "auto"
     }),
+    beforeUpdate() {
+        window.addEventListener("resize", this.setWidthAuto);
+    },
+    updated() {
+        this.$nextTick(() => {
+            this.calculateWidth();
+        });
+    },
     props: {
         projects: {
             type: Array,
@@ -54,14 +60,31 @@ export default {
 
             return project.images[cover].file[640];
         },
-        onSelect() {
-            this.$emit("selected", 0);
+        calculateWidth() {
+            if (this.width == "auto") {
+                let size = this.$refs.cols[0].$el.offsetWidth;
+                this.width = size;
+                console.log("ejecutandose");
+            }
+        },
+        setWidthAuto() {
+            this.width = "auto";
+        }
+    },
+    computed: {
+        elementWidth() {
+            if (this.width == "auto") {
+                return this.width;
+            } else {
+                return this.width + "px";
+            }
         }
     }
 };
 </script>
 
 <style lang="scss" scoped>
+
 // .full{
 //     background-color: blue;
    
@@ -70,6 +93,7 @@ export default {
 // .green{
 //     background-color: green;
 // }
+
 .scroll-fade-enter-active {
     transition: all 0.3s ease;
 }
