@@ -15,6 +15,7 @@ import Project from "@/components/Project.vue";
 import Contact from "@/components/Contact.vue";
 
 export default {
+    name: "Home",
     components: { Introduction, Service, Project, Contact }
 };
 </script>
