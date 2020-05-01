@@ -23,6 +23,7 @@
                     :image-url="cover(project)"
                     :description="project.description"
                     :element-width="elementWidth"
+                    @click.native="goTo(project)"
                 />
             </v-col>
         </fade-transition>
@@ -69,6 +70,12 @@ export default {
         },
         setWidthAuto() {
             this.width = "auto";
+        },
+        goTo(project) {
+            this.$router.push({
+                name: "project",
+                params: { project: project, id: project.id }
+            });
         }
     },
     computed: {
@@ -84,16 +91,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-// .full{
-//     background-color: blue;
-   
-   
-// }
-// .green{
-//     background-color: green;
-// }
-
 .scroll-fade-enter-active {
     transition: all 0.3s ease;
 }
