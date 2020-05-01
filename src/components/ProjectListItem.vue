@@ -1,24 +1,24 @@
 <template>
-    <!-- <v-hover v-slot:default="{ hover }"> -->
-    <!-- Se necesita establecer un ancho fijo para evitar los issues al redimensionar -->
-    <v-card
-        tile
-        @click="clickMe"
-        :width="elementWidth"
-    >
-        <v-img
-            class="white--text"
-            :src="imageUrl"
-            :aspect-ratio="16/9"
+    <v-hover v-slot:default="{ hover }">
+        <!-- Se necesita establecer un ancho fijo para evitar los issues al redimensionar -->
+        <v-card
+            :elevation="hover ? 10 : elevation"
+            tile
+            :width="elementWidth"
         >
-        </v-img>
-        <v-card-title>
-            {{ title }}
-        </v-card-title>
-        <v-card-text>{{ description }}</v-card-text>
-    </v-card>
+            <v-img
+                class="white--text"
+                :src="imageUrl"
+                :aspect-ratio="16/9"
+            >
+            </v-img>
+            <v-card-title>
+                {{ title }}
+            </v-card-title>
+            <v-card-text>{{ description }}</v-card-text>
+        </v-card>
 
-    <!-- </v-hover> -->
+    </v-hover>
 </template>
 
 <script>
@@ -42,13 +42,12 @@ export default {
         loading: true,
         show: false
     }),
-    methods: {
-        clickMe() {
-            console.log(this.$refs.card.$parent);
-            this.$emit("click", 5);
+    methods: {},
+    computed: {
+        elevation() {
+            return this.$vuetify.breakpoint.smAndDown ? 4 : 2;
         }
-    },
-    computed: {}
+    }
 };
 </script>
 
