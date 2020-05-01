@@ -63,9 +63,6 @@ export default {
         setProject(state, project) {
             state.project = project;
         },
-        setProjectsTotal(state, total) {
-            state.projectsTotal = total;
-        },
         setNextPage(state) {
             state.page++;
         },
