@@ -4,9 +4,9 @@ export default {
     getBios(params = {}) {
         return axios
             .get("api/bio/", {
-                params: params
+                params: params,
             })
-            .then(response => {
+            .then((response) => {
                 return response.data;
             });
     },
@@ -14,9 +14,9 @@ export default {
         const url = `api/bio/${pk}`;
         return axios
             .get(url, {
-                params: params
+                params: params,
             })
-            .then(response => {
+            .then((response) => {
                 return response.data;
             });
     },
@@ -24,9 +24,9 @@ export default {
         const url = `api/projects/`;
         return axios
             .get(url, {
-                params: params
+                params: params,
             })
-            .then(response => {
+            .then((response) => {
                 return response.data;
             });
     },
@@ -34,9 +34,9 @@ export default {
         const url = `api/projects/${pk}`;
         return axios
             .get(url, {
-                params: params
+                params: params,
             })
-            .then(response => {
+            .then((response) => {
                 return response.data;
             });
     },
@@ -44,20 +44,10 @@ export default {
         const url = `api/service/`;
         return axios
             .get(url, {
-                params: params
+                params: params,
             })
-            .then(response => {
+            .then((response) => {
                 return response.data;
             });
     },
-    getTechnologys(params = {}) {
-        const url = "api/technology/";
-        return axios
-            .get(url, {
-                params: params
-            })
-            .then(response => {
-                return response.data;
-            });
-    }
 };
