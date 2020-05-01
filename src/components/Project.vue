@@ -1,7 +1,10 @@
 <template>
     <div class="bg-light full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <v-row no-gutters>
+            <v-row
+                no-gutters
+                class="flex-grow-0"
+            >
                 <v-col
                     xl="8"
                     lg="6"
@@ -37,8 +40,8 @@
             <project-list
                 v-if="projects"
                 :projects="paginateProjects"
+                class="mt-auto"
             />
-
 
             <v-pagination
                 v-if="projects"
@@ -68,8 +71,7 @@ export default {
     }),
     methods: {
         ...mapActions("projects", {
-            getProjects: "fetchProjects",
-            getTechnologys: "fetchTechnologys"
+            getProjects: "fetchProjects"
         }),
         prueba(payload) {
             console.log(payload);
@@ -77,7 +79,6 @@ export default {
     },
     created() {
         this.getProjects();
-        this.getTechnologys();
     },
     watch: {
         tab(newValue, oldValue) {
@@ -92,8 +93,8 @@ export default {
         }
     },
     computed: {
-        ...mapGetters("projects", ["filterItems"]),
-        ...mapState("projects", ["technologys", "count"]),
+        ...mapGetters("projects", ["filterItems", "technologys"]),
+        ...mapState("projects", ["count"]),
 
         selectedCategory() {
             return this.categories[this.tab];
