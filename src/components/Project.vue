@@ -45,10 +45,10 @@
 
             <v-pagination
                 v-if="projects"
-                v-model="page"
+                @input="paginate"
                 :length="pages"
+                :value="page"
                 class="mt-auto"
-                @input="prueba"
             ></v-pagination>
         </v-container>
     </div>
@@ -67,61 +67,69 @@ export default {
         page: 1,
         current: 0,
         tab: 0,
-        loading: true
+        loading: true,
+        perPage: 3
     }),
     methods: {
         ...mapActions("projects", {
             getProjects: "fetchProjects"
         }),
-        prueba(payload) {
-            console.log(payload);
+        paginate(curretPage) {
+            if (curretPage == this.pages || curretPage == this.pages - 1) {
+                console.log("Cargando info");
+                this.getProjects().then(() => {
+                    this.page = curretPage;
+                    console.log("Info cargada");
+                });
+            } else {
+                this.page = curretPage;
+            }
         }
     },
-    created() {
+    mounted() {
         this.getProjects();
     },
     watch: {
-        tab(newValue, oldValue) {
+        tab() {
             this.page = 1;
-            console.log("New:" + newValue + " old:" + oldValue);
         },
-        page() {
-            if (this.page == this.pages) {
-                console.log("fetching elements");
+        pages() {
+            if (this.pages == 1 && this.total < this.count) {
+                console.log("se ejecuta");
                 this.getProjects();
             }
         }
     },
     computed: {
-        ...mapGetters("projects", ["filterItems", "technologys"]),
+        ...mapGetters("projects", ["filterItems", "technologys", "total"]),
         ...mapState("projects", ["count"]),
-
-        selectedCategory() {
-            return this.categories[this.tab];
-        },
         categories() {
             return [this.all].concat(this.technologys);
         },
-        projects() {
-            let category = this.selectedCategory;
-            if (category == this.all) category = "";
-            return this.filterItems(category);
+        selectedCategory() {
+            let category =
+                this.categories[this.tab] == this.all
+                    ? ""
+                    : this.categories[this.tab];
+            return category;
         },
-        pageCount() {
-            return this.$vuetify.breakpoint.smAndDown ? 3 : 4;
+        projects() {
+            return this.filterItems(this.selectedCategory);
+        },
+        start() {
+            return (this.page - 1) * this.perPage;
+        },
+        end() {
+            return this.start + this.perPage;
         },
         paginateProjects() {
-            let start = (this.page - 1) * 3;
-
-            let end = start + 3;
-
-            return this.projects.slice(start, end);
+            return this.projects.slice(this.start, this.end);
         },
         size() {
             return this.projects.length;
         },
         pages() {
-            return Math.ceil(this.size / 3);
+            return Math.ceil(this.size / this.perPage);
         }
     }
 };
