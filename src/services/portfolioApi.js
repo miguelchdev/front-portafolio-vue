@@ -1,5 +1,9 @@
 import axios from "axios";
 
+const headers = (token) => {
+    return { Authorization: "Token " + token };
+};
+
 export default {
     getBios(params = {}) {
         return axios
@@ -45,6 +49,15 @@ export default {
         return axios
             .get(url, {
                 params: params,
+            })
+            .then((response) => {
+                return response.data;
+            });
+    },
+    sendEmail(token, content) {
+        return axios
+            .post("api/email_service/", content, {
+                headers: headers(token),
             })
             .then((response) => {
                 return response.data;
