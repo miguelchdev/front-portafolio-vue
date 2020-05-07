@@ -22,7 +22,7 @@
                     :title="project.title"
                     :image-url="cover(project)"
                     :description="project.description"
-                    :element-width="elementWidth"
+                    :element-width="width"
                     @click.native="goTo(project)"
                 />
             </v-col>
@@ -34,20 +34,33 @@
 <script>
 import ProjectItem from "@/components/ProjectListItem.vue";
 
+function debounce(fn, delay) {
+    var timeoutID = null;
+    return function() {
+        clearTimeout(timeoutID);
+        var args = arguments;
+        var that = this;
+        timeoutID = setTimeout(function() {
+            fn.apply(that, args);
+        }, delay);
+    };
+}
 export default {
     name: "ProjectList",
     components: { ProjectItem },
     data: () => ({
-        model: null,
-        width: "auto"
+        created: true,
+        width: "auto",
+        winSize: 0
     }),
-    beforeUpdate() {
-        window.addEventListener("resize", this.setWidthAuto);
+    mounted() {
+        window.addEventListener("resize", this.onResize);
     },
     updated() {
-        this.$nextTick(() => {
-            this.calculateWidth();
-        });
+        this.initalizeSize();
+    },
+    beforeDestroy() {
+        window.removeEventListener("resize", this.onResize);
     },
     props: {
         projects: {
@@ -64,28 +77,34 @@ export default {
         calculateWidth() {
             if (this.width == "auto") {
                 let size = this.$refs.cols[0].$el.offsetWidth;
-                this.width = size;
+                this.width = size + "px";
                 console.log("ejecutandose");
             }
-        },
-        setWidthAuto() {
-            this.width = "auto";
         },
         goTo(project) {
             this.$router.push({
                 name: "project",
                 params: { project: project, id: project.id }
             });
+        },
+        initalizeSize() {
+            this.$nextTick(() => {
+                if (this.created) {
+                    this.created = false;
+                    this.calculateWidth();
+                }
+            });
+        },
+        onResize() {
+            this.width = "auto";
+            this.winSize = window.innerWidth + window.innerHeight;
         }
     },
-    computed: {
-        elementWidth() {
-            if (this.width == "auto") {
-                return this.width;
-            } else {
-                return this.width + "px";
-            }
-        }
+    computed: {},
+    watch: {
+        winSize: debounce(function() {
+            this.calculateWidth();
+        }, 500)
     }
 };
 </script>
