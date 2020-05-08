@@ -15,7 +15,7 @@
                             md="4"
                         >
                             <v-text-field
-                                v-model="name"
+                                v-model="contact.name"
                                 label="Nombre"
                                 :rules="nameRules"
                                 class="mb-3"
@@ -30,7 +30,7 @@
                         >
                             <v-text-field
                                 dark
-                                v-model="email"
+                                v-model="contact.email"
                                 label="Correo electrónico"
                                 :rules="emailRules"
                                 class="mb-3"
@@ -48,7 +48,7 @@
                                 label="Mensaje"
                                 class="mb-3"
                                 value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
-                                v-model="mensaje_input"
+                                v-model="contact.message"
                                 :rules="mensaje_rules"
                             ></v-textarea>
                         </v-col>
@@ -68,6 +68,7 @@
                 <v-dialog
                     v-model="dialog"
                     width="500"
+                    dark
                 >
 
                     <v-card>
@@ -91,42 +92,40 @@
 </template>
 
 <script>
+import portfolioApi from "@/services/portfolioApi";
+
 export default {
     name: "Contact",
     data: () => ({
         title: "Contact ME",
         servicesDescription:
             "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus rutrum sapien eget scelerisque. Nullam vel leo congue, ultricies arcu eu, rutrum est. Fusce sollicitudin, arcu id vulputate fermentum, lacus ipsum ultricies odio, vel tincidunt sapien nibh ac felis. Maecenas a nisi sit amet dolor sodales hendrerit. Mauris ut sodales felis ",
-        name: "",
-        lastName: "",
         dialog: false,
-        phone: "",
-        email: "",
-        aeronave: null,
-        pasajeros: 1,
-        origen: "",
-        destino: "",
+
         error_messages: {
             missing: "Debe ingresar un {}.",
             invalid: "Debe ingresar un {} valido",
             missing_option: "Debe seleccionar una opción."
         },
-        mensaje_input: "",
+        contact: {
+            name: "",
+            message: "",
+            email: ""
+        },
+
         valid: false,
-        aeropuertos_seleccionados: [],
-        menu2: false,
-        menu: false,
         dialogTitle: "",
         dialogBody: ""
     }),
     computed: {
         nameRules() {
             return [
-                v => !!v || this.error_messages.missing.replace("{}", "nombre"),
+                (v =>
+                    !!v || this.error_messages.missing.replace("{}", "nombre"),
                 v =>
                     /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(
                         v
-                    ) || this.error_messages.invalid.replace("{}", "nombre")
+                    ) || this.error_messages.invalid.replace("{}", "nombre"))
             ];
         },
         lastNameRules() {
@@ -174,22 +173,23 @@ export default {
                 v => v.length > 20 || "Mensaje muy corto"
             ];
         },
-        message() {
-            return `Nombre:${this.name}\nApellido:${this.lastName}\nTeléfono:${this.phone}\nCorreo Electrónico:${this.email}\n\n${this.mensaje_input}`;
-        },
         formValues() {
             return {
-                from_email: this.email,
-                to_email: "info@victoryfly.com",
-                body: this.message,
-                subject: `Nuevo mensaje  de: ${this.name} ${this.lastName}`
+                from_email: this.contact.email,
+                to_email: "miguelangelchgz@gmail.com",
+                body: this.contact.message,
+                subject: `Nuevo mensaje  de: ${this.contact.name}`
             };
         }
     },
     methods: {
         validate() {
             if (this.$refs.form.validate()) {
-                EmailApi.sendEmail(this.formValues)
+                portfolioApi
+                    .sendEmail(
+                        "471dcc9429567ece484878e5d2f6b0e7a1ba81a0",
+                        this.formValues
+                    )
                     .then(response => {
                         this.dialog = true;
                         this.dialogTitle = "Gracias";
