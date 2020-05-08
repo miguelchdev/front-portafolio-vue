@@ -11,7 +11,8 @@ export default {
         count: 0,
     },
     actions: {
-        fetchProjects({ commit, state, getters }) {
+        fetchProjects({ commit, state, getters, dispatch }) {
+            dispatch("addAction", "fetchProjects", { root: true });
             return portfolioApi
                 .getProjects({
                     fields: "id,title,images,description,technologys",
@@ -22,17 +23,31 @@ export default {
                     if (state.count > getters.total)
                         commit("setProjects", results);
                     if (next) commit("setNextPage");
+                    dispatch("removeAction", "fetchProjects", { root: true });
+                })
+                .catch((error) => {
+                    dispatch("removeAction", "fetchProjects", { root: true });
+                    const notification = {
+                        type: "error",
+                        message:
+                            "There was a problem fetching projects: " +
+                            error.message,
+                    };
+                    dispatch("notifications/add", notification, { root: true });
                 });
         },
-        fetchProject({ commit, getters }, id) {
+        fetchProject({ commit, getters, dispatch }, id) {
             let project = getters.getProjectById(id);
 
             if (project) {
                 commit("setProject", project);
                 return project;
             } else {
+                dispatch("addAction", "fetchProject", { root: true });
                 return portfolioApi.getProject(id).then((project) => {
                     commit("setProject", project);
+                    dispatch("removeAction", "fetchProject", { root: true });
+
                     return project;
                 });
             }

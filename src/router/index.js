@@ -26,6 +26,16 @@ const routes = [
                 .then((project) => {
                     routeTo.params.project = project;
                     next();
+                })
+                .catch((error) => {
+                    next({ name: "home" });
+                    const notification = {
+                        type: "error",
+                        message:
+                            "There was a problem fetching project: " +
+                            error.message,
+                    };
+                    store.dispatch("notifications/add", notification);
                 });
         },
     },
