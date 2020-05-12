@@ -15,7 +15,8 @@
                 sm="4"
                 class="hide-only-xs"
                 :style="styleObject"
-            />
+            >
+            </v-col>
         </v-row>
         <div class="layer-1 parent-height">
             <slot></slot>
