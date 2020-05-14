@@ -15,7 +15,7 @@
             <v-card-title>
                 {{ title }}
             </v-card-title>
-            <v-card-text>{{ description }}</v-card-text>
+
         </v-card>
 
     </v-hover>
