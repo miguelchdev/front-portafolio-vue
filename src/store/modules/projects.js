@@ -1,6 +1,6 @@
 import portfolioApi from "@/services/portfolioApi";
 
-import { filterFun, onlyUnique } from "@/store/utils";
+import { filterFun, onlyUnique } from "@/helpers";
 
 export default {
     namespaced: true,

@@ -34,18 +34,8 @@
 
 <script>
 import ProjectItem from "@/components/ProjectListItem.vue";
+import { debounce } from "@/helpers";
 
-function debounce(fn, delay) {
-    var timeoutID = null;
-    return function() {
-        clearTimeout(timeoutID);
-        var args = arguments;
-        var that = this;
-        timeoutID = setTimeout(function() {
-            fn.apply(that, args);
-        }, delay);
-    };
-}
 export default {
     name: "ProjectList",
     components: { ProjectItem },
