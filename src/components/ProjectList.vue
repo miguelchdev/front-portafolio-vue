@@ -22,7 +22,8 @@
                     :title="project.title"
                     :image-url="cover(project)"
                     :description="project.description"
-                    :element-width="width"
+                    :width="width"
+                    :height="height"
                     @click.native="goTo(project)"
                 />
             </v-col>
@@ -51,6 +52,7 @@ export default {
     data: () => ({
         created: true,
         width: "auto",
+        height: "auto",
         winSize: 0
     }),
     mounted() {
@@ -74,11 +76,12 @@ export default {
 
             return project.images[cover].file[640];
         },
-        calculateWidth() {
+        calculateSize() {
             if (this.width == "auto") {
-                let size = this.$refs.cols[0].$el.offsetWidth;
-                this.width = size + "px";
-                console.log("ejecutandose");
+                let width = this.$refs.cols[0].$el.offsetWidth;
+                let height = this.$refs.cols[0].$el.offsetHeight;
+                this.width = `${width}px`;
+                this.height = `${height}px`;
             }
         },
         goTo(project) {
@@ -91,19 +94,20 @@ export default {
             this.$nextTick(() => {
                 if (this.created) {
                     this.created = false;
-                    this.calculateWidth();
+                    this.calculateSize();
                 }
             });
         },
         onResize() {
             this.width = "auto";
+            this.height = "auto";
             this.winSize = window.innerWidth + window.innerHeight;
         }
     },
     computed: {},
     watch: {
         winSize: debounce(function() {
-            this.calculateWidth();
+            this.calculateSize();
         }, 500)
     }
 };

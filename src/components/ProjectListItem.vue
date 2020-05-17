@@ -4,7 +4,8 @@
         <v-card
             :elevation="hover ? 10 : elevation"
             tile
-            :width="elementWidth"
+            :width="width"
+            :height="height"
         >
             <v-img
                 class="white--text"
@@ -33,7 +34,11 @@ export default {
             type: Boolean,
             default: false
         },
-        elementWidth: {
+        width: {
+            type: String,
+            default: "auto"
+        },
+        height: {
             type: String,
             default: "auto"
         }
