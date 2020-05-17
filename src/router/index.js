@@ -12,6 +12,12 @@ const routes = [
         component: Home,
     },
     {
+        path: "*",
+        name: "error",
+        component: () =>
+            import(/* webpackChunkName: "about" */ "@/views/404.vue"),
+    },
+    {
         path: "/projects/:id",
         name: "project",
         props: true,
@@ -27,15 +33,20 @@ const routes = [
                     routeTo.params.project = project;
                     next();
                 })
-                .catch((error) => {
-                    next({ name: "home" });
-                    const notification = {
-                        type: "error",
-                        message:
-                            "There was a problem fetching project: " +
-                            error.message,
-                    };
-                    store.dispatch("notifications/add", notification);
+                .catch(({ message, response }) => {
+                    if (response) {
+                        next({ name: "error" });
+                    } else {
+                        next({ name: "home" });
+
+                        const notification = {
+                            type: "error",
+                            message:
+                                "There was a problem fetching project: " +
+                                message,
+                        };
+                        store.dispatch("notifications/add", notification);
+                    }
                 });
         },
     },
