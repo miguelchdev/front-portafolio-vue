@@ -13,3 +13,15 @@ export const filterFun = (toFilter, property, query) => {
 };
 
 export const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+
+export function debounce(fn, delay) {
+    var timeoutID = null;
+    return function() {
+        clearTimeout(timeoutID);
+        var args = arguments;
+        var that = this;
+        timeoutID = setTimeout(function() {
+            fn.apply(that, args);
+        }, delay);
+    };
+}
