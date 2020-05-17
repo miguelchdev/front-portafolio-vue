@@ -15,7 +15,6 @@ export default {
             dispatch("addAction", "fetchProjects", { root: true });
             return portfolioApi
                 .getProjects({
-                    fields: "id,title,images,description,technologys",
                     page: state.page,
                 })
                 .then(({ results, next, count }) => {
@@ -54,22 +53,13 @@ export default {
         },
     },
     getters: {
-        filterItems: ({ items }) => (query) => {
-            return filterFun(items, "technologys", query);
-        },
-        total: ({ items }) => {
-            return items.length;
-        },
-        getProjectById: ({ items }) => (id) => {
-            return items.find((project) => project.id === id);
-        },
-        technologys: ({ items }) => {
-            return items
-                .flatMap((project) => {
-                    return project.technologys;
-                })
-                .filter(onlyUnique);
-        },
+        filterItems: ({ items }) => (query) =>
+            filterFun(items, "technologys", query),
+        total: ({ items }) => items.length,
+        getProjectById: ({ items }) => (id) =>
+            items.find((project) => project.id === id),
+        technologys: ({ items }) =>
+            items.flatMap((project) => project.technologys).filter(onlyUnique),
     },
     mutations: {
         setProjects(state, projects) {

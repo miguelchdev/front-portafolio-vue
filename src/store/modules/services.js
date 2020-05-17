@@ -9,9 +9,7 @@ export default {
         fetchServices({ commit, dispatch }) {
             return portfolioApi
                 .getServices()
-                .then(({ results }) => {
-                    commit("setServices", results);
-                })
+                .then(({ results }) => commit("setServices", results))
                 .catch((error) => {
                     const notification = {
                         type: "error",
@@ -24,9 +22,7 @@ export default {
         },
     },
     getters: {
-        total: (state) => {
-            return state.items.length;
-        },
+        total: (state) => state.items.length,
     },
     mutations: {
         setServices(state, services) {
