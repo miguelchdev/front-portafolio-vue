@@ -94,6 +94,8 @@
 <script>
 import portfolioApi from "@/services/portfolioApi";
 
+import { checkEmail, checkName } from "@/helpers";
+
 export default {
     name: "Contact",
     data: () => ({
@@ -119,66 +121,33 @@ export default {
     }),
     computed: {
         nameRules() {
+            let { invalid, missing } = this.error_messages;
             return [
-                (v =>
-                    !!v || this.error_messages.missing.replace("{}", "nombre"),
-                v =>
-                    /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(
-                        v
-                    ) || this.error_messages.invalid.replace("{}", "nombre"))
-            ];
-        },
-        lastNameRules() {
-            return [
-                v =>
-                    !!v ||
-                    this.error_messages.missing.replace("{}", "apellido"),
-                v =>
-                    /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/.test(
-                        v
-                    ) || this.error_messages.invalid.replace("{}", "apellido")
+                (v => !!v || missing.replace("{}", "nombre"),
+                v => checkName(v) || invalid.replace("{}", "nombre"))
             ];
         },
         emailRules() {
+            let { invalid, missing } = this.error_messages;
             return [
-                v => !!v || this.error_messages.missing.replace("{}", "email"),
-                v =>
-                    /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(
-                        v
-                    ) || this.error_messages.invalid.replace("{}", "email")
-            ];
-        },
-        phoneRules() {
-            return [
-                v =>
-                    !!v ||
-                    this.error_messages.missing.replace(
-                        "{}",
-                        "número de teléfono"
-                    ),
-                v =>
-                    /^(0\d{10}|0\d{3}\-\d{7}|58\d{10}|58\-\d{3}\-\d{7})$/.test(
-                        v
-                    ) ||
-                    this.error_messages.invalid.replace(
-                        "{}",
-                        "número de teléfono"
-                    )
+                v => !!v || missing.replace("{}", "email"),
+                v => checkEmail(v) || invalid.replace("{}", "email")
             ];
         },
         mensaje_rules() {
+            let { missing } = this.error_messages;
             return [
-                v =>
-                    !!v || this.error_messages.missing.replace("{}", "mensaje"),
+                v => !!v || missing.replace("{}", "mensaje"),
                 v => v.length > 20 || "Mensaje muy corto"
             ];
         },
         formValues() {
+            let { email, message, name } = this.contact;
             return {
-                from_email: this.contact.email,
+                from_email: email,
                 to_email: "miguelangelchgz@gmail.com",
-                body: this.contact.message,
-                subject: `Nuevo mensaje  de: ${this.contact.name}`
+                body: message,
+                subject: `Nuevo mensaje  de: ${name}`
             };
         }
     },
