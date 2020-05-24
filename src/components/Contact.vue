@@ -47,9 +47,8 @@
                                 auto-grow
                                 label="Mensaje"
                                 class="mb-3"
-                                value="The Woodman set to work at once, and so sharp was his axe that the tree was soon chopped nearly through."
                                 v-model="contact.message"
-                                :rules="mensaje_rules"
+                                :rules="mensajeRules"
                             ></v-textarea>
                         </v-col>
                     </v-row>
@@ -134,7 +133,7 @@ export default {
                 v => checkEmail(v) || invalid.replace("{}", "email")
             ];
         },
-        mensaje_rules() {
+        mensajeRules() {
             let { missing } = this.error_messages;
             return [
                 v => !!v || missing.replace("{}", "mensaje"),
