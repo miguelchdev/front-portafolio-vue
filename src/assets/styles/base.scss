@@ -4,7 +4,6 @@
     src: url("~@/assets/fonts/ProximaNova.ttf") format("truetype");
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-weight: normal;
 }
 
 @import "@/assets/styles/responsive-breakpoints.scss";
@@ -101,24 +100,23 @@ $variations: light, dark;
                 font-size: map-get($heading, "size");
                 line-height: map-get($heading, "line-height");
                 text-transform: uppercase;
-                font-weight: 900;
+                font-weight: bold;
             }
         }
 
         p,
         a {
             color: var(--v-#{$variation}Text-base) !important;
-            font-weight: 500;
             text-decoration: none;
+        }
+        button {
+            font-family: "Proxima Nova";
+            text-transform: uppercase;
+            font-weight: bold;
         }
     }
 }
 
-button {
-    font-family: "Proxima Nova";
-    text-transform: uppercase;
-    font-weight: 900;
-}
 .parent-height {
     height: inherit;
 }
