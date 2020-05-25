@@ -109,14 +109,14 @@ $variations: light, dark;
             color: var(--v-#{$variation}Text-base) !important;
             text-decoration: none;
         }
+        button {
+            font-family: "Proxima Nova";
+            text-transform: uppercase;
+            font-weight: bold;
+        }
     }
 }
 
-button {
-    font-family: "Proxima Nova";
-    text-transform: uppercase;
-    font-weight: bold;
-}
 .parent-height {
     height: inherit;
 }
