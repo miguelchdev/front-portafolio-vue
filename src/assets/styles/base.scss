@@ -1,35 +1,33 @@
 // src/sass/variables.scss
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('~@/assets/fonts/ProximaNova.ttf');
+    font-family: "Proxima Nova";
+    src: url("~@/assets/fonts/ProximaNova.ttf") format("truetype");
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: normal;
 }
 
-@import '@/assets/styles/responsive-breakpoints.scss';
-
-
+@import "@/assets/styles/responsive-breakpoints.scss";
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('~@/assets/fonts/Proxima Nova Extrabold.otf') format('opentype');
+    font-family: "Proxima Nova";
+    src: url("~@/assets/fonts/Proxima Nova Extrabold.otf") format("opentype");
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: bold;
 }
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('~@/assets/fonts/Proxima Nova Thin.otf');
+    font-family: "Proxima Nova";
+    src: url("~@/assets/fonts/Proxima Nova Thin.otf") format("opentype");
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 100;
 }
 
 @font-face {
-    font-family: 'Proxima Nova';
-    src: url('~@/assets/fonts/Proxima Nova Bold.otf');
+    font-family: "Proxima Nova";
+    src: url("~@/assets/fonts/Proxima Nova Bold.otf") format("opentype");
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 800;
@@ -46,46 +44,46 @@ $list-item-title-font-size: 0.929rem;
 $list-item-dense-title-font-size: 0.929rem;
 $list-item-dense-title-font-weight: initial;
 $fab-icon-sizes: (
-    'small': 20
+    "small": 20,
 );
 $btn-font-sizes: (
-    'default': 1rem,
-    'large': 1rem
+    "default": 1rem,
+    "large": 1rem,
 );
 $btn-sizes: (
-    'default': 41,
-    'large': 54
+    "default": 41,
+    "large": 54,
 );
 
 $headings: (
-    'h1': (
-        'size': 3.3125rem,
-        'line-height': 1.15em
+    "h1": (
+        "size": 3.3125rem,
+        "line-height": 1.15em,
     ),
-    'h2': (
-        'size': 2.25rem,
-        'line-height': 1.5em
+    "h2": (
+        "size": 2.25rem,
+        "line-height": 1.5em,
     ),
-    'h3': (
-        'size': 1.5625rem,
-        'line-height': 1.4em
+    "h3": (
+        "size": 1.5625rem,
+        "line-height": 1.4em,
     ),
-    'h4': (
-        'size': 1.125rem,
-        'line-height': 1.4em
+    "h4": (
+        "size": 1.125rem,
+        "line-height": 1.4em,
     ),
-    'h5': (
-        'size': 1.0625rem
+    "h5": (
+        "size": 1.0625rem,
     ),
-    'h6': (
-        'size': 0.75rem
+    "h6": (
+        "size": 0.75rem,
     ),
-    'subtitle-2': (
-        'size': 1rem
+    "subtitle-2": (
+        "size": 1rem,
     ),
-    'overline': (
-        'letter-spacing': 0
-    )
+    "overline": (
+        "letter-spacing": 0,
+    ),
 );
 
 $variations: light, dark;
@@ -98,10 +96,10 @@ $variations: light, dark;
             $heading: map-get($headings, h#{$i});
 
             h#{$i} {
-                font-family: 'Proxima Nova';
+                font-family: "Proxima Nova";
                 color: var(--v-#{$variation}Heading-base);
-                font-size: map-get($heading, 'size');
-                line-height: map-get($heading, 'line-height');
+                font-size: map-get($heading, "size");
+                line-height: map-get($heading, "line-height");
                 text-transform: uppercase;
                 font-weight: 900;
             }
@@ -117,7 +115,7 @@ $variations: light, dark;
 }
 
 button {
-    font-family: 'Proxima Nova';
+    font-family: "Proxima Nova";
     text-transform: uppercase;
     font-weight: 900;
 }
