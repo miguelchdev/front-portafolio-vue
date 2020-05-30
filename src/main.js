@@ -7,9 +7,9 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import Transitions from "vue2-transitions";
 Vue.use(Transitions);
-axios.defaults.baseURL = "https://miguelangelch.pythonanywhere.com";
+axios.defaults.baseURL = process.env.API_URL;
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = process.env.PRODUCTION;
 
 new Vue({
     router,
