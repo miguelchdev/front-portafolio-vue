@@ -64,7 +64,7 @@ export default {
         cover(project) {
             let cover = project.images.length - 1;
 
-            return project.images[cover].file[640];
+            return project.images[cover].file;
         },
         calculateSize() {
             if (this.width == "auto") {
