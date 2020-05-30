@@ -155,7 +155,7 @@ export default {
             if (this.$refs.form.validate()) {
                 portfolioApi
                     .sendEmail(
-                        "471dcc9429567ece484878e5d2f6b0e7a1ba81a0",
+                        "3cb59adf21daf59225ea3d5a4a5dbd40d3807660",
                         this.formValues
                     )
                     .then(response => {
