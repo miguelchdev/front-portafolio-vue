@@ -12,7 +12,7 @@
                 <v-carousel-item
                     v-for="image in project.images"
                     :key="image.id"
-                    :src="image.file['1366']"
+                    :src="image.file"
                     transition="fade-transition"
                 >
 
@@ -49,8 +49,9 @@
                         class="d-flex"
                     >
                         <v-img
-                            :src="image.file['1366']"
-                            :lazy-src="image.file['1366']"
+                            :src="image.file"
+                            :lazy-src="image.file"
+                            :alt="image.alt"
                             :aspect-ratio="4/3"
                         ></v-img>
                     </v-card>
