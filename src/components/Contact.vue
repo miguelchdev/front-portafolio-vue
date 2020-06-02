@@ -154,10 +154,7 @@ export default {
         validate() {
             if (this.$refs.form.validate()) {
                 portfolioApi
-                    .sendEmail(
-                        "3cb59adf21daf59225ea3d5a4a5dbd40d3807660",
-                        this.formValues
-                    )
+                    .sendEmail(this.formValues)
                     .then(response => {
                         this.dialog = true;
                         this.dialogTitle = "Gracias";

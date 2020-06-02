@@ -7,13 +7,11 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import Transitions from "vue2-transitions";
 Vue.use(Transitions);
-axios.defaults.baseURL = "https://api-miguelchdev.herokuapp.com/";
+
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 Vue.config.productionTip = true;
 
-let prueba = process.env.DEBUG;
-console.log(process.env);
-console.log(prueba);
 new Vue({
     router,
     store,

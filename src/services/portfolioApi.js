@@ -54,9 +54,10 @@ export default {
                 return response.data;
             });
     },
-    sendEmail(token, content) {
+    sendEmail(content) {
+        let token = process.env.VUE_APP_EMAIL_TOKEN;
         return axios
-            .post("api/email_service/", content, {
+            .post("en/api/email_service/", content, {
                 headers: headers(token),
             })
             .then((response) => {
