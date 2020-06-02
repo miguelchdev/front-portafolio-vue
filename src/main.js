@@ -11,6 +11,9 @@ axios.defaults.baseURL = "https://api-miguelchdev.herokuapp.com/";
 
 Vue.config.productionTip = true;
 
+let prueba = process.env.DEBUG;
+console.log(process.env);
+console.log(prueba);
 new Vue({
     router,
     store,
