@@ -7,9 +7,10 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import Transitions from "vue2-transitions";
 Vue.use(Transitions);
+
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 new Vue({
     router,
