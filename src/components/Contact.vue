@@ -72,7 +72,7 @@
 
                     <v-card>
                         <v-card-title primary-title>
-                            <p class="display-1 text--primary">
+                            <p class="display-1">
                                 {{dialogTitle}}
                             </p>
 
