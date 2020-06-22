@@ -2,7 +2,7 @@
     <introduction-background
         light="true"
         class="bg-light"
-        image-url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        :image="images.banner"
     >
 
         <v-container class="px-sm-12 px-6 fill-height">
@@ -54,6 +54,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
     name: "Introduction",
     components: { IntroductionBackground },
+    props: { title: String, images: Object, page_contents: Object },
     data() {
         return {
             loading: true,
