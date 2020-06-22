@@ -21,7 +21,7 @@
                     <div class="mt-auto">
                         <h1 class="text-sm-left text-center name mb-5">{{ full_name }}</h1>
 
-                        <p class="text-sm-left text-center mb-5">{{ about }}</p>
+                        <p class="text-sm-left text-center mb-5 about">{{ about }}</p>
 
                         <div class="text-sm-left text-center">
                             <v-btn
@@ -76,6 +76,9 @@ export default {
 
 
 <style scoped lang="scss">
+.about {
+    word-wrap: break-word;
+}
 .fill-height {
     min-height: 100%;
 }

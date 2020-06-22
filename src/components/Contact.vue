@@ -185,6 +185,7 @@ export default {
     font-size: 1rem;
     color: var(--v-darkText-base);
     padding: 5% 0 3% 0%;
+    word-wrap: break-word;
 }
 @include respond-above(sm) {
     @media (orientation: portrait) {
