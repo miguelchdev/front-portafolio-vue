@@ -54,10 +54,12 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
     name: "Introduction",
     components: { IntroductionBackground },
-    data: () => ({
-        loading: true,
-        seeMyWork: "See my work"
-    }),
+    data() {
+        return {
+            loading: true,
+            seeMyWork: "See my work"
+        };
+    },
     computed: {
         ...mapState("bio", ["welcome_message", "about", "social_networks"]),
         ...mapGetters("bio", ["full_name"])
