@@ -40,8 +40,7 @@ export default {
     },
     computed: {
         ...mapGetters(["loading"]),
-        ...mapState("notifications", ["notifications"]),
-        ...mapState("pages", ["services"])
+        ...mapState("notifications", ["notifications"])
     },
     methods: {
         ...mapActions("notifications", ["remove"])
