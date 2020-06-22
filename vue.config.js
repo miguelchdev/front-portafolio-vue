@@ -4,5 +4,5 @@ module.exports = {
         devtool: "source-map",
     },
 
-    lintOnSave: false,
+    lintOnSave: true,
 };

@@ -35,8 +35,9 @@
 import { mapGetters, mapActions, mapState } from "vuex";
 export default {
     name: "App",
-    components: {},
-    data: () => ({ snackbar: true }),
+    data() {
+        return { snackbar: true };
+    },
     computed: {
         ...mapGetters(["loading"]),
         ...mapState("notifications", ["notifications"])

@@ -10,7 +10,7 @@ Vue.use(Transitions);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 
 new Vue({
     router,

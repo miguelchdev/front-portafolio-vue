@@ -12,8 +12,11 @@
                     cols="12"
                     class="mb-md-0 mb-5"
                 >
-                    <h1 class=" text-sm-justify text-center description-services mins">
-                        {{ myWork }}
+                    <h1
+                        v-if="title"
+                        class=" text-sm-justify text-center description-services mins"
+                    >
+                        {{ title }}
                     </h1>
                 </v-col>
                 <v-col
@@ -61,15 +64,17 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
     name: "Projects",
     components: { ProjectList },
-    data: () => ({
-        myWork: "my work",
-        all: "All",
-        page: 1,
-        current: 0,
-        tab: 0,
-        loading: true,
-        perPage: 3
-    }),
+    props: { title: String, images: Object, page_contents: Object },
+    data() {
+        return {
+            all: "All",
+            page: 1,
+            current: 0,
+            tab: 0,
+            loading: true,
+            perPage: 3
+        };
+    },
     methods: {
         ...mapActions("projects", {
             getProjects: "fetchProjects"

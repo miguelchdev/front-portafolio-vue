@@ -1,8 +1,14 @@
 <template>
     <div class="bg-dark full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <h1 class="text-sm-justify text-center">{{ title }}</h1>
-            <p class="description-services ">{{ servicesDescription }}</p>
+            <h1
+                v-if="title"
+                class="text-sm-justify text-center"
+            >{{ title }}</h1>
+            <p
+                v-if="page_contents"
+                class="description-services "
+            >{{ page_contents.description }}</p>
             <v-container>
 
                 <v-form
@@ -97,27 +103,27 @@ import { checkEmail, checkName } from "@/helpers";
 
 export default {
     name: "Contact",
-    data: () => ({
-        title: "Contact ME",
-        servicesDescription:
-            "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus rutrum sapien eget scelerisque. Nullam vel leo congue, ultricies arcu eu, rutrum est. Fusce sollicitudin, arcu id vulputate fermentum, lacus ipsum ultricies odio, vel tincidunt sapien nibh ac felis. Maecenas a nisi sit amet dolor sodales hendrerit. Mauris ut sodales felis ",
-        dialog: false,
+    props: { title: String, images: Object, page_contents: Object },
+    data() {
+        return {
+            dialog: false,
 
-        error_messages: {
-            missing: "Debe ingresar un {}.",
-            invalid: "Debe ingresar un {} valido",
-            missing_option: "Debe seleccionar una opción."
-        },
-        contact: {
-            name: "",
-            message: "",
-            email: ""
-        },
+            error_messages: {
+                missing: "Debe ingresar un {}.",
+                invalid: "Debe ingresar un {} valido",
+                missing_option: "Debe seleccionar una opción."
+            },
+            contact: {
+                name: "",
+                message: "",
+                email: ""
+            },
 
-        valid: false,
-        dialogTitle: "",
-        dialogBody: ""
-    }),
+            valid: false,
+            dialogTitle: "",
+            dialogBody: ""
+        };
+    },
     computed: {
         nameRules() {
             const { invalid, missing } = this.error_messages;
@@ -179,6 +185,7 @@ export default {
     font-size: 1rem;
     color: var(--v-darkText-base);
     padding: 5% 0 3% 0%;
+    word-wrap: break-word;
 }
 @include respond-above(sm) {
     @media (orientation: portrait) {
