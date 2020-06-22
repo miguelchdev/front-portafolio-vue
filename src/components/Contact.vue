@@ -120,31 +120,31 @@ export default {
     }),
     computed: {
         nameRules() {
-            let { invalid, missing } = this.error_messages;
+            const { invalid, missing } = this.error_messages;
             return [
                 (v => !!v || missing.replace("{}", "nombre"),
                 v => checkName(v) || invalid.replace("{}", "nombre"))
             ];
         },
         emailRules() {
-            let { invalid, missing } = this.error_messages;
+            const { invalid, missing } = this.error_messages;
             return [
                 v => !!v || missing.replace("{}", "email"),
                 v => checkEmail(v) || invalid.replace("{}", "email")
             ];
         },
         mensajeRules() {
-            let { missing } = this.error_messages;
+            const { missing } = this.error_messages;
             return [
                 v => !!v || missing.replace("{}", "mensaje"),
                 v => v.length > 20 || "Mensaje muy corto"
             ];
         },
         formValues() {
-            let { email, message, name } = this.contact;
+            const { email, message, name } = this.contact;
             return {
                 from_email: email,
-                to_email: "miguelangelchgz@gmail.com",
+                to_email: "miguelchdev@gmail.com",
                 body: message,
                 subject: `Nuevo mensaje  de: ${name}`
             };
