@@ -28,19 +28,29 @@
 export default {
     name: "IntroductionBackground",
     props: {
-        imageUrl: {
-            type: String,
+        image: {
+            type: Object,
             required: true,
-            default: ""
+            default() {
+                return {
+                    file: null,
+                    alt: ""
+                };
+            }
         }
     },
     computed: {
+        background() {
+            return this.image.file
+                ? "url(" + this.image.file + ")  15% 0%"
+                : "transparent";
+        },
         styleObject() {
             return {
                 height: "auto",
                 width: "100%",
                 backgroundRepeat: "no-repeat",
-                background: "url(" + this.imageUrl + ")  15% 0%",
+                background: this.background,
                 backgroundSize: "cover"
             };
         }

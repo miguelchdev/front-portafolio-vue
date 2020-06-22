@@ -53,11 +53,11 @@
 export default {
     name: "ContactForm",
     props: {
-        contact: {},
-        emailRules: {},
-        mensajeRules: {},
-        nameRules: {},
-        valid: {}
+        contact: Object,
+        emailRules: Array,
+        mensajeRules: Array,
+        nameRules: Array,
+        valid: Boolean
     }
 };
 </script>

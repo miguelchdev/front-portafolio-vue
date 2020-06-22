@@ -1,8 +1,14 @@
 <template>
     <div class="bg-dark full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <h1 class="text-sm-justify text-center">{{ title }}</h1>
-            <p class="description-services ">{{ servicesDescription }}</p>
+            <h1
+                v-if="title"
+                class="text-sm-justify text-center"
+            >{{ title }}</h1>
+            <p
+                v-if="page_contents"
+                class="description-services "
+            >{{ page_contents.description }}</p>
             <v-container>
 
                 <v-form
@@ -72,7 +78,7 @@
 
                     <v-card>
                         <v-card-title primary-title>
-                            <p class="display-1 text--primary">
+                            <p class="display-1">
                                 {{dialogTitle}}
                             </p>
 
@@ -97,54 +103,54 @@ import { checkEmail, checkName } from "@/helpers";
 
 export default {
     name: "Contact",
-    data: () => ({
-        title: "Contact ME",
-        servicesDescription:
-            "Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus rutrum sapien eget scelerisque. Nullam vel leo congue, ultricies arcu eu, rutrum est. Fusce sollicitudin, arcu id vulputate fermentum, lacus ipsum ultricies odio, vel tincidunt sapien nibh ac felis. Maecenas a nisi sit amet dolor sodales hendrerit. Mauris ut sodales felis ",
-        dialog: false,
+    props: { title: String, images: Object, page_contents: Object },
+    data() {
+        return {
+            dialog: false,
 
-        error_messages: {
-            missing: "Debe ingresar un {}.",
-            invalid: "Debe ingresar un {} valido",
-            missing_option: "Debe seleccionar una opción."
-        },
-        contact: {
-            name: "",
-            message: "",
-            email: ""
-        },
+            error_messages: {
+                missing: "Debe ingresar un {}.",
+                invalid: "Debe ingresar un {} valido",
+                missing_option: "Debe seleccionar una opción."
+            },
+            contact: {
+                name: "",
+                message: "",
+                email: ""
+            },
 
-        valid: false,
-        dialogTitle: "",
-        dialogBody: ""
-    }),
+            valid: false,
+            dialogTitle: "",
+            dialogBody: ""
+        };
+    },
     computed: {
         nameRules() {
-            let { invalid, missing } = this.error_messages;
+            const { invalid, missing } = this.error_messages;
             return [
                 (v => !!v || missing.replace("{}", "nombre"),
                 v => checkName(v) || invalid.replace("{}", "nombre"))
             ];
         },
         emailRules() {
-            let { invalid, missing } = this.error_messages;
+            const { invalid, missing } = this.error_messages;
             return [
                 v => !!v || missing.replace("{}", "email"),
                 v => checkEmail(v) || invalid.replace("{}", "email")
             ];
         },
         mensajeRules() {
-            let { missing } = this.error_messages;
+            const { missing } = this.error_messages;
             return [
                 v => !!v || missing.replace("{}", "mensaje"),
                 v => v.length > 20 || "Mensaje muy corto"
             ];
         },
         formValues() {
-            let { email, message, name } = this.contact;
+            const { email, message, name } = this.contact;
             return {
                 from_email: email,
-                to_email: "miguelangelchgz@gmail.com",
+                to_email: "miguelchdev@gmail.com",
                 body: message,
                 subject: `Nuevo mensaje  de: ${name}`
             };
@@ -179,6 +185,7 @@ export default {
     font-size: 1rem;
     color: var(--v-darkText-base);
     padding: 5% 0 3% 0%;
+    word-wrap: break-word;
 }
 @include respond-above(sm) {
     @media (orientation: portrait) {

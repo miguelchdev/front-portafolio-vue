@@ -64,4 +64,14 @@ export default {
                 return response.data;
             });
     },
+    getPages(params = {}) {
+        const url = `api/page/`;
+        return axios
+            .get(url, {
+                params: params,
+            })
+            .then((response) => {
+                return response.data;
+            });
+    },
 };

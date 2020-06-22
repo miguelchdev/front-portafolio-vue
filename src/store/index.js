@@ -4,6 +4,7 @@ import projects from "./modules/projects";
 import services from "./modules/services";
 import notifications from "./modules/notifications";
 import bio from "./modules/bio";
+import pages from "./modules/pages";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         services,
         bio,
         notifications,
+        pages,
     },
     state: {
         buffer: [],

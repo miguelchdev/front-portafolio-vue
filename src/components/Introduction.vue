@@ -2,7 +2,7 @@
     <introduction-background
         light="true"
         class="bg-light"
-        image-url="https://images.pexels.com/photos/248515/pexels-photo-248515.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        :image="images.banner"
     >
 
         <v-container class="px-sm-12 px-6 fill-height">
@@ -21,7 +21,7 @@
                     <div class="mt-auto">
                         <h1 class="text-sm-left text-center name mb-5">{{ full_name }}</h1>
 
-                        <p class="text-sm-left text-center mb-5">{{ about }}</p>
+                        <p class="text-sm-left text-center mb-5 about">{{ about }}</p>
 
                         <div class="text-sm-left text-center">
                             <v-btn
@@ -54,10 +54,13 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
     name: "Introduction",
     components: { IntroductionBackground },
-    data: () => ({
-        loading: true,
-        seeMyWork: "See my work"
-    }),
+    props: { title: String, images: Object, page_contents: Object },
+    data() {
+        return {
+            loading: true,
+            seeMyWork: "See my work"
+        };
+    },
     computed: {
         ...mapState("bio", ["welcome_message", "about", "social_networks"]),
         ...mapGetters("bio", ["full_name"])
@@ -73,6 +76,9 @@ export default {
 
 
 <style scoped lang="scss">
+.about {
+    word-wrap: break-word;
+}
 .fill-height {
     min-height: 100%;
 }
