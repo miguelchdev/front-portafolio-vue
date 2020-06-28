@@ -1,0 +1,27 @@
+{
+    "introduction": { "myWork": "My work" },
+    "services": {},
+    "projects": { "all": "All" },
+    "contact": {
+        "name": "Name",
+        "email": "Email",
+        "message": "Message",
+        "send": "Send",
+        "dialog": {
+            "success": {
+                "title": "Thanks",
+                "body": "Your message have been sended."
+            },
+            "error": {
+                "title": "Error",
+                "body": "Your message have been sended,try again."
+            }
+        }
+    },
+    "errors": {
+        "missing_input": "Missing {field}.",
+        "invalid_input": "Invalid {field}.",
+        "missing_option": "You should choose an option",
+        "too_short": "{field} too short."
+    }
+}
