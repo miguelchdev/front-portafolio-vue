@@ -1,0 +1,27 @@
+{
+    "introduction": { "myWork": "Mi proyectos" },
+    "services": {},
+    "projects": { "all": "Todos" },
+    "contact": {
+        "name": "Nombre",
+        "email": "Correo Electrónico",
+        "message": "Mensaje",
+        "send": "Enviar",
+        "dialog": {
+            "success": {
+                "title": "Gracias",
+                "body": "Se ha enviado su mensaje."
+            },
+            "error": {
+                "title": "Error",
+                "body": "Su solicitud no pudo ser procesada, intente más tarde."
+            }
+        }
+    },
+    "errors": {
+        "missing_input": "Debe ingresar un {field}.",
+        "invalid_input": "Debe ingresar un {field} valido",
+        "missing_option": "Debe seleccionar una opción.",
+        "too_short": "{field} muy corto."
+    }
+}

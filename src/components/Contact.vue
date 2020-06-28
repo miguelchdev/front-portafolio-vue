@@ -1,64 +1,59 @@
 <template>
     <div class="bg-dark full-view">
-        <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <h1
-                v-if="title"
-                class="text-sm-justify text-center"
-            >{{ title }}</h1>
-            <p
-                v-if="page_contents"
-                class="description-services "
-            >{{ page_contents.description }}</p>
+        <v-container
+            class="px-sm-12 px-5 padding-y parent-height d-flex flex-column"
+        >
+            <h1 v-if="title" class="text-sm-justify text-center">
+                {{ title }}
+            </h1>
+            <p v-if="page_contents" class="description-services">
+                {{ page_contents.description }}
+            </p>
             <v-container>
-
-                <v-form
-                    ref="form"
-                    v-model="valid"
-                >
+                <v-form ref="form" v-model="valid">
                     <v-row>
-                        <v-col
-                            cols="12"
-                            md="4"
-                        >
+                        <v-col cols="12" md="4">
                             <v-text-field
                                 v-model="contact.name"
-                                label="Nombre"
                                 :rules="nameRules"
                                 class="mb-3"
                                 required
                                 type="text"
                                 dark
-                            ></v-text-field>
+                            >
+                                <template v-slot:label>
+                                    {{ $t("contact.name") }}
+                                </template>
+                            </v-text-field>
                         </v-col>
-                        <v-col
-                            md="4"
-                            cols="12"
-                        >
+                        <v-col md="4" cols="12">
                             <v-text-field
                                 dark
                                 v-model="contact.email"
-                                label="Correo electrónico"
                                 :rules="emailRules"
                                 class="mb-3"
                                 required
                                 type="email"
-                            ></v-text-field>
+                            >
+                                <template v-slot:label>
+                                    {{ $t("contact.email") }}
+                                </template>
+                            </v-text-field>
                         </v-col>
-                        <v-col
-                            md="8"
-                            cols="12"
-                        >
+                        <v-col md="8" cols="12">
                             <v-textarea
                                 dark
                                 auto-grow
-                                label="Mensaje"
                                 class="mb-3"
                                 v-model="contact.message"
                                 :rules="mensajeRules"
-                            ></v-textarea>
+                            >
+                                <template v-slot:label>
+                                    {{ $t("contact.message") }}
+                                </template>
+                            </v-textarea>
                         </v-col>
                     </v-row>
-
                 </v-form>
                 <v-btn
                     :disabled="!valid"
@@ -66,31 +61,18 @@
                     large
                     class="mt-4 mx-auto"
                     @click="validate"
-                >
-                    Enviar mensaje
-                </v-btn>
-
-                <v-dialog
-                    v-model="dialog"
-                    width="500"
-                    dark
+                    >{{ $t("contact.send") }}</v-btn
                 >
 
+                <v-dialog v-model="showDialog" width="500" dark>
                     <v-card>
                         <v-card-title primary-title>
-                            <p class="display-1">
-                                {{dialogTitle}}
-                            </p>
-
+                            <h1 class="display-1">{{ $t(dialog.title) }}</h1>
                         </v-card-title>
                         <v-spacer></v-spacer>
-                        <v-card-text>
-                            {{dialogBody}}
-                        </v-card-text>
-
+                        <v-card-text>{{ $t(dialog.body) }}</v-card-text>
                     </v-card>
                 </v-dialog>
-
             </v-container>
         </v-container>
     </div>
@@ -106,45 +88,54 @@ export default {
     props: { title: String, images: Object, page_contents: Object },
     data() {
         return {
-            dialog: false,
-
-            error_messages: {
-                missing: "Debe ingresar un {}.",
-                invalid: "Debe ingresar un {} valido",
-                missing_option: "Debe seleccionar una opción."
+            showDialog: false,
+            fields: {
+                name: "name",
+                email: "email",
+                message: "message"
             },
             contact: {
                 name: "",
                 message: "",
                 email: ""
             },
-
-            valid: false,
-            dialogTitle: "",
-            dialogBody: ""
+            postState: "error",
+            valid: false
         };
+    },
+    watch: {
+        "$i18n.locale": function(value) {
+            this.setNameFields();
+        }
     },
     computed: {
         nameRules() {
-            const { invalid, missing } = this.error_messages;
-            return [
-                (v => !!v || missing.replace("{}", "nombre"),
-                v => checkName(v) || invalid.replace("{}", "nombre"))
-            ];
+            const {
+                fields: { name },
+                getErrorMessage
+            } = this;
+            const missing = getErrorMessage("missing_input", name);
+            const invalid = getErrorMessage("invalid_input", name);
+
+            return [v => !!v || missing, v => checkName(v) || invalid];
         },
         emailRules() {
-            const { invalid, missing } = this.error_messages;
-            return [
-                v => !!v || missing.replace("{}", "email"),
-                v => checkEmail(v) || invalid.replace("{}", "email")
-            ];
+            const {
+                fields: { email },
+                getErrorMessage
+            } = this;
+            const missing = getErrorMessage("missing_input", email);
+            const invalid = getErrorMessage("invalid_input", email);
+            return [v => !!v || missing, v => checkEmail(v) || invalid];
         },
         mensajeRules() {
-            const { missing } = this.error_messages;
-            return [
-                v => !!v || missing.replace("{}", "mensaje"),
-                v => v.length > 20 || "Mensaje muy corto"
-            ];
+            const {
+                fields: { message },
+                getErrorMessage
+            } = this;
+            const missing = getErrorMessage("missing_input", message);
+            const too_short = getErrorMessage("too_short", message);
+            return [v => !!v || missing, v => v.length > 20 || too_short];
         },
         formValues() {
             const { email, message, name } = this.contact;
@@ -154,6 +145,11 @@ export default {
                 body: message,
                 subject: `Nuevo mensaje  de: ${name}`
             };
+        },
+        dialog() {
+            const body = `contact.dialog.${this.postState}.body`;
+            const title = `contact.dialog.${this.postState}.title`;
+            return {title,body};
         }
     },
     methods: {
@@ -162,18 +158,30 @@ export default {
                 portfolioApi
                     .sendEmail(this.formValues)
                     .then(response => {
-                        this.dialog = true;
-                        this.dialogTitle = "Gracias";
-                        this.dialogBody = "Su mensaje ha sido enviado.";
+                        this.showDialog = true;
+                        this.postState = "success";
                     })
                     .catch(error => {
-                        this.dialog = true;
-                        this.dialogTitle = "Error";
-                        this.dialogBody =
-                            "Su solicitud no pudo ser procesada, intente más tarde.";
+                        this.showDialog = true;
                     });
             }
+        },
+        getErrorMessage(message, field) {
+            return this.$root.$t(`errors.${message}`, {
+                field: field
+            });
+        },
+        setNameFields() {
+            const {
+                $root 
+            } = this;
+            this.fields.name = $root.$t("contact.name");
+            this.fields.email = $root.$t("contact.email");
+            this.fields.message = $root.$t("contact.message");
         }
+    },
+    created() {
+        this.setNameFields();
     }
 };
 </script>

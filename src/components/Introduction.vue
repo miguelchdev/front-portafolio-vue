@@ -4,7 +4,6 @@
         class="bg-light"
         :image="images.banner"
     >
-
         <v-container class="px-sm-12 px-6 fill-height">
             <v-row class="fill-height mx-auto">
                 <v-col
@@ -19,16 +18,22 @@
                     <p class="mx-sm-0 mx-auto">{{ welcome_message }}</p>
 
                     <div class="mt-auto">
-                        <h1 class="text-sm-left text-center name mb-5">{{ full_name }}</h1>
+                        <h1 class="text-sm-left text-center name mb-5">
+                            {{ full_name }}
+                        </h1>
 
-                        <p class="text-sm-left text-center mb-5 about">{{ about }}</p>
+                        <p class="text-sm-left text-center mb-5 about">
+                            {{ about }}
+                        </p>
 
                         <div class="text-sm-left text-center">
                             <v-btn
                                 tile
                                 large
                                 elevation="24"
-                            >{{ seeMyWork }}</v-btn>
+                            >
+                                {{ $t("introduction.myWork") }}
+                            </v-btn>
                         </div>
                     </div>
 
@@ -39,7 +44,9 @@
                             :href="item"
                             class="social pr-sm-5 pr-2"
                             target="_blank"
-                        >{{ index }}</a>
+                        >
+                            {{ index }}
+                        </a>
                     </div>
                 </v-col>
             </v-row>
@@ -55,12 +62,6 @@ export default {
     name: "Introduction",
     components: { IntroductionBackground },
     props: { title: String, images: Object, page_contents: Object },
-    data() {
-        return {
-            loading: true,
-            seeMyWork: "See my work"
-        };
-    },
     computed: {
         ...mapState("bio", ["welcome_message", "about", "social_networks"]),
         ...mapGetters("bio", ["full_name"])
@@ -69,7 +70,7 @@ export default {
         this.getBio();
     },
     methods: {
-        ...mapActions("bio", { getBio: "fetchBio" })
+        ...mapActions("bio", { getBio: "fetchBio" }),
     }
 };
 </script>
