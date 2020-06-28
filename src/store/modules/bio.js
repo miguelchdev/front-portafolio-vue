@@ -5,38 +5,35 @@ export default {
     state: {
         name: "",
         last_name: "",
-        welcome_message: "",
+        welcome_message: null,
         about: "",
         social_networks: [],
     },
     actions: {
-        fetchBio({ commit, dispatch }) {
-            return portfolioApi
-                .getBio(1)
-                .then(
-                    ({
-                        name,
-                        last_name,
-                        welcome_message,
-                        about,
-                        social_networks,
-                    }) => {
-                        commit("setName", name);
-                        commit("setLastName", last_name);
-                        commit("setWelcomeMessage", welcome_message);
-                        commit("setAbout", about);
-                        commit("setSocialNetworks", social_networks);
-                    }
-                )
-                .catch((error) => {
-                    const notification = {
-                        type: "error",
-                        message:
-                            "There was a problem fetching info: " +
-                            error.message,
-                    };
-                    dispatch("notifications/add", notification, { root: true });
-                });
+        async fetchBio({ commit, dispatch }) {
+            try {
+                const {
+                    name,
+                    last_name,
+                    welcome_message,
+                    about,
+                    social_networks,
+                } = await portfolioApi.getBio(1);
+
+                commit("setName", name);
+                commit("setLastName", last_name);
+                commit("setWelcomeMessage", welcome_message);
+                commit("setAbout", about);
+                commit("setSocialNetworks", social_networks);
+            } catch (error) {
+                const notification = {
+                    type: "error",
+                    message:
+                        "There was a problem fetching info: " + error.message,
+                };
+                dispatch("notifications/add", notification, { root: true });
+            }
+
         },
     },
     getters: {

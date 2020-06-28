@@ -9,32 +9,31 @@ export default {
         projects: null,
     },
     actions: {
-        fetchPages({ commit, dispatch }) {
+        async fetchPages({ commit, dispatch }) {
             dispatch("addAction", "fetchContent", { root: true });
-            return portfolioApi
-                .getPages()
-                .then(
-                    ({
-                        results: { services, contact, introduction, projects },
-                    }) => {
-                        commit("setServices", services);
-                        commit("setContact", contact);
-                        commit("setIntroduction", introduction);
-                        commit("setProjects", projects);
-                    }
-                )
-                .catch((error) => {
-                    const notification = {
-                        type: "error",
-                        message:
-                            "There was a problem fetching info: " +
-                            error.message,
-                    };
-                    dispatch("notifications/add", notification, { root: true });
-                })
-                .then(() => {
-                    dispatch("removeAction", "fetchContent", { root: true });
-                });
+
+            try {
+                const {
+                    results: { services, contact, introduction, projects },
+                } = await portfolioApi.getPages();
+
+                commit("setServices", services);
+                commit("setContact", contact);
+                commit("setIntroduction", introduction);
+                commit("setProjects", projects);
+
+            }catch (error) {
+
+                const notification = {
+                    type: "error",
+                    message:
+                        "There was a problem fetching info: " + error.message,
+                };
+
+                dispatch("notifications/add", notification, { root: true });
+            }
+            
+            dispatch("removeAction", "fetchContent", { root: true });
         },
     },
     getters: {},
