@@ -14,10 +14,8 @@
                 >
                     <h1
                         v-if="title"
-                        class=" text-sm-justify text-center description-services mins"
-                    >
-                        {{ title }}
-                    </h1>
+                        class="text-sm-justify text-center description-services mins"
+                    >{{ title }}</h1>
                 </v-col>
                 <v-col
                     xl="4"
@@ -32,10 +30,11 @@
                         background-color="light"
                         show-arrows
                     >
+                        <v-tab>{{ $t("projects.all") }}</v-tab>
                         <v-tab
-                            v-for="(category,index) in categories"
+                            v-for="(category, index) in categories"
                             :key="index"
-                        >{{ category}}</v-tab>
+                        >{{ category }}</v-tab>
                     </v-tabs>
                 </v-col>
             </v-row>
@@ -67,7 +66,6 @@ export default {
     props: { title: String, images: Object, page_contents: Object },
     data() {
         return {
-            all: "All",
             page: 1,
             current: 0,
             tab: 0,
@@ -109,13 +107,10 @@ export default {
         ...mapGetters("projects", ["filterItems", "technologys", "total"]),
         ...mapState("projects", ["count"]),
         categories() {
-            return [this.all].concat(this.technologys);
+            return this.technologys;
         },
         selectedCategory() {
-            let category =
-                this.categories[this.tab] == this.all
-                    ? ""
-                    : this.categories[this.tab];
+            let category = this.tab == 0 ? "" : this.categories[this.tab - 1];
             return category;
         },
         projects() {
