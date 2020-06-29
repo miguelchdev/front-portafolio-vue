@@ -11,6 +11,7 @@ export default {
     },
     actions: {
         async fetchBio({ commit, dispatch }) {
+            dispatch("addAction", "fetchBio", { root: true });
             try {
                 const {
                     name,
@@ -33,7 +34,7 @@ export default {
                 };
                 dispatch("notifications/add", notification, { root: true });
             }
-
+            dispatch("removeAction", "fetchBio", { root: true });
         },
     },
     getters: {
