@@ -1,18 +1,28 @@
 <template>
     <div class="bg-dark full-view">
-        <v-container
-            class="px-sm-12 px-5 padding-y parent-height d-flex flex-column"
-        >
-            <h1 v-if="title" class="text-sm-justify text-center">
+        <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
+            <h1
+                v-if="title"
+                class="text-sm-justify text-center"
+            >
                 {{ title }}
             </h1>
-            <p v-if="page_contents" class="description-services">
+            <p
+                v-if="page_contents"
+                class="description-services"
+            >
                 {{ page_contents.description }}
             </p>
             <v-container>
-                <v-form ref="form" v-model="valid">
+                <v-form
+                    ref="form"
+                    v-model="valid"
+                >
                     <v-row>
-                        <v-col cols="12" md="4">
+                        <v-col
+                            cols="12"
+                            md="4"
+                        >
                             <v-text-field
                                 v-model="contact.name"
                                 :rules="nameRules"
@@ -26,7 +36,10 @@
                                 </template>
                             </v-text-field>
                         </v-col>
-                        <v-col md="4" cols="12">
+                        <v-col
+                            md="4"
+                            cols="12"
+                        >
                             <v-text-field
                                 dark
                                 v-model="contact.email"
@@ -40,7 +53,10 @@
                                 </template>
                             </v-text-field>
                         </v-col>
-                        <v-col md="8" cols="12">
+                        <v-col
+                            md="8"
+                            cols="12"
+                        >
                             <v-textarea
                                 dark
                                 auto-grow
@@ -61,10 +77,13 @@
                     large
                     class="mt-4 mx-auto"
                     @click="validate"
-                    >{{ $t("contact.send") }}</v-btn
-                >
+                >{{ $t("contact.send") }}</v-btn>
 
-                <v-dialog v-model="showDialog" width="500" dark>
+                <v-dialog
+                    v-model="showDialog"
+                    width="500"
+                    dark
+                >
                     <v-card>
                         <v-card-title primary-title>
                             <h1 class="display-1">{{ $t(dialog.title) }}</h1>
@@ -149,21 +168,20 @@ export default {
         dialog() {
             const body = `contact.dialog.${this.postState}.body`;
             const title = `contact.dialog.${this.postState}.title`;
-            return {title,body};
+            return { title, body };
         }
     },
     methods: {
-        validate() {
+        async validate() {
             if (this.$refs.form.validate()) {
-                portfolioApi
-                    .sendEmail(this.formValues)
-                    .then(response => {
-                        this.showDialog = true;
-                        this.postState = "success";
-                    })
-                    .catch(error => {
-                        this.showDialog = true;
-                    });
+                try {
+                    let response = await portfolioApi.sendEmail(
+                        this.formValues
+                    );
+                    this.postState = "success";
+                } catch (error) {}
+
+                this.showDialog = true;
             }
         },
         getErrorMessage(message, field) {
@@ -172,9 +190,7 @@ export default {
             });
         },
         setNameFields() {
-            const {
-                $root 
-            } = this;
+            const { $root } = this;
             this.fields.name = $root.$t("contact.name");
             this.fields.email = $root.$t("contact.email");
             this.fields.message = $root.$t("contact.message");

@@ -1,77 +1,49 @@
 import axios from "axios";
 
-const headers = (token) => {
-    return { Authorization: "Token " + token };
+const get = async (url, params) => {
+    try {
+        const { data } = await axios.get(url, {
+            params: params,
+        });
+        return data;
+    } catch (error) {
+        return error;
+    }
+};
+
+const post = async (url, content, params = {}) => {
+    let token = process.env.VUE_APP_EMAIL_TOKEN;
+    try {
+        const { data } = await axios.post(url, content, {
+            params: params,
+            headers: { Authorization: `Token ${token}` },
+        });
+        return data;
+    } catch (error) {
+        return error;
+    }
 };
 
 export default {
     getBios(params = {}) {
-        return axios
-            .get("api/bio/", {
-                params: params,
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return get("api/bio/", params);
     },
     getBio(pk, params = {}) {
-        const url = `api/bio/${pk}`;
-        return axios
-            .get(url, {
-                params: params,
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return get(`api/bio/${pk}`, params);
     },
     getProjects(params = {}) {
-        const url = `api/projects/`;
-        return axios
-            .get(url, {
-                params: params,
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return get("api/projects/", params);
     },
     getProject(pk, params = {}) {
-        const url = `api/projects/${pk}`;
-        return axios
-            .get(url, {
-                params: params,
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return get(`api/projects/${pk}`, params);
     },
     getServices(params = {}) {
-        const url = `api/service/`;
-        return axios
-            .get(url, {
-                params: params,
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return get(`api/service/`, params);
     },
     sendEmail(content) {
-        let token = process.env.VUE_APP_EMAIL_TOKEN;
-        return axios
-            .post("en/api/email_service/", content, {
-                headers: headers(token),
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return post("en/api/email_service/", content);
     },
     getPages(params = {}) {
-        const url = `api/page/`;
-        return axios
-            .get(url, {
-                params: params,
-            })
-            .then((response) => {
-                return response.data;
-            });
+        return get(`api/page/`, params);
     },
 };

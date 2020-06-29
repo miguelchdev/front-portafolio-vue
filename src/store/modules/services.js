@@ -6,19 +6,19 @@ export default {
         items: [],
     },
     actions: {
-        fetchServices({ commit, dispatch }) {
-            return portfolioApi
-                .getServices()
-                .then(({ results }) => commit("setServices", results))
-                .catch((error) => {
-                    const notification = {
-                        type: "error",
-                        message:
-                            "There was a problem fetching Services Info: " +
-                            error.message,
-                    };
-                    dispatch("notifications/add", notification, { root: true });
-                });
+        async fetchServices({ commit, dispatch }) {
+            try {
+                const { results } = await portfolioApi.getServices();
+                commit("setServices", results);
+            } catch (error) {
+                const notification = {
+                    type: "error",
+                    message:
+                        "There was a problem fetching Services Info: " +
+                        error.message,
+                };
+                dispatch("notifications/add", notification, { root: true });
+            }
         },
     },
     getters: {
