@@ -7,6 +7,9 @@ import vuetify from "./plugins/vuetify";
 import axios from "axios";
 import Transitions from "vue2-transitions";
 import i18n from "./i18n";
+import VueMeta from 'vue-meta'
+
+Vue.use(VueMeta)
 Vue.use(Transitions);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
