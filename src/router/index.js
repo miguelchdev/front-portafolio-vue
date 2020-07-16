@@ -26,28 +26,15 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () =>
             import(/* webpackChunkName: "about" */ "@/views/ProjectView.vue"),
-        beforeEnter(routeTo, routeFrom, next) {
-            store
-                .dispatch("projects/fetchProject", routeTo.params.id)
-                .then((project) => {
-                    routeTo.params.project = project;
-                    next();
-                })
-                .catch(({ message, response }) => {
-                    if (response) {
-                        next({ name: "error" });
-                    } else {
-                        next({ name: "home" });
-
-                        const notification = {
-                            type: "error",
-                            message:
-                                "There was a problem fetching project: " +
-                                message,
-                        };
-                        store.dispatch("notifications/add", notification);
-                    }
-                });
+        async beforeEnter(routeTo, routeFrom, next) {
+            const { id } = routeTo.params;
+            const project = await store.dispatch("projects/fetchProject", id);
+            if (project) {
+                routeTo.params.project = project;
+                next();
+            } else {
+                next({ name: "error" });
+            }
         },
     },
 ];

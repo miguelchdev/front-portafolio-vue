@@ -18,6 +18,12 @@
             }
         }
     },
+    "project":{
+        "date":"Date",
+        "technologys":"Techologys",
+        "gallery":"Gallery",
+         "button-go":"Link to project"
+    },
     "errors": {
         "missing_input": "Missing {field}.",
         "invalid_input": "Invalid {field}.",

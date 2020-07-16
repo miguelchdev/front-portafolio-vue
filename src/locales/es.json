@@ -17,6 +17,11 @@
                 "body": "Su solicitud no pudo ser procesada, intente más tarde."
             }
         }
+    },"project":{
+        "date":"Fecha",
+        "technologys":"Tecnologías",
+        "gallery":"Fotos",
+        "button-go":"Enlace al proyecto."
     },
     "errors": {
         "missing_input": "Debe ingresar un {field}.",

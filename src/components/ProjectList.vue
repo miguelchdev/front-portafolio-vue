@@ -67,8 +67,9 @@ export default {
             return project.images[cover].file;
         },
         calculateSize() {
-            let col = this.$refs.cols[0];
-            if (this.width == "auto" && col) {
+            let colums = this.$refs.cols;
+            if (this.width == "auto" && colums) {
+                let col = colums[0];
                 let width = col.$el.offsetWidth;
                 let height = col.$el.offsetHeight;
                 this.width = `${width}px`;

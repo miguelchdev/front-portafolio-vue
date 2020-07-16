@@ -11,31 +11,34 @@ export default {
         count: 0,
     },
     actions: {
-        fetchProjects({ commit, state, getters, dispatch }) {
+        async fetchProjects({ commit, state, getters, dispatch }) {
             dispatch("addAction", "fetchProjects", { root: true });
-            return portfolioApi
-                .getProjects({
-                    page: state.page,
-                })
-                .then(({ results, next, count }) => {
-                    commit("setCount", count);
-                    if (state.count > getters.total)
-                        commit("setProjects", results);
-                    if (next) commit("setNextPage");
-                    dispatch("removeAction", "fetchProjects", { root: true });
-                })
-                .catch((error) => {
-                    dispatch("removeAction", "fetchProjects", { root: true });
-                    const notification = {
-                        type: "error",
-                        message:
-                            "There was a problem fetching projects: " +
-                            error.message,
-                    };
-                    dispatch("notifications/add", notification, { root: true });
-                });
+
+            try {
+                const {
+                    results,
+                    next,
+                    count,
+                } = await portfolioApi.getProjects({ page: state.page });
+
+                commit("setCount", count);
+
+                if (state.count > getters.total) commit("setProjects", results);
+
+                if (next) commit("setNextPage");
+            } catch (error) {
+                const notification = {
+                    type: "error",
+                    message:
+                        "There was a problem fetching projects: " +
+                        error.message,
+                };
+                dispatch("notifications/add", notification, { root: true });
+            }
+
+            dispatch("removeAction", "fetchProjects", { root: true });
         },
-        fetchProject({ commit, getters, dispatch }, id) {
+        async fetchProject({ commit, getters, dispatch }, id) {
             let project = getters.getProjectById(id);
 
             if (project) {
@@ -43,12 +46,15 @@ export default {
                 return project;
             } else {
                 dispatch("addAction", "fetchProject", { root: true });
-                return portfolioApi.getProject(id).then((project) => {
+                try {
+                    project = await portfolioApi.getProject(id);
                     commit("setProject", project);
-                    dispatch("removeAction", "fetchProject", { root: true });
+                } catch ({ message }) {
+                    
+                }
 
-                    return project;
-                });
+                dispatch("removeAction", "fetchProject", { root: true });
+                return project;
             }
         },
     },
