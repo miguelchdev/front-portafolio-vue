@@ -41,6 +41,9 @@ export default {
         full_name({ name, last_name }) {
             return name + " " + last_name;
         },
+        loading( state, getters, rootState,rootGetters ) {
+            return rootGetters.isLoading('fetchBio');
+        },
     },
     mutations: {
         setName(state, name) {
