@@ -3,7 +3,7 @@ import portfolioApi from "@/services/portfolioApi";
 export default {
     namespaced: true,
     state: {
-        items: null,
+        items:[],
     },
     actions: {
         async fetchServices({ commit, dispatch }) {
@@ -26,8 +26,8 @@ export default {
     },
     getters: {
         total: (state) => state.items.length,
-        ready({ items }, getters, rootState, { isLoading }) {
-            return items && !isLoading("fetchServices");
+        ready({ items }, _getters, _rootState, { isLoading }) {
+            return items.length > 0 && !isLoading("fetchServices");
         },
     },
     mutations: {

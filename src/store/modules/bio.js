@@ -43,8 +43,8 @@ export default {
         full_name({ name, last_name }) {
             return name + " " + last_name;
         },
-        ready(state, getters, rootState, rootGetters) {
-            return !rootGetters.isLoading("fetchBio") && state.welcome_message;
+        ready({welcome_message}, _getters, _rootState, {isLoading}) {
+            return welcome_message && !isLoading("fetchBio");
         },
     },
     mutations: {

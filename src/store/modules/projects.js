@@ -67,8 +67,8 @@ export default {
         technologys: ({ items }) =>
             items.flatMap((project) => project.technologys).filter(onlyUnique),
 
-        loading(state, getters, rootState, rootGetters) {
-            return rootGetters.isLoading("fetchProjects");
+        ready({ items }, _getters, _rootState, { isLoading }) {
+            return items.length > 0 && !isLoading("fetchProjects");
         },
     },
     mutations: {
