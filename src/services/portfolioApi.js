@@ -7,7 +7,7 @@ const get = async (url, params) => {
         });
         return data;
     } catch (error) {
-        return error;
+        return { error };
     }
 };
 
@@ -20,7 +20,7 @@ const post = async (url, content, params = {}) => {
         });
         return data;
     } catch (error) {
-        return error;
+        return null;
     }
 };
 

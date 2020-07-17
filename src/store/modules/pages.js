@@ -12,31 +12,32 @@ export default {
         async fetchPages({ commit, dispatch }) {
             dispatch("addAction", "fetchContent", { root: true });
 
-            try {
-                const {
-                    results: { services, contact, introduction, projects },
-                } = await portfolioApi.getPages();
-
+            const { results, error } = await portfolioApi.getPages();
+            if (!error) {
+                const { services, contact, introduction, projects } = results;
                 commit("setServices", services);
                 commit("setContact", contact);
                 commit("setIntroduction", introduction);
                 commit("setProjects", projects);
-
-            }catch (error) {
-
+            } else {
                 const notification = {
                     type: "error",
                     message:
-                        "There was a problem fetching info: " + error.message,
+                        "There was a problem fetching content: " +
+                        error.message,
                 };
 
                 dispatch("notifications/add", notification, { root: true });
             }
-            
+
             dispatch("removeAction", "fetchContent", { root: true });
         },
     },
-    getters: {},
+    getters: {
+        ready({ services }, getters, rootState, { isLoading }) {
+            return services != null && !isLoading("fetchContent");
+        },
+    },
     mutations: {
         setServices(state, services) {
             state.services = services;

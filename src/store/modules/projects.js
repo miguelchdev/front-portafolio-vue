@@ -14,19 +14,21 @@ export default {
         async fetchProjects({ commit, state, getters, dispatch }) {
             dispatch("addAction", "fetchProjects", { root: true });
 
-            try {
-                const {
-                    results,
-                    next,
-                    count,
-                } = await portfolioApi.getProjects({ page: state.page });
-
+            const {
+                results,
+                next,
+                count,
+                error,
+            } = await portfolioApi.getProjects({
+                page: state.page,
+            });
+            if (!error) {
                 commit("setCount", count);
 
                 if (state.count > getters.total) commit("setProjects", results);
 
                 if (next) commit("setNextPage");
-            } catch (error) {
+            } else {
                 const notification = {
                     type: "error",
                     message:
@@ -49,9 +51,7 @@ export default {
                 try {
                     project = await portfolioApi.getProject(id);
                     commit("setProject", project);
-                } catch ({ message }) {
-                    
-                }
+                } catch ({ message }) {}
 
                 dispatch("removeAction", "fetchProject", { root: true });
                 return project;
@@ -66,6 +66,10 @@ export default {
             items.find((project) => project.id === id),
         technologys: ({ items }) =>
             items.flatMap((project) => project.technologys).filter(onlyUnique),
+
+        loading(state, getters, rootState, rootGetters) {
+            return rootGetters.isLoading("fetchProjects");
+        },
     },
     mutations: {
         setProjects(state, projects) {

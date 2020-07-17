@@ -3,14 +3,16 @@ import portfolioApi from "@/services/portfolioApi";
 export default {
     namespaced: true,
     state: {
-        items: [],
+        items: null,
     },
     actions: {
         async fetchServices({ commit, dispatch }) {
-            try {
-                const { results } = await portfolioApi.getServices();
+            dispatch("addAction", "fetchServices", { root: true });
+
+            const { results, error } = await portfolioApi.getServices();
+            if (!error) {
                 commit("setServices", results);
-            } catch (error) {
+            } else {
                 const notification = {
                     type: "error",
                     message:
@@ -19,10 +21,14 @@ export default {
                 };
                 dispatch("notifications/add", notification, { root: true });
             }
+            dispatch("removeAction", "fetchServices", { root: true });
         },
     },
     getters: {
         total: (state) => state.items.length,
+        ready({ items }, getters, rootState, { isLoading }) {
+            return items && !isLoading("fetchServices");
+        },
     },
     mutations: {
         setServices(state, services) {

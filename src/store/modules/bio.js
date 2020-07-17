@@ -12,21 +12,23 @@ export default {
     actions: {
         async fetchBio({ commit, dispatch }) {
             dispatch("addAction", "fetchBio", { root: true });
-            try {
-                const {
-                    name,
-                    last_name,
-                    welcome_message,
-                    about,
-                    social_networks,
-                } = await portfolioApi.getBio(1);
 
+            const {
+                name,
+                last_name,
+                welcome_message,
+                about,
+                social_networks,
+                error,
+            } = await portfolioApi.getBio(1);
+            
+            if (!error) {
                 commit("setName", name);
                 commit("setLastName", last_name);
                 commit("setWelcomeMessage", welcome_message);
                 commit("setAbout", about);
                 commit("setSocialNetworks", social_networks);
-            } catch (error) {
+            } else {
                 const notification = {
                     type: "error",
                     message:
@@ -41,8 +43,8 @@ export default {
         full_name({ name, last_name }) {
             return name + " " + last_name;
         },
-        loading( state, getters, rootState,rootGetters ) {
-            return rootGetters.isLoading('fetchBio');
+        ready(state, getters, rootState, rootGetters) {
+            return !rootGetters.isLoading("fetchBio") && state.welcome_message;
         },
     },
     mutations: {
