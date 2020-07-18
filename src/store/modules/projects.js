@@ -6,7 +6,6 @@ export default {
     namespaced: true,
     state: {
         items: [],
-        project: {},
         page: 1,
         count: 0,
     },
@@ -44,14 +43,11 @@ export default {
             let project = getters.getProjectById(id);
 
             if (project) {
-                commit("setProject", project);
                 return project;
             } else {
                 dispatch("addAction", "fetchProject", { root: true });
-                try {
-                    project = await portfolioApi.getProject(id);
-                    commit("setProject", project);
-                } catch ({ message }) {}
+
+                project = await portfolioApi.getProject(id);
 
                 dispatch("removeAction", "fetchProject", { root: true });
                 return project;
@@ -74,9 +70,6 @@ export default {
     mutations: {
         setProjects(state, projects) {
             state.items.push(...projects);
-        },
-        setProject(state, project) {
-            state.project = project;
         },
         setNextPage(state) {
             state.page++;
