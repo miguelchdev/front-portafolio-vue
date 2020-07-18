@@ -27,8 +27,8 @@
             <v-container>
                 <v-lazy
                     v-if="ready"
-                    :options="{threshold: 1}"
-                    min-height="500px"
+                    :options="{threshold: 0.25}"
+                    min-height="300px"
                     transition="scroll-x-transition"
                 >
                     <v-form
@@ -93,7 +93,7 @@
                 <v-lazy
                     v-if="ready"
                     :options="{threshold: 1}"
-                    min-height="100px"
+                    min-height="50px"
                     transition="scroll-x-transition"
                 >
                     <v-btn

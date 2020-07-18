@@ -1,73 +1,129 @@
 <template>
     <div class="bg-dark d-flex flex-grow-1">
         <v-container class=" px-sm-12 px-5 padding-y parent-height ">
-         
+            <v-lazy
+                :value="false"
+                :options="{threshold: 1}"
+                min-height="60px"
+                transition="scroll-x-transition"
+            >
                 <h1 class="text-sm-center text-center">{{project.title}}</h1>
+            </v-lazy>
+            <v-lazy
+                :value="false"
+                :options="{threshold: 0.5}"
+                min-height="500px"
+                transition="scroll-x-transition"
+            >
                 <v-parallax
                     class="my-8"
                     :src="cover"
                 ></v-parallax>
-            
-            <div class="d-flex justify-space-between">
-                <div class="flex-grow-1 flex-shrink-1">
-                    <h3 class="text-uppercase font-weight-bold text-center">{{$t("project.date")}}</h3>
-                    <p class="text-center  py-1">-{{$d(new Date(project.date),'short')}}</p>
-                </div>
-                <div class="flex-grow-1">
-                    <h3 class="text-uppercase font-weight-bold text-center">{{$t("project.technologys")}}</h3>
-                    <div class="d-flex justify-center flex-wrap py-1">
-                        <p
-                            :key="key"
-                            class="text-center px-1"
-                            v-for="(item,key) in project.technologys"
-                        >{{item}}</p>
+            </v-lazy>
+
+            <v-lazy
+                :value="false"
+                :options="{threshold: 1}"
+                min-height="83px"
+                transition="scroll-x-transition"
+            >
+                <div class="d-flex justify-space-between">
+                    <div class="flex-grow-1 flex-shrink-1">
+                        <h3 class="text-uppercase font-weight-bold text-center">{{$t("project.date")}}</h3>
+                        <p class="text-center  py-1">-{{$d(new Date(project.date),'short')}}</p>
                     </div>
+                    <div class="flex-grow-1">
+                        <h3 class="text-uppercase font-weight-bold text-center">{{$t("project.technologys")}}</h3>
+                        <div class="d-flex justify-center flex-wrap py-1">
+                            <p
+                                :key="key"
+                                class="text-center px-1"
+                                v-for="(item,key) in project.technologys"
+                            >{{item}}</p>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
+            </v-lazy>
+
+            <v-lazy
+                :value="false"
+                :options="{threshold: 1}"
+                min-height="50px"
+                transition="scroll-x-transition"
+            >
+            </v-lazy>
+
             <h2 class="text-center font-weight-bold">Descripción</h2>
-            <p class="text-justify py-5">{{project.description}}</p>
-            <h2 class="text-sm-center text-center">{{$t('project.gallery')}}</h2>
-            <v-row class="mx-auto">
-                <v-col
-                    v-for="{id,file,alt} in project.images"
-                    :key="id"
-                    md="4"
-                    cols="6"
-                >
+            <v-lazy
+                :value="false"
+                :options="{threshold: 0.3}"
+                min-height="250px"
+                transition="scroll-x-transition"
+            >
 
-                    <v-hover v-slot:default="{hover}">
-                        <v-card
-                            dark
-                            flat
-                            tile
-                            class="d-flex"
-                            :elevation="hover ? 24 : 4"
-                            @click="showDialog(file)"
+                <p class="text-justify py-5">{{project.description}}</p>
+
+            </v-lazy>
+
+            <v-lazy
+                :value="false"
+                :options="{threshold: 0.35}"
+                min-height="350px"
+                transition="scroll-x-transition"
+            >
+                <div>
+                    <h2 class="text-sm-center text-center">{{$t('project.gallery')}}</h2>
+                    <v-row class="mx-auto">
+                        <v-col
+                            v-for="{id,file,alt} in project.images"
+                            :key="id"
+                            md="4"
+                            cols="6"
                         >
-                            <v-img
-                                :src="file"
-                                :alt="alt"
-                                :aspect-ratio="4/3"
-                            ></v-img>
-                        </v-card>
-                    </v-hover>
-                </v-col>
-            </v-row>
-            <div class="text-center pt-12">
-                <v-hover v-slot:default="{hover}">
 
-                    <v-btn
-                        dark
-                        tile
-                        large
-                        :elevation="hover ? 24 : 8"
-                        class=" py-5 mx-auto"
-                    >
-                        {{ $t("project.button-go") }}
-                    </v-btn>
-                </v-hover>
-            </div>
+                            <v-hover v-slot:default="{hover}">
+                                <v-card
+                                    dark
+                                    flat
+                                    tile
+                                    class="d-flex"
+                                    :elevation="hover ? 24 : 4"
+                                    @click="showDialog(file)"
+                                >
+                                    <v-img
+                                        :src="file"
+                                        :alt="alt"
+                                        :aspect-ratio="4/3"
+                                    ></v-img>
+                                </v-card>
+                            </v-hover>
+                        </v-col>
+                    </v-row>
+                </div>
+
+            </v-lazy>
+            <v-lazy
+                value="false"
+                :options="{threshold: 0.15}"
+                min-height="50px"
+                transition="scroll-x-transition"
+            >
+                <div class="text-center pt-12">
+                    <v-hover v-slot:default="{hover}">
+
+                        <v-btn
+                            dark
+                            tile
+                            large
+                            :elevation="hover ? 24 : 8"
+                            class=" py-5 mx-auto"
+                        >
+                            {{ $t("project.button-go") }}
+                        </v-btn>
+                    </v-hover>
+                </div>
+            </v-lazy>
             <v-dialog v-model="dialog">
                 <v-img :src="currentImage"></v-img>
             </v-dialog>

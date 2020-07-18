@@ -23,7 +23,7 @@
             <v-lazy
                 v-if="ready"
                 :options="{
-                threshold: 1}"
+                threshold: 0.25}"
                 min-height="300px"
                 transition="scroll-x-transition"
             >
