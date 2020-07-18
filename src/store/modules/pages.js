@@ -35,7 +35,7 @@ export default {
     },
     getters: {
         ready({ services }, _getters, _rootState, { isLoading }) {
-            return services > 0 && !isLoading("fetchContent");
+            return services && !isLoading("fetchContent");
         },
     },
     mutations: {
