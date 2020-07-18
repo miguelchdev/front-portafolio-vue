@@ -18,13 +18,13 @@
                 >
                     <v-scroll-x-transition appear>
                         <p
-                            v-if="!loading"
+                            v-if="ready"
                             class="mx-sm-0 mx-auto"
                         >{{ welcome_message }}</p>
                     </v-scroll-x-transition>
 
                     <v-scroll-x-transition appear>
-                        <div v-if="!loading" class="mt-auto">
+                        <div v-if="ready" class="mt-auto">
                             <h1 class="text-sm-left text-center name mb-5">
                                 {{ full_name }}
                             </h1>
@@ -45,7 +45,7 @@
                         </div>
                     </v-scroll-x-transition>
                     <v-scroll-x-transition appear>
-                        <div v-if="!loading" class="mt-auto mx-sm-0 mx-auto pt-5">
+                        <div v-if="ready" class="mt-auto mx-sm-0 mx-auto pt-5">
                             <a
                                 v-for="(item, index) in social_networks"
                                 :key="index"
@@ -74,10 +74,7 @@ export default {
   
     computed: {
         ...mapState("bio", ["welcome_message", "about", "social_networks"]),
-        ...mapGetters("bio", ["full_name","loading"]),
-        loadBanner(){
-            return this.$vuetify.breakpoint.smAndUp;
-        }
+        ...mapGetters("bio", ["full_name","ready"]),
     },
     created() {
         this.addAction('banner');
