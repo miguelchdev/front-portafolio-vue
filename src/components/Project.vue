@@ -12,10 +12,17 @@
                     cols="12"
                     class="mb-md-0 mb-5"
                 >
-                    <h1
-                        v-if="title"
-                        class="text-sm-justify text-center description-services mins"
-                    >{{ title }}</h1>
+                    <v-lazy
+                        v-if="readyAll"
+                        :options="{threshold: 1}"
+                        min-height="50px"
+                        transition="scroll-x-transition"
+                    >
+                        <h1
+                            v-if="title"
+                            class="text-sm-justify text-center description-services mins"
+                        >{{ title }}</h1>
+                    </v-lazy>
                 </v-col>
                 <v-col
                     xl="4"
@@ -23,35 +30,58 @@
                     md="6"
                     cols="12"
                 >
-                    <v-tabs
-                        v-if="categories"
-                        v-model="tab"
-                        fixed-tabs
-                        background-color="light"
-                        show-arrows
+                    <v-lazy
+                        v-if="readyAll"
+                        :options="{
+                threshold: 1
+            }"
+                        min-height="100px"
+                        transition="scroll-x-transition"
                     >
-                        <v-tab>{{ $t("projects.all") }}</v-tab>
-                        <v-tab
-                            v-for="(category, index) in categories"
-                            :key="index"
-                        >{{ category }}</v-tab>
-                    </v-tabs>
+                        <v-tabs
+                            v-if="categories"
+                            v-model="tab"
+                            fixed-tabs
+                            background-color="light"
+                            show-arrows
+                        >
+                            <v-tab>{{ $t("projects.all") }}</v-tab>
+                            <v-tab
+                                v-for="(category, index) in categories"
+                                :key="index"
+                            >{{ category }}</v-tab>
+                        </v-tabs>
+                    </v-lazy>
                 </v-col>
             </v-row>
-
-            <project-list
-                v-if="projects"
-                :projects="paginateProjects"
+            <v-lazy
+                v-if="readyAll"
+                :options="{
+                threshold: 1
+            }"
+                min-height="300px"
+                transition="scroll-x-transition"
                 class="mt-auto"
-            />
-
-            <v-pagination
-                v-if="projects"
-                @input="paginate"
-                :length="pages"
-                :value="page"
+            >
+                <project-list
+                    v-if="projects"
+                    :projects="paginateProjects"
+                />
+            </v-lazy>
+            <v-lazy
+                v-if="readyAll"
+                :options="{threshold: 1}"
                 class="mt-auto"
-            ></v-pagination>
+                min-height="50px"
+                transition="scroll-x-transition"
+            >
+                <v-pagination
+                    v-if="projects"
+                    @input="paginate"
+                    :length="pages"
+                    :value="page"
+                ></v-pagination>
+            </v-lazy>
         </v-container>
     </div>
 </template>
@@ -69,7 +99,6 @@ export default {
             page: 1,
             current: 0,
             tab: 0,
-            loading: true,
             perPage: 3
         };
     },
@@ -79,10 +108,9 @@ export default {
         }),
         paginate(curretPage) {
             if (curretPage == this.pages || curretPage == this.pages - 1) {
-                console.log("Cargando info");
+               
                 this.getProjects().then(() => {
                     this.page = curretPage;
-                    console.log("Info cargada");
                 });
             } else {
                 this.page = curretPage;
@@ -98,13 +126,18 @@ export default {
         },
         pages() {
             if (this.pages == 1 && this.total < this.count) {
-                console.log("se ejecuta");
                 this.getProjects();
             }
         }
     },
     computed: {
-        ...mapGetters("projects", ["filterItems", "technologys", "total"]),
+        ...mapGetters("projects", [
+            "filterItems",
+            "technologys",
+            "total",
+            "ready"
+        ]),
+        ...mapGetters("pages", { readyContent: "ready" }),
         ...mapState("projects", ["count"]),
         categories() {
             return this.technologys;
@@ -130,6 +163,9 @@ export default {
         },
         pages() {
             return Math.ceil(this.size / this.perPage);
+        },
+        readyAll() {
+            return this.ready || this.readyContent;
         }
     }
 };

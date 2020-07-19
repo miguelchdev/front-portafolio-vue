@@ -6,7 +6,6 @@ export default {
     namespaced: true,
     state: {
         items: [],
-        project: {},
         page: 1,
         count: 0,
     },
@@ -14,19 +13,21 @@ export default {
         async fetchProjects({ commit, state, getters, dispatch }) {
             dispatch("addAction", "fetchProjects", { root: true });
 
-            try {
-                const {
-                    results,
-                    next,
-                    count,
-                } = await portfolioApi.getProjects({ page: state.page });
-
+            const {
+                results,
+                next,
+                count,
+                error,
+            } = await portfolioApi.getProjects({
+                page: state.page,
+            });
+            if (!error) {
                 commit("setCount", count);
 
                 if (state.count > getters.total) commit("setProjects", results);
 
                 if (next) commit("setNextPage");
-            } catch (error) {
+            } else {
                 const notification = {
                     type: "error",
                     message:
@@ -42,16 +43,11 @@ export default {
             let project = getters.getProjectById(id);
 
             if (project) {
-                commit("setProject", project);
                 return project;
             } else {
                 dispatch("addAction", "fetchProject", { root: true });
-                try {
-                    project = await portfolioApi.getProject(id);
-                    commit("setProject", project);
-                } catch ({ message }) {
-                    
-                }
+
+                project = await portfolioApi.getProject(id);
 
                 dispatch("removeAction", "fetchProject", { root: true });
                 return project;
@@ -66,13 +62,14 @@ export default {
             items.find((project) => project.id === id),
         technologys: ({ items }) =>
             items.flatMap((project) => project.technologys).filter(onlyUnique),
+
+        ready({ items }, _getters, _rootState, { isLoading }) {
+            return items.length > 0 && !isLoading("fetchProjects");
+        },
     },
     mutations: {
         setProjects(state, projects) {
             state.items.push(...projects);
-        },
-        setProject(state, project) {
-            state.project = project;
         },
         setNextPage(state) {
             state.page++;

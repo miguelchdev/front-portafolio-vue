@@ -1,84 +1,109 @@
 <template>
     <div class="bg-dark full-view">
         <v-container class="px-sm-12 px-5 padding-y parent-height d-flex flex-column">
-            <h1
-                v-if="title"
-                class="text-sm-justify text-center"
+            <v-lazy
+                v-if="ready"
+                :options="{threshold: 1}"
+                min-height="50px"
+                transition="scroll-x-transition"
             >
-                {{ title }}
-            </h1>
-            <p
-                v-if="page_contents"
-                class="description-services"
-            >
-                {{ page_contents.description }}
-            </p>
-            <v-container>
-                <v-form
-                    ref="form"
-                    v-model="valid"
+                <h1
+                    v-if="title"
+                    class="text-sm-justify text-center"
                 >
-                    <v-row>
-                        <v-col
-                            cols="12"
-                            md="4"
-                        >
-                            <v-text-field
-                                v-model="contact.name"
-                                :rules="nameRules"
-                                class="mb-3"
-                                required
-                                type="text"
-                                dark
+                    {{ title }}
+                </h1>
+            </v-lazy>
+            <v-lazy
+                v-if="ready"
+                :options="{threshold: 1}"
+                min-height="50px"
+                transition="scroll-x-transition"
+            >
+                <p class="description-services">
+                    {{ page_contents.description }}
+                </p>
+            </v-lazy>
+            <v-container>
+                <v-lazy
+                    v-if="ready"
+                    :options="{threshold: 0.25}"
+                    min-height="300px"
+                    transition="scroll-x-transition"
+                >
+                    <v-form
+                        ref="form"
+                        v-model="valid"
+                    >
+                        <v-row>
+                            <v-col
+                                cols="12"
+                                md="4"
                             >
-                                <template v-slot:label>
-                                    {{ $t("contact.name") }}
-                                </template>
-                            </v-text-field>
-                        </v-col>
-                        <v-col
-                            md="4"
-                            cols="12"
-                        >
-                            <v-text-field
-                                dark
-                                v-model="contact.email"
-                                :rules="emailRules"
-                                class="mb-3"
-                                required
-                                type="email"
+                                <v-text-field
+                                    v-model="contact.name"
+                                    :rules="nameRules"
+                                    class="mb-3"
+                                    required
+                                    type="text"
+                                    dark
+                                >
+                                    <template v-slot:label>
+                                        {{ $t("contact.name") }}
+                                    </template>
+                                </v-text-field>
+                            </v-col>
+                            <v-col
+                                md="4"
+                                cols="12"
                             >
-                                <template v-slot:label>
-                                    {{ $t("contact.email") }}
-                                </template>
-                            </v-text-field>
-                        </v-col>
-                        <v-col
-                            md="8"
-                            cols="12"
-                        >
-                            <v-textarea
-                                dark
-                                auto-grow
-                                class="mb-3"
-                                v-model="contact.message"
-                                :rules="mensajeRules"
+                                <v-text-field
+                                    dark
+                                    v-model="contact.email"
+                                    :rules="emailRules"
+                                    class="mb-3"
+                                    required
+                                    type="email"
+                                >
+                                    <template v-slot:label>
+                                        {{ $t("contact.email") }}
+                                    </template>
+                                </v-text-field>
+                            </v-col>
+                            <v-col
+                                md="8"
+                                cols="12"
                             >
-                                <template v-slot:label>
-                                    {{ $t("contact.message") }}
-                                </template>
-                            </v-textarea>
-                        </v-col>
-                    </v-row>
-                </v-form>
-                <v-btn
-                    :disabled="!valid"
-                    dark
-                    large
-                    class="mt-4 mx-auto"
-                    @click="validate"
-                >{{ $t("contact.send") }}</v-btn>
+                                <v-textarea
+                                    dark
+                                    auto-grow
+                                    class="mb-3"
+                                    v-model="contact.message"
+                                    :rules="mensajeRules"
+                                >
+                                    <template v-slot:label>
+                                        {{ $t("contact.message") }}
+                                    </template>
+                                </v-textarea>
+                            </v-col>
+                        </v-row>
+                    </v-form>
+                </v-lazy>
 
+                <v-lazy
+                    v-if="ready"
+                    :options="{threshold: 1}"
+                    min-height="50px"
+                    transition="scroll-x-transition"
+                >
+                    <v-btn
+                        :disabled="!valid"
+                        dark
+                        large
+                        class="mt-4 mx-auto"
+                        @click="validate"
+                    >{{ $t("contact.send") }}</v-btn>
+                </v-lazy>
                 <v-dialog
                     v-model="showDialog"
                     width="500"
@@ -169,6 +194,9 @@ export default {
             const body = `contact.dialog.${this.postState}.body`;
             const title = `contact.dialog.${this.postState}.title`;
             return { title, body };
+        },
+        ready() {
+            return this.$store.getters['pages/ready'];
         }
     },
     methods: {

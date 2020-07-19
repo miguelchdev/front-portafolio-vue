@@ -28,9 +28,11 @@ const routes = [
             import(/* webpackChunkName: "about" */ "@/views/ProjectView.vue"),
         async beforeEnter(routeTo, routeFrom, next) {
             const { id } = routeTo.params;
-            const project = await store.dispatch("projects/fetchProject", id);
-            if (project) {
-                routeTo.params.project = project;
+            const response = await store.dispatch("projects/fetchProject", id);
+            const { error } = response;
+
+            if (!error) {
+                routeTo.params.project = response;
                 next();
             } else {
                 next({ name: "error" });

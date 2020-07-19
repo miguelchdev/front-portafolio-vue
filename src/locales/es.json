@@ -1,6 +1,6 @@
 {
     "introduction": { "myWork": "Mi proyectos" },
-    "services": {},
+    "services": {"services":"Servicios"},
     "projects": { "all": "Todos" },
     "contact": {
         "name": "Nombre",
