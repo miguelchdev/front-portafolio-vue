@@ -20,32 +20,13 @@
 </template>
 
 <script>
-import { mapState,  mapActions } from "vuex";
 import ServiceListItem from "@/components/ServiceListItem.vue";
 
 export default {
     name: "ServiceList",
     components: { ServiceListItem },
-    data: () => ({
-        loading: true,
-        show: false
-    }),
-    methods: {
-        ...mapActions("services", {
-            getServices: "fetchServices"
-        })
-    },
-    mounted() {
-        this.getServices();
-    },
-    computed: {
-        ...mapState("services", {
-            services: "items",
-            count: "itemsTotal"
-        }),
-        hasGutters() {
-            return false;
-        }
+    props: {
+        services: Array
     }
 };
 </script>

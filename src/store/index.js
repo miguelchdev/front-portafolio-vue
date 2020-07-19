@@ -30,6 +30,9 @@ export default new Vuex.Store({
         loading({ buffer }) {
             return buffer.length != 0;
         },
+        isLoading({ buffer }) {
+            return (element) => buffer.includes(element);
+        },
     },
     mutations: {
         addBuffer(state, action) {

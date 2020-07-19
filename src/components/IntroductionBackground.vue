@@ -8,15 +8,19 @@
             justify="end"
             class="parent-height layer-0"
         >
-            <v-col
-                xl="4"
-                lg="4"
-                md="4"
-                sm="4"
-                class="hide-only-xs"
-                :style="styleObject"
-            >
-            </v-col>
+            <transition name="fade">
+
+                <v-col
+                    v-if="show"
+                    xl="4"
+                    lg="4"
+                    md="4"
+                    sm="4"
+                    class="hide-only-xs"
+                    :style="styleObject"
+                >
+                </v-col>
+            </transition>
         </v-row>
         <div class="layer-1 parent-height">
             <slot></slot>
@@ -37,12 +41,20 @@ export default {
                     alt: ""
                 };
             }
-        }
+        },
+        
+    },
+    data() {
+        return {
+            imageInner: "",
+            imageUrl: "",
+            show: false
+        };
     },
     computed: {
         background() {
-            return this.image.file
-                ? "url(" + this.image.file + ")  15% 0%"
+            return this.imageInner
+                ? "url(" + this.imageInner + ")  15% 0%"
                 : "transparent";
         },
         styleObject() {
@@ -54,6 +66,25 @@ export default {
                 backgroundSize: "cover"
             };
         }
+    },
+    watch: {
+        image() {
+           this.image.file && this.setImage();
+        }
+    },
+    methods: {
+        setImage() {
+            let highResImage = new Image();
+            highResImage.onload = () => {
+                this.imageInner = this.image.file;
+                this.show = true;
+                this.$emit('load-banner');
+            };
+            highResImage.src = this.image.file;
+        }
+    },
+    mounted(){
+         this.image.file &&  this.setImage();
     }
 };
 </script>
@@ -90,5 +121,13 @@ export default {
         width: 100%;
         left: 0;
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .8s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
 }
 </style>
