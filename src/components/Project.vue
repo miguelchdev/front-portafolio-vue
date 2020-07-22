@@ -18,10 +18,7 @@
                         min-height="50px"
                         transition="scroll-x-transition"
                     >
-                        <h1
-                            v-if="title"
-                            class="text-sm-justify text-center description-services mins"
-                        >{{ title }}</h1>
+                        <h1 class="text-sm-justify text-center description-services mins">{{ title }}</h1>
                     </v-lazy>
                 </v-col>
                 <v-col
@@ -39,7 +36,6 @@
                         transition="scroll-x-transition"
                     >
                         <v-tabs
-                            v-if="categories"
                             v-model="tab"
                             fixed-tabs
                             background-color="light"
@@ -63,10 +59,7 @@
                 transition="scroll-x-transition"
                 class="mt-auto"
             >
-                <project-list
-                    v-if="projects"
-                    :projects="paginateProjects"
-                />
+                <project-list :projects="projects" />
             </v-lazy>
             <v-lazy
                 v-if="readyAll"
@@ -76,10 +69,8 @@
                 transition="scroll-x-transition"
             >
                 <v-pagination
-                    v-if="projects"
-                    @input="paginate"
                     :length="pages"
-                    :value="page"
+                    v-model="page"
                 ></v-pagination>
             </v-lazy>
         </v-container>
@@ -97,73 +88,38 @@ export default {
     data() {
         return {
             page: 1,
-            current: 0,
-            tab: 0,
-            perPage: 3
+            tab: 0
         };
     },
     methods: {
         ...mapActions("projects", {
-            getProjects: "fetchProjects"
-        }),
-        paginate(curretPage) {
-            if (curretPage == this.pages || curretPage == this.pages - 1) {
-               
-                this.getProjects().then(() => {
-                    this.page = curretPage;
-                });
-            } else {
-                this.page = curretPage;
-            }
-        }
+            getProjects: "fetchProjects",
+            filterBy: "filterBy",
+            changePage: "changePage"
+        })
     },
     mounted() {
         this.getProjects();
     },
     watch: {
-        tab() {
+        tab(value) {
+            let category = value == 0 ? "" : this.categories[value - 1];
+
+            this.filterBy(category);
             this.page = 1;
         },
-        pages() {
-            if (this.pages == 1 && this.total < this.count) {
-                this.getProjects();
-            }
+        page(value) {
+            this.changePage(value);
         }
     },
     computed: {
-        ...mapGetters("projects", [
-            "filterItems",
-            "technologys",
-            "total",
-            "ready"
-        ]),
         ...mapGetters("pages", { readyContent: "ready" }),
-        ...mapState("projects", ["count"]),
-        categories() {
-            return this.technologys;
-        },
-        selectedCategory() {
-            let category = this.tab == 0 ? "" : this.categories[this.tab - 1];
-            return category;
-        },
-        projects() {
-            return this.filterItems(this.selectedCategory);
-        },
-        start() {
-            return (this.page - 1) * this.perPage;
-        },
-        end() {
-            return this.start + this.perPage;
-        },
-        paginateProjects() {
-            return this.projects.slice(this.start, this.end);
-        },
-        size() {
-            return this.projects.length;
-        },
-        pages() {
-            return Math.ceil(this.size / this.perPage);
-        },
+        ...mapGetters("projects", {
+            projects: "paginate",
+            pages: "pages",
+            ready: "ready",
+            categories: "technologys"
+        }),
         readyAll() {
             return this.ready || this.readyContent;
         }
