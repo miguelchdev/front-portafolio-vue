@@ -6,6 +6,7 @@
             tile
             :width="width"
             :height="height"
+            @click="go"
         >
             <v-img
                 class="white--text"
@@ -16,7 +17,13 @@
             <v-card-title>
                 {{ title }}
             </v-card-title>
-
+            <v-card-actions>
+                <v-btn
+                    v-if="btnGo"
+                    text
+                    @click="go"
+                >{{btnGo}}</v-btn>
+            </v-card-actions>
         </v-card>
 
     </v-hover>
@@ -41,13 +48,23 @@ export default {
         height: {
             type: String,
             default: "auto"
+        },
+        projectUrl: {
+            type: String
+        },
+        btnGo: {
+            type: String
         }
     },
     data: () => ({
         loading: true,
         show: false
     }),
-    methods: {},
+    methods: {
+        go() {
+            this.$emit("click");
+        }
+    },
     computed: {
         elevation() {
             return this.$vuetify.breakpoint.smAndDown ? 4 : 2;
