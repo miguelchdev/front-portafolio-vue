@@ -17,7 +17,7 @@
             >
                 <v-parallax
                     class="my-8"
-                    :src="cover"
+                    :src="project.cover"
                 ></v-parallax>
             </v-lazy>
 
@@ -118,6 +118,9 @@
                             large
                             :elevation="hover ? 24 : 8"
                             class=" py-5 mx-auto"
+                            link
+                            :href="project.link"
+                            target="_blank"
                         >
                             {{ $t("project.button-go") }}
                         </v-btn>
@@ -166,9 +169,6 @@ export default {
         return { dialog: false, currentImage: "", isActive: false };
     },
     computed: {
-        cover() {
-            return this.project.images[0].file;
-        },
         short_description() {
             return `${this.project.description.slice(0, 120)}...`;
         }

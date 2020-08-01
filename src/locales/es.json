@@ -1,7 +1,7 @@
 {
     "introduction": { "myWork": "Mi proyectos" },
     "services": {"services":"Servicios"},
-    "projects": { "all": "Todos" },
+    "projects": { "all": "Todos","btnGo":"Ir al proyecto."},
     "contact": {
         "name": "Nombre",
         "email": "Correo Electrónico",

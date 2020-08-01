@@ -20,11 +20,13 @@
                     ref="cols"
                     :id="project.id"
                     :title="project.title"
-                    :image-url="cover(project)"
+                    :image-url="project.cover"
                     :description="project.description"
                     :width="width"
                     :height="height"
-                    @click.native="goTo(project)"
+                    :project-url="project.link"
+                    :btn-go="btnGoText"
+                    @click="goTo(project)"
                 />
             </v-col>
         </fade-transition>
@@ -58,14 +60,13 @@ export default {
         projects: {
             type: Array,
             required: true
+        },
+        btnGoText: {
+            type: String,
+            required: true
         }
     },
     methods: {
-        cover(project) {
-            let cover = project.images.length - 1;
-
-            return project.images[cover].file;
-        },
         calculateSize() {
             let colums = this.$refs.cols;
             if (this.width == "auto" && colums) {
@@ -79,7 +80,7 @@ export default {
         goTo(project) {
             this.$router.push({
                 name: "project",
-                params: { project: project, id: project.id }
+                params: { id: project.id }
             });
         },
         initalizeSize() {

@@ -1,7 +1,7 @@
 {
     "introduction": { "myWork": "My work" },
     "services": {},
-    "projects": { "all": "All" },
+    "projects": { "all": "All" ,"btnGo":"Go."},
     "contact": {
         "name": "Name",
         "email": "Email",

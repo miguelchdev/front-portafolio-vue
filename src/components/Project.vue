@@ -32,7 +32,7 @@
                         :options="{
                 threshold: 1
             }"
-                        min-height="100px"
+                        min-height="50px"
                         transition="scroll-x-transition"
                     >
                         <v-tabs
@@ -59,7 +59,10 @@
                 transition="scroll-x-transition"
                 class="mt-auto"
             >
-                <project-list :projects="projects" />
+                <project-list
+                    :btn-go-text="btnGo"
+                    :projects="projects"
+                />
             </v-lazy>
             <v-lazy
                 v-if="readyAll"
@@ -122,6 +125,9 @@ export default {
         }),
         readyAll() {
             return this.ready || this.readyContent;
+        },
+        btnGo() {
+            return this.$t("projects.btnGo");
         }
     }
 };
