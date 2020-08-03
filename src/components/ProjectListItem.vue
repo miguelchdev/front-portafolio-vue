@@ -10,7 +10,10 @@
         >
             <v-img
                 class="white--text"
-                :src="imageUrl"
+                :sizes="sizes"
+                :src="src"
+                :lazy-src="lazySrc"
+                :srcset="srcSet"
                 :aspect-ratio="16/9"
             >
             </v-img>
@@ -30,6 +33,7 @@
 </template>
 
 <script>
+import {cloudinaryImage,cloudinarySrcSet} from '@/helpers';
 export default {
     name: "ProjectItem",
     props: {
@@ -68,6 +72,15 @@ export default {
     computed: {
         elevation() {
             return this.$vuetify.breakpoint.smAndDown ? 4 : 2;
+        },
+        lazySrc(){
+            return cloudinaryImage(this.imageUrl,['f_auto','q_50','w_100']);
+        },srcSet(){
+            return cloudinarySrcSet(this.imageUrl);
+        },src(){
+            return cloudinaryImage(this.imageUrl,['f_auto','w_1','q_96']);
+        },sizes(){
+            return this.$vuetify.breakpoint.smAndDown ? '80vw' : '15vw';
         }
     }
 };
