@@ -1,4 +1,5 @@
 {
+    "title":"Miguel Angel Chacón Portfolio",
     "introduction": { "myWork": "My work" },
     "services": {},
     "projects": { "all": "All" ,"btnGo":"Go."},
@@ -22,7 +23,8 @@
         "date":"Date",
         "technologys":"Techologys",
         "gallery":"Gallery",
-         "button-go":"Link to project"
+         "button-go":"Link to project",
+         "project":"Project: {field}"
     },
     "errors": {
         "missing_input": "Missing {field}.",
