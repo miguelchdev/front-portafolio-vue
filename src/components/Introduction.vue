@@ -38,6 +38,7 @@
                                     tile
                                     large
                                     elevation="24"
+                                    @click="click"
                                 >
                                     {{ $t("introduction.myWork") }}
                                 </v-btn>
@@ -83,7 +84,9 @@ export default {
     methods: {
         ...mapActions("bio", { getBio: "fetchBio" }),
         ...mapActions(['addAction','removeAction']),
-
+        click(){
+            this.$emit('click');
+        }
     }
 };
 </script>

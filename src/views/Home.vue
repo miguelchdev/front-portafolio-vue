@@ -1,10 +1,16 @@
 <template>
     <div>
-        <introduction v-bind="introduction"></introduction>
+        <introduction
+            @click="go"
+            v-bind="introduction"
+        ></introduction>
 
         <service v-bind="services"></service>
 
-        <project v-bind="projects"></project>
+        <project
+            id="project"
+            v-bind="projects"
+        ></project>
 
         <contact v-bind="contact"></contact>
 
@@ -31,7 +37,14 @@ export default {
         ])
     },
     methods: {
-        ...mapActions("pages", ["fetchPages"])
+        ...mapActions("pages", ["fetchPages"]),
+        go() {
+            this.$vuetify.goTo('#project', {
+                duration: 750,
+                offset: 0,
+                easing: "easeInQuad"
+            });
+        }
     },
     created() {
         this.fetchPages();
