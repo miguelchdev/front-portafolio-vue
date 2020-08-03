@@ -22,7 +22,8 @@
         "date":"Fecha",
         "technologys":"Tecnologías",
         "gallery":"Fotos",
-        "button-go":"Enlace al proyecto."
+        "button-go":"Enlace al proyecto.",
+        "project":"Proyecto: {field}"
     },
     "errors": {
         "missing_input": "Debe ingresar un {field}.",

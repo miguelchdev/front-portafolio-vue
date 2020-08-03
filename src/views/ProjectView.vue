@@ -158,12 +158,15 @@ export default {
         }
     },
     metaInfo() {
+        let title = this.$t("project.project", {
+            field: this.project.title
+        });
         return {
-            title: this.project.title,
-            titleTemplate: this.project.title,
+            title: title,
+            titleTemplate: title,
             meta: [
-                { name: "og:title", content: this.project.title },
-                { name: "twitter:title", content: this.project.title },
+                { name: "og:title", content: title },
+                { name: "twitter:title", content: title },
                 { name: "description", content: this.short_description },
                 { name: "og:description", content: this.short_description },
                 {
@@ -183,8 +186,9 @@ export default {
     computed: {
         short_description() {
             return `${this.project.description.slice(0, 120)}...`;
-        },metaImage(){
-            return cloudinaryImage(this.project.cover,['f_auto','w_500']);
+        },
+        metaImage() {
+            return cloudinaryImage(this.project.cover, ["f_auto", "w_500"]);
         }
     },
     methods: {
@@ -196,10 +200,10 @@ export default {
             return cloudinarySrcSet(url);
         },
         fallbackImage(url) {
-            return cloudinaryImage(url, ['f_auto','q_90','w_1280']);
+            return cloudinaryImage(url, ["f_auto", "q_90", "w_1280"]);
         },
-        lazySrc(url,size){
-            return  cloudinaryImage(url, ['f_auto','q_10',`w_${size}`]);
+        lazySrc(url, size) {
+            return cloudinaryImage(url, ["f_auto", "q_10", `w_${size}`]);
         }
     }
 };

@@ -23,7 +23,8 @@
         "date":"Date",
         "technologys":"Techologys",
         "gallery":"Gallery",
-         "button-go":"Link to project"
+         "button-go":"Link to project",
+         "project":"Project: {field}"
     },
     "errors": {
         "missing_input": "Missing {field}.",

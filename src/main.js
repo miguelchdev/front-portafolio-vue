@@ -9,7 +9,13 @@ import Transitions from "vue2-transitions";
 import i18n from "./i18n";
 import VueMeta from 'vue-meta'
 
-Vue.use(VueMeta)
+Vue.use(VueMeta,{
+    keyName: 'metaInfo',
+    attribute: 'data-vue-meta',
+    ssrAttribute: 'data-vue-meta-server-rendered',
+    tagIDKeyName: 'vmid',
+    refreshOnceOnNavigation: true
+  })
 Vue.use(Transitions);
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
