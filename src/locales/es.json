@@ -1,4 +1,5 @@
 {
+    "title":"Miguel Angel Chacón Portafolio",
     "introduction": { "myWork": "Mi proyectos" },
     "services": {"services":"Servicios"},
     "projects": { "all": "Todos","btnGo":"Ir al proyecto."},

@@ -1,4 +1,5 @@
 {
+    "title":"Miguel Angel Chacón Portfolio",
     "introduction": { "myWork": "My work" },
     "services": {},
     "projects": { "all": "All" ,"btnGo":"Go."},

@@ -170,9 +170,10 @@ export default {
                     name: "twitter:description",
                     content: this.short_description
                 },
-                { name: "image", content: this.cover },
-                { name: "og:image", content: this.cover },
-                { name: "twitter:image", content: this.cover }
+                { name: "image", content: this.metaImage },
+                { name: "og:image", content: this.metaImage },
+                { name: "og:type", content: "website" },
+                { name: "twitter:card", content: "summary_large_image" }
             ]
         };
     },
@@ -182,6 +183,8 @@ export default {
     computed: {
         short_description() {
             return `${this.project.description.slice(0, 120)}...`;
+        },metaImage(){
+            return cloudinaryImage(this.project.cover,['f_auto','w_500']);
         }
     },
     methods: {
@@ -193,7 +196,7 @@ export default {
             return cloudinarySrcSet(url);
         },
         fallbackImage(url) {
-            return cloudinaryImage(url, ['f_auto','q_97']);
+            return cloudinaryImage(url, ['f_auto','q_90','w_1280']);
         },
         lazySrc(url,size){
             return  cloudinaryImage(url, ['f_auto','q_10',`w_${size}`]);
