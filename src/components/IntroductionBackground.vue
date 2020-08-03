@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { cloudinarySrcSet } from "@/helpers";
+
 export default {
     name: "IntroductionBackground",
     props: {
@@ -41,8 +43,7 @@ export default {
                     alt: ""
                 };
             }
-        },
-        
+        }
     },
     data() {
         return {
@@ -65,26 +66,40 @@ export default {
                 background: this.background,
                 backgroundSize: "cover"
             };
+        },
+        srcSet() {
+            return cloudinarySrcSet(this.image.file);
+        },
+        sizes() {
+            return this.$vuetify.breakpoint.smAndUp ? "50vw" : "0vw";
         }
     },
     watch: {
         image() {
-           this.image.file && this.setImage();
+            this.image.file && this.setImage();
+        },
+        sizes() {
+            this.setImage();
         }
     },
     methods: {
         setImage() {
-            let highResImage = new Image();
-            highResImage.onload = () => {
-                this.imageInner = this.image.file;
-                this.show = true;
-                this.$emit('load-banner');
-            };
-            highResImage.src = this.image.file;
+            if (this.sizes == "0vw") {
+                this.$emit("load-banner");
+            } else {
+                let highResImage = new Image();
+                highResImage.onload = () => {
+                    this.imageInner = highResImage.currentSrc;
+                    this.show = true;
+                    this.$emit("load-banner");
+                };
+                highResImage.sizes = this.sizes;
+                highResImage.srcset = this.srcSet;
+            }
         }
     },
-    mounted(){
-         this.image.file &&  this.setImage();
+    mounted() {
+        this.image.file && this.setImage();
     }
 };
 </script>
@@ -125,7 +140,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .8s;
+    transition: opacity 0.8s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;

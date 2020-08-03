@@ -17,7 +17,8 @@
             >
                 <v-parallax
                     class="my-8"
-                    :src="project.cover"
+                    :src="fallbackImage(project.cover)"
+                    :src-set="srcSet(project.cover)"
                 ></v-parallax>
             </v-lazy>
 
@@ -92,8 +93,11 @@
                                     @click="showDialog(file)"
                                 >
                                     <v-img
-                                        :src="file"
+                                        :src="fallbackImage(file)"
+                                        :lazy-src="lazySrc(file,'150')"
+                                        :srcset="srcSet(file)"
                                         :alt="alt"
+                                        sizes="25vw"
                                         :aspect-ratio="4/3"
                                     ></v-img>
                                 </v-card>
@@ -128,13 +132,20 @@
                 </div>
             </v-lazy>
             <v-dialog v-model="dialog">
-                <v-img :src="currentImage"></v-img>
+                <v-img
+                    v-if="dialog"
+                    :src='fallbackImage(currentImage)'
+                    :lazy-src="lazySrc(currentImage,'500')"
+                    :srcset="srcSet(currentImage)"
+                    sizes="90vw"
+                ></v-img>
             </v-dialog>
         </v-container>
     </div>
 </template>
 
 <script>
+import { cloudinarySrcSet, cloudinaryImage } from "@/helpers";
 export default {
     name: "ProjectView",
     props: {
@@ -177,6 +188,15 @@ export default {
         showDialog(image) {
             this.dialog = true;
             this.currentImage = image;
+        },
+        srcSet(url) {
+            return cloudinarySrcSet(url);
+        },
+        fallbackImage(url) {
+            return cloudinaryImage(url, ['f_auto','q_97']);
+        },
+        lazySrc(url,size){
+            return  cloudinaryImage(url, ['f_auto','q_10',`w_${size}`]);
         }
     }
 };
