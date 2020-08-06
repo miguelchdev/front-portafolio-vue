@@ -10,6 +10,7 @@
             <v-col
                 v-for="project in projects"
                 :key="project.id"
+                class="align-stretch"
                 xl="4"
                 lg="4"
                 md="4"
