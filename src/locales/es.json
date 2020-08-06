@@ -1,6 +1,6 @@
 {
     "title":"Miguel Angel Chacón Portafolio",
-    "introduction": { "myWork": "Mi proyectos" },
+    "introduction": { "myWork": "Mi proyectos","cv":"Currículum" },
     "services": {"services":"Servicios"},
     "projects": { "all": "Todos","btnGo":"Ir al proyecto."},
     "contact": {
