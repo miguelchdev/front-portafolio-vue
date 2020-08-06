@@ -8,6 +8,7 @@ export default {
         welcome_message: null,
         about: "",
         social_networks: [],
+        cvLink: null,
     },
     actions: {
         async fetchBio({ commit, dispatch }) {
@@ -19,15 +20,17 @@ export default {
                 welcome_message,
                 about,
                 social_networks,
+                cv_link,
                 error,
             } = await portfolioApi.getBio(1);
-            
+
             if (!error) {
                 commit("setName", name);
                 commit("setLastName", last_name);
                 commit("setWelcomeMessage", welcome_message);
                 commit("setAbout", about);
                 commit("setSocialNetworks", social_networks);
+                commit("setCVLink", cv_link);
             } else {
                 const notification = {
                     type: "error",
@@ -43,7 +46,7 @@ export default {
         full_name({ name, last_name }) {
             return name + " " + last_name;
         },
-        ready({welcome_message}, _getters, _rootState, {isLoading}) {
+        ready({ welcome_message }, _getters, _rootState, { isLoading }) {
             return welcome_message && !isLoading("fetchBio");
         },
     },
@@ -62,6 +65,9 @@ export default {
         },
         setSocialNetworks(state, social_networks) {
             state.social_networks = social_networks;
+        },
+        setCVLink(state, link) {
+            state.cvLink = link;
         },
     },
 };

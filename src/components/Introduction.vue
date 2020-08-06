@@ -33,7 +33,7 @@
                                 {{ about }}
                             </p>
 
-                            <div class="text-sm-left text-center">
+                            <div class="text-sm-left text-center bt-container">
                                 <v-btn
                                     tile
                                     large
@@ -41,6 +41,15 @@
                                     @click="click"
                                 >
                                     {{ $t("introduction.myWork") }}
+                                </v-btn>
+                                 <v-btn
+                                    v-if="cvLink"
+                                    tile
+                                    elevation="24"
+                                    large
+                                    @click="open"
+                                >
+                                    {{ $t("introduction.cv") }}
                                 </v-btn>
                             </div>
                         </div>
@@ -74,7 +83,7 @@ export default {
     props: { title: String, images: Object, page_contents: Object },
   
     computed: {
-        ...mapState("bio", ["welcome_message", "about", "social_networks"]),
+        ...mapState("bio", ["welcome_message", "about", "social_networks","cvLink"]),
         ...mapGetters("bio", ["full_name","ready"]),
     },
     created() {
@@ -86,6 +95,8 @@ export default {
         ...mapActions(['addAction','removeAction']),
         click(){
             this.$emit('click');
+        },open(){
+            window.open(this.cvLink,'_blank');
         }
     }
 };
@@ -93,6 +104,9 @@ export default {
 
 
 <style scoped lang="scss">
+.bt-container > * + *{
+    margin-left: 1.5em;
+}
 .about {
     word-wrap: break-word;
 }
