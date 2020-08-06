@@ -4,6 +4,7 @@
             <v-col
                 v-for="service in services"
                 :key="service.id"
+                class="align-stretch"
                 xl="4"
                 lg="4"
                 md="4"

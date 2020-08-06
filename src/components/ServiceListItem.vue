@@ -4,6 +4,7 @@
             :elevation="elevation(hover)"
             class="py-xl-8 px-xl-6 px-md-1 px-sm-2"
             tile
+            height="100%"
             :color="color(hover)"
         >
             <v-responsive :aspect-ratio="6 / 5">
