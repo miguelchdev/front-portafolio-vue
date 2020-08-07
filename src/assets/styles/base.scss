@@ -137,7 +137,7 @@ $variations: light, dark;
 @include respond-above(sm) {
     @media (orientation: portrait) {
         .full-view {
-            height: 70vh;
+            min-height: 60vh;
         }
         .parent-height {
             height: inherit;

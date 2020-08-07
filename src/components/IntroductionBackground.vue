@@ -1,12 +1,12 @@
 <template>
     <v-container
         fluid
-        class="px-0 py-0 full-view"
+        class="px-0 py-0 full-view wrapper"
     >
         <v-row
             no-gutters
             justify="end"
-            class="parent-height layer-0"
+            class="layer-0"
         >
             <transition name="fade">
 
@@ -22,7 +22,7 @@
                 </v-col>
             </transition>
         </v-row>
-        <div class="layer-1 parent-height">
+        <div class="layer-1">
             <slot></slot>
         </div>
     </v-container>
@@ -114,30 +114,37 @@ export default {
 // Telefonos moviles en landscape
 @include respond-between(xs, md) {
     @media (orientation: landscape) {
+        .layer-0,
         .layer-1 {
-            top: 0;
-            z-index: 1;
-            position: absolute;
             width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
             left: 0;
+        }
+        .layer-1 {
+            z-index: 10;
         }
     }
 }
 //Tables pequeñas y hacia arriba
 @include respond-above(sm) {
-    .layer-0 {
-        z-index: 0;
-        position: relative;
+    .layer-0,
+    .layer-1 {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
     .layer-1 {
-        top: 0;
-        z-index: 1;
-        position: absolute;
-        width: 100%;
-        left: 0;
+        z-index: 10;
     }
 }
 
+.wrapper {
+    position: relative;
+}
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.8s;
