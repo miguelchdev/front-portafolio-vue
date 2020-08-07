@@ -1,12 +1,11 @@
 <template>
     <introduction-background
         light="true"
-        class="bg-light"
         :image="images.banner"
         @load-banner="removeAction('banner')"
     >
-        <v-container class="px-sm-12 px-6 fill-height">
-            <v-row class="fill-height mx-auto">
+        <v-container class="px-sm-12 px-6 d-flex align-stretch fill-height">
+            <v-row class=" mx-auto">
                 <v-col
                     xl="8"
                     lg="8"
@@ -14,7 +13,7 @@
                     sm="8"
                     xs="12"
                     col="12"
-                    class="d-flex flex-column  fill-height"
+                    class="d-flex flex-column"
                 >
                     <v-scroll-x-transition appear>
                         <p
@@ -104,9 +103,13 @@ export default {
 
 
 <style scoped lang="scss">
-.bt-container > * + *{
-    margin-left: 1.5em;
+.bt-container{
+    display: flex;
+    *+*{
+        margin-left: 0.5em;
+    }
 }
+
 .about {
     word-wrap: break-word;
 }
