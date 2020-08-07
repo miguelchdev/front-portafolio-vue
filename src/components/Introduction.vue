@@ -118,6 +118,8 @@ export default {
 }
 .name {
     font-size: 4.2rem;
+    text-transform:uppercase;
+    font-family: 'Proxima Nova';
 }
 
 .social {

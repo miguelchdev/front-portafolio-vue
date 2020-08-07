@@ -1,7 +1,7 @@
 <template>
     <v-container
         fluid
-        class="px-0 py-0 full-view wrapper"
+        class="px-0 py-0 full-view bg-light wrapper"
     >
         <v-row
             no-gutters
