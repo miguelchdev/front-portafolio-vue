@@ -1,16 +1,16 @@
 <template>
     <!--  -->
-    <v-container fluid>
+    <v-container fluid
+    class="wrapper">
 
         <fade-transition
             group
             tag="div"
-            class="row"
+            class="row align-stretch"
         >
             <v-col
-                v-for="project in projects"
-                :key="project.id"
-                class="align-stretch"
+                v-for="{id,title,cover,description,link} in projects"
+                :key="id"
                 xl="4"
                 lg="4"
                 md="4"
@@ -18,16 +18,13 @@
                 cols="12"
             >
                 <project-item
-                    ref="cols"
-                    :id="project.id"
-                    :title="project.title"
-                    :image-url="project.cover"
-                    :description="project.description"
-                    :width="width"
-                    :height="height"
-                    :project-url="project.link"
+                    :id="id"
+                    :title="title"
+                    :image-url="cover"
+                    :description="description"
+                    :project-url="link"
                     :btn-go="btnGoText"
-                    @click="goTo(project)"
+                    @click="goTo(id)"
                 />
             </v-col>
         </fade-transition>
@@ -42,21 +39,6 @@ import { debounce } from "@/helpers";
 export default {
     name: "ProjectList",
     components: { ProjectItem },
-    data: () => ({
-        created: true,
-        width: "auto",
-        height: "auto",
-        winSize: 0
-    }),
-    mounted() {
-        window.addEventListener("resize", this.onResize);
-    },
-    updated() {
-        this.initalizeSize();
-    },
-    beforeDestroy() {
-        window.removeEventListener("resize", this.onResize);
-    },
     props: {
         projects: {
             type: Array,
@@ -68,58 +50,20 @@ export default {
         }
     },
     methods: {
-        calculateSize() {
-            let colums = this.$refs.cols;
-            if (this.width == "auto" && colums) {
-                let col = colums[0];
-                let width = col.$el.offsetWidth;
-                let height = col.$el.offsetHeight;
-                this.width = `${width}px`;
-                this.height = `${height}px`;
-            }
-        },
-        goTo(project) {
+        goTo(projectId) {
             this.$router.push({
                 name: "project",
-                params: { id: project.id }
+                params: { id: projectId }
             });
-        },
-        initalizeSize() {
-            this.$nextTick(() => {
-                if (this.created) {
-                    this.created = false;
-                    this.calculateSize();
-                }
-            });
-        },
-        onResize() {
-            this.width = "auto";
-            this.height = "auto";
-            this.winSize = window.innerWidth + window.innerHeight;
         }
     },
-    computed: {},
-    watch: {
-        winSize: debounce(function() {
-            this.calculateSize();
-        }, 500)
-    }
+   
 };
 </script>
 
 <style lang="scss" scoped>
-.scroll-fade-enter-active {
-    transition: all 0.3s ease;
-}
-.scroll-fade-leave-active {
-    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.scroll-fade-enter, .scroll-fade-leave-to
-/* .scroll-fade-leave-active below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
-}
-.mins {
-    min-height: 0;
+
+.wrapper{
+    position:relative;
 }
 </style>

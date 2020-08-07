@@ -4,8 +4,6 @@
         <v-card
             :elevation="hover ? 10 : elevation"
             tile
-            :width="width"
-            :height="height"
             @click="go"
         >
             <v-img
@@ -44,14 +42,6 @@ export default {
         active: {
             type: Boolean,
             default: false
-        },
-        width: {
-            type: String,
-            default: "auto"
-        },
-        height: {
-            type: String,
-            default: "auto"
         },
         projectUrl: {
             type: String
